@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Preview|Win32">
+      <Configuration>Preview</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Preview|x64">
+      <Configuration>Preview</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{7E02B89F-27AC-45A9-8793-FD68F5FB8266}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Sample00</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Preview|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Preview|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Preview|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Preview|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)/../ExEngine/effekseer/src/EffekseerRendererDX12;$(SolutionDir)/../ExEngine/effekseer/src/Effekseer;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/../MiniEngine;$(SolutionDir)/Sample_00;$(SolutionDir)/../ExEngine/effekseer/src/Effekseer$(SolutionDir)/../ExEngine/effekseer/src/Effekseer</IncludePath>
+    <LibraryPath>$(SolutionDir)/../MiniEngine/DirectXTK/Bin/Desktop_2019_Win10/Win32/Debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)/../ExEngine/effekseer/src/EffekseerRendererDX12;$(SolutionDir)/../ExEngine/effekseer/src/Effekseer;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/../MiniEngine;$(SolutionDir)/Sample_00;$(SolutionDir)/../ExEngine;$(SolutionDir)/../ExEngine/bulletPhysics/src;$(SolutionDir)/../ExEngine/effekseer/src/EffekseerRendererDX12$(SolutionDir)/../ExEngine/effekseer/src/Effekseer$(SolutionDir)/../ExEngine/effekseer/src/Effekseer;C:\Program Files %28x86%29\Windows Kits\8.1\Include\um;$(ProjectDir)..\..\ExEngine\Photon;$(ProjectDir)</IncludePath>
+    <LibraryPath>$(SolutionDir)/../MiniEngine/DirectXTK/Bin/Desktop_2019_Win10/x64/Debug;$(SolutionDir)/exlib/x64;C:\Program Files %28x86%29\Windows Kits\8.1\Lib\winv6.3\um\x64;$(SolutionDir)/../ExEngine/effekseer/install_msvc2019/lib;$(ProjectDir)..\..\ExEngine\Photon\Photon-cpp\lib;$(ProjectDir)..\..\ExEngine\Photon\LoadBalancing-cpp\lib;$(ProjectDir)..\..\ExEngine\Photon\Common-cpp\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)/../ExEngine/effekseer/src/EffekseerRendererDX12;$(SolutionDir)/../ExEngine/effekseer/src/Effekseer;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/../MiniEngine;$(SolutionDir)/Sample_00;$(SolutionDir)/../ExEngine/effekseer/src/Effekseer$(SolutionDir)/../ExEngine/effekseer/src/Effekseer</IncludePath>
+    <LibraryPath>$(SolutionDir)/../MiniEngine/DirectXTK/Bin/Desktop_2019_Win10/Win32/Release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Preview|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)/../ExEngine/effekseer/src/EffekseerRendererDX12;$(SolutionDir)/../ExEngine/effekseer/src/Effekseer;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/../MiniEngine;$(SolutionDir)/Sample_00;$(SolutionDir)/../ExEngine/effekseer/src/Effekseer$(SolutionDir)/../ExEngine/effekseer/src/Effekseer</IncludePath>
+    <LibraryPath>$(SolutionDir)/../MiniEngine/DirectXTK/Bin/Desktop_2019_Win10/Win32/Release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)/../ExEngine/effekseer/src/EffekseerRendererDX12;$(SolutionDir)/../ExEngine/effekseer/src/Effekseer;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/../MiniEngine;$(SolutionDir)/Sample_00;$(SolutionDir)/../ExEngine;$(SolutionDir)/../ExEngine/bulletPhysics/src;$(SolutionDir)/../ExEngine/effekseer/src/EffekseerRendererDX12$(SolutionDir)/../ExEngine/effekseer/src/Effekseer$(SolutionDir)/../ExEngine/effekseer/src/Effekseer;C:\Program Files %28x86%29\Windows Kits\8.1\Include\um;$(ProjectDir)..\..\ExEngine\Photon;$(ProjectDir)</IncludePath>
+    <LibraryPath>$(SolutionDir)/../MiniEngine/DirectXTK/Bin/Desktop_2019_Win10/x64/Release;$(SolutionDir)/exlib/x64;$(SolutionDir)/../ExEngine/effekseer/install_msvc2019/lib;C:\Program Files %28x86%29\Windows Kits\8.1\Lib\winv6.3\um\x64;$(ProjectDir)..\..\ExEngine\Photon\Common-cpp\lib;$(ProjectDir)..\..\ExEngine\Photon\Photon-cpp\lib;$(ProjectDir)..\..\ExEngine\Photon\LoadBalancing-cpp\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Preview|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(IncludePath);$(ProjectDir)/../;$(ProjectDir);$(SolutionDir)/../ExEngine/effekseer/src/EffekseerRendererDX12;$(SolutionDir)/../ExEngine/effekseer/src/Effekseer;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)/../MiniEngine;$(SolutionDir)/Sample_00;$(SolutionDir)/../ExEngine;$(SolutionDir)/../ExEngine/bulletPhysics/src;$(SolutionDir)/../ExEngine/effekseer/src/Effekseer$(SolutionDir)/../ExEngine/effekseer/src/Effekseer$(SolutionDir)/../ExEngine/effekseer/src/Effekseer;C:\Program Files %28x86%29\Windows Kits\8.1\Include\um;$(ProjectDir)..\..\ExEngine\Photon</IncludePath>
+    <LibraryPath>$(SolutionDir)/../MiniEngine/DirectXTK/Bin/Desktop_2019_Win10/x64/Release;$(SolutionDir)/exlib/x64;$(SolutionDir)/../ExEngine/effekseer/install_msvc2019/lib;C:\Program Files %28x86%29\Windows Kits\8.1\Lib\winv6.3\um\x64;$(ProjectDir)..\..\ExEngine\Photon\Common-cpp\lib;$(ProjectDir)..\..\ExEngine\Photon\Photon-cpp\lib;$(ProjectDir)..\..\ExEngine\Photon\LoadBalancing-cpp\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>LinearMath_Debug.lib;Effekseerd.lib;EffekseerRendererDX12d.lib;LLGId.lib;winmm.lib;DXGI.lib;dxguid.lib;DirectXTK12.lib;d3d12.lib;d3dcompiler.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)winmm.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>LinearMath_Debug.lib;Effekseerd.lib;EffekseerRendererDX12d.lib;LLGId.lib;winmm.lib;DXGI.lib;dxguid.lib;DirectXTK12.lib;d3d12.lib;d3dcompiler.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;Photon-cpp_vc16_debug_windows_mt_x64.lib;LoadBalancing-cpp_vc16_debug_windows_mt_x64.lib;Common-cpp_vc16_debug_windows_mt_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>LinearMath.lib;Effekseer.lib;EffekseerRendererDX12.lib;LLGI.lib;winmm.lib;DXGI.lib;dxguid.lib;DirectXTK12.lib;d3d12.lib;d3dcompiler.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)winmm.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Preview|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>LinearMath.lib;Effekseer.lib;EffekseerRendererDX12.lib;LLGI.lib;winmm.lib;DXGI.lib;dxguid.lib;DirectXTK12.lib;d3d12.lib;d3dcompiler.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)winmm.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>LinearMath.lib;Effekseer.lib;EffekseerRendererDX12.lib;LLGI.lib;winmm.lib;DXGI.lib;dxguid.lib;DirectXTK12.lib;d3d12.lib;d3dcompiler.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;BulletCollision.lib;BulletDynamics.lib;Photon-cpp_vc16_release_windows_mt_x64.lib;LoadBalancing-cpp_vc16_release_windows_mt_x64.lib;Common-cpp_vc16_release_windows_mt_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Preview|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>LinearMath.lib;Effekseer.lib;EffekseerRendererDX12.lib;LLGI.lib;winmm.lib;DXGI.lib;dxguid.lib;DirectXTK12.lib;d3d12.lib;d3dcompiler.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;BulletCollision.lib;BulletDynamics.lib;Photon-cpp_vc16_release_windows_mt_x64.lib;LoadBalancing-cpp_vc16_release_windows_mt_x64.lib;Common-cpp_vc16_release_windows_mt_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\ExEngine\effect\Effect.cpp" />
+    <ClCompile Include="..\..\ExEngine\effect\EffectEngine.cpp" />
+    <ClCompile Include="..\..\ExEngine\gameObject\Gameobjectmanager.cpp" />
+    <ClCompile Include="..\..\ExEngine\gameObject\IGameObject.cpp" />
+    <ClCompile Include="..\..\ExEngine\level2D\CaslFile.cpp" />
+    <ClCompile Include="..\..\ExEngine\level2D\Level2D.cpp" />
+    <ClCompile Include="..\..\ExEngine\level2D\MapChip2D.cpp" />
+    <ClCompile Include="..\..\ExEngine\physics\BoxCollider.cpp" />
+    <ClCompile Include="..\..\ExEngine\physics\CapsuleCollider.cpp" />
+    <ClCompile Include="..\..\ExEngine\physics\CharacterController.cpp" />
+    <ClCompile Include="..\..\ExEngine\physics\MeshCollider.cpp" />
+    <ClCompile Include="..\..\ExEngine\physics\Physics.cpp" />
+    <ClCompile Include="..\..\ExEngine\physics\PhysicsStaticObject.cpp" />
+    <ClCompile Include="..\..\ExEngine\physics\RigidBody.cpp" />
+    <ClCompile Include="..\..\ExEngine\physics\SphereCollider.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Animation.cpp" />
+    <ClCompile Include="..\..\MiniEngine\AnimationClip.cpp" />
+    <ClCompile Include="..\..\MiniEngine\AnimationPlayController.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Camera.cpp" />
+    <ClCompile Include="..\..\MiniEngine\ConstantBuffer.cpp" />
+    <ClCompile Include="..\..\MiniEngine\DescriptorHeap.cpp" />
+    <ClCompile Include="..\..\MiniEngine\font\Font.cpp" />
+    <ClCompile Include="..\..\MiniEngine\font\FontEngine.cpp" />
+    <ClCompile Include="..\..\MiniEngine\GaussianBlur.cpp" />
+    <ClCompile Include="..\..\MiniEngine\GPUBuffer.cpp" />
+    <ClCompile Include="..\..\MiniEngine\GraphicsEngine.cpp" />
+    <ClCompile Include="..\..\MiniEngine\HID\GamePad.cpp" />
+    <ClCompile Include="..\..\MiniEngine\IndexBuffer.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Material.cpp" />
+    <ClCompile Include="..\..\MiniEngine\math\Matrix.cpp" />
+    <ClCompile Include="..\..\MiniEngine\math\Vector.cpp" />
+    <ClCompile Include="..\..\MiniEngine\MeshParts.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Model.cpp" />
+    <ClCompile Include="..\..\MiniEngine\NullTextureMaps.cpp" />
+    <ClCompile Include="..\..\MiniEngine\PipelineState.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\BLASBuffer.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingDescriptorHeaps.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingEngine.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingInstance.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingPSO.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingShaderTable.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingWorld.cpp" />
+    <ClCompile Include="..\..\MiniEngine\raytracing\TLASBuffer.cpp" />
+    <ClCompile Include="..\..\MiniEngine\RenderTarget.cpp" />
+    <ClCompile Include="..\..\MiniEngine\RootSignature.cpp" />
+    <ClCompile Include="..\..\MiniEngine\RWStructuredBuffer.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Shader.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Skeleton.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Sprite.cpp" />
+    <ClCompile Include="..\..\MiniEngine\StructuredBuffer.cpp" />
+    <ClCompile Include="..\..\MiniEngine\Texture.cpp" />
+    <ClCompile Include="..\..\MiniEngine\tkEngine.cpp" />
+    <ClCompile Include="..\..\MiniEngine\tkFile\TkaFile.cpp" />
+    <ClCompile Include="..\..\MiniEngine\tkFile\TkmFile.cpp" />
+    <ClCompile Include="..\..\MiniEngine\tkFile\TksFile.cpp" />
+    <ClCompile Include="..\..\MiniEngine\VertexBuffer.cpp" />
+    <ClCompile Include="Graphics\Bloom.cpp" />
+    <ClCompile Include="Graphics\DepthShadow.cpp" />
+    <ClCompile Include="Graphics\DoF.cpp" />
+    <ClCompile Include="Graphics\Fade.cpp" />
+    <ClCompile Include="Graphics\FontRender.cpp" />
+    <ClCompile Include="Graphics\FontRenderSub.cpp" />
+    <ClCompile Include="Graphics\HexagonBlur.cpp" />
+    <ClCompile Include="Graphics\Light.cpp" />
+    <ClCompile Include="Graphics\MiniMap.cpp" />
+    <ClCompile Include="Graphics\PostEffect.cpp" />
+    <ClCompile Include="Graphics\Silhouette.cpp" />
+    <ClCompile Include="Graphics\SkinModelRender.cpp" />
+    <ClCompile Include="Graphics\SkyCube.cpp" />
+    <ClCompile Include="Graphics\SpriteRender.cpp" />
+    <ClCompile Include="Graphics\RenderingEngine.cpp" />
+    <ClCompile Include="Graphics\SpriteRenderSub.cpp" />
+    <ClCompile Include="InGame\AccompanyAI\AccompanyAI.cpp" />
+    <ClCompile Include="InGame\AccompanyAI\AccompanyAIAnimation.cpp" />
+    <ClCompile Include="InGame\AccompanyAI\AccompanyAIShield.cpp" />
+    <ClCompile Include="InGame\AccompanyAI\AccompanyAISword.cpp" />
+    <ClCompile Include="InGame\Camera\CameraMoveDirectionChange.cpp" />
+    <ClCompile Include="InGame\Camera\PlayerCamera.cpp" />
+    <ClCompile Include="InGame\Enemy\ConfusionStar.cpp" />
+    <ClCompile Include="InGame\Enemy\DropCoin.cpp" />
+    <ClCompile Include="InGame\Enemy\EnemyBase.cpp" />
+    <ClCompile Include="InGame\Enemy\FirstBoss.cpp" />
+    <ClCompile Include="InGame\Enemy\WeakEnemy\Mole.cpp" />
+    <ClCompile Include="InGame\Enemy\WeakEnemy\Needle.cpp" />
+    <ClCompile Include="InGame\Enemy\WeakEnemy\NeedleSlime.cpp" />
+    <ClCompile Include="InGame\Enemy\WeakEnemy\Slime.cpp" />
+    <ClCompile Include="InGame\GameLimitTime.cpp" />
+    <ClCompile Include="InGame\GameScene.cpp" />
+    <ClCompile Include="InGame\GameScreenUI.cpp" />
+    <ClCompile Include="InGame\Item\RecoveryItem.cpp" />
+    <ClCompile Include="InGame\Item\Weapon\Arrow.cpp" />
+    <ClCompile Include="InGame\Item\Weapon\Weapon.cpp" />
+    <ClCompile Include="InGame\LoadScene.cpp" />
+    <ClCompile Include="InGame\Online\Online.cpp" />
+    <ClCompile Include="InGame\Online\OnlineErrorScene.cpp" />
+    <ClCompile Include="InGame\Online\SyncOnlineTwoPlayerMatchEngine.cpp" />
+    <ClCompile Include="InGame\Pause.cpp" />
+    <ClCompile Include="InGame\Player\Player.cpp" />
+    <ClCompile Include="InGame\Player\PlayerAnimation.cpp" />
+    <ClCompile Include="InGame\Player\PlayerCharaCon.cpp" />
+    <ClCompile Include="InGame\Player\PlayerRotation.cpp" />
+    <ClCompile Include="InGame\Player\PlayerSound.cpp" />
+    <ClCompile Include="InGame\Player\PlayerStatus.cpp" />
+    <ClCompile Include="InGame\Shop\Hotel\HotelScene.cpp" />
+    <ClCompile Include="InGame\Shop\Hotel\HotelSelect.cpp" />
+    <ClCompile Include="InGame\Shop\Hotel\HotelSelectFont.cpp" />
+    <ClCompile Include="InGame\Shop\ItemShop\ItemShopScene.cpp" />
+    <ClCompile Include="InGame\Shop\ItemShop\ItemShopSelect.cpp" />
+    <ClCompile Include="InGame\Shop\ItemShop\ItemShopSelectFont.cpp" />
+    <ClCompile Include="InGame\Stage\FirstBossStage.cpp" />
+    <ClCompile Include="InGame\Stage\StageBuilding.cpp" />
+    <ClCompile Include="InGame\Stage\Stage.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ResourceBankManager.cpp" />
+    <ClCompile Include="Result\GameClearScene.cpp" />
+    <ClCompile Include="Result\GameOverScene.cpp" />
+    <ClCompile Include="Sound\tkSoundEngine.cpp" />
+    <ClCompile Include="Sound\tkSoundSource.cpp" />
+    <ClCompile Include="Sound\tkWaveFile.cpp" />
+    <ClCompile Include="Sound\tkWaveFileBank.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Preview|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Preview|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="system\system.cpp" />
+    <ClCompile Include="Title\TitleScene.cpp" />
+    <ClCompile Include="Title\TitleSceneSound.cpp" />
+    <ClCompile Include="Title\TitleSceneSprite.cpp" />
+    <ClCompile Include="Utilities\GameUpdateStop.cpp" />
+    <ClCompile Include="Utilities\Noncopyable.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\ExEngine\effect\Effect.h" />
+    <ClInclude Include="..\..\ExEngine\effect\EffectEngine.h" />
+    <ClInclude Include="..\..\ExEngine\ExEngine.h" />
+    <ClInclude Include="..\..\ExEngine\gameObject\GameObjectManager.h" />
+    <ClInclude Include="..\..\ExEngine\gameObject\IGameobject.h" />
+    <ClInclude Include="..\..\ExEngine\level2D\CaslFile.h" />
+    <ClInclude Include="..\..\ExEngine\level2D\Level2D.h" />
+    <ClInclude Include="..\..\ExEngine\level2D\MapChip2D.h" />
+    <ClInclude Include="..\..\ExEngine\physics\BoxCollider.h" />
+    <ClInclude Include="..\..\ExEngine\physics\CapsuleCollider.h" />
+    <ClInclude Include="..\..\ExEngine\physics\CharacterController.h" />
+    <ClInclude Include="..\..\ExEngine\physics\CollisionAttr.h" />
+    <ClInclude Include="..\..\ExEngine\physics\ICollider.h" />
+    <ClInclude Include="..\..\ExEngine\physics\MeshCollider.h" />
+    <ClInclude Include="..\..\ExEngine\physics\Physics.h" />
+    <ClInclude Include="..\..\ExEngine\physics\PhysicsStaticObject.h" />
+    <ClInclude Include="..\..\ExEngine\physics\RigidBody.h" />
+    <ClInclude Include="..\..\ExEngine\physics\SphereCollider.h" />
+    <ClInclude Include="..\..\MiniEngine\Animation.h" />
+    <ClInclude Include="..\..\MiniEngine\AnimationClip.h" />
+    <ClInclude Include="..\..\MiniEngine\AnimationPlayController.h" />
+    <ClInclude Include="..\..\MiniEngine\Camera.h" />
+    <ClInclude Include="..\..\MiniEngine\ConstantBuffer.h" />
+    <ClInclude Include="..\..\MiniEngine\dbg\MyAssert.h" />
+    <ClInclude Include="..\..\MiniEngine\dbg\MyLog.h" />
+    <ClInclude Include="..\..\MiniEngine\DescriptorHeap.h" />
+    <ClInclude Include="..\..\MiniEngine\DescriptorHeap_inline.h" />
+    <ClInclude Include="..\..\MiniEngine\font\Font.h" />
+    <ClInclude Include="..\..\MiniEngine\font\FontEngine.h" />
+    <ClInclude Include="..\..\MiniEngine\GaussianBlur.h" />
+    <ClInclude Include="..\..\MiniEngine\GPUBuffer.h" />
+    <ClInclude Include="..\..\MiniEngine\GraphicsEngine.h" />
+    <ClInclude Include="..\..\MiniEngine\HID\GamePad.h" />
+    <ClInclude Include="..\..\MiniEngine\IndexBuffer.h" />
+    <ClInclude Include="..\..\MiniEngine\Material.h" />
+    <ClInclude Include="..\..\MiniEngine\math\Math.h" />
+    <ClInclude Include="..\..\MiniEngine\math\Matrix.h" />
+    <ClInclude Include="..\..\MiniEngine\math\Vector.h" />
+    <ClInclude Include="..\..\MiniEngine\MeshParts.h" />
+    <ClInclude Include="..\..\MiniEngine\MiniEngine.h" />
+    <ClInclude Include="..\..\MiniEngine\Model.h" />
+    <ClInclude Include="..\..\MiniEngine\NullTextureMaps.h" />
+    <ClInclude Include="..\..\MiniEngine\PipelineState.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\BLASBuffer.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\Raytracing.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingDescriptorHeaps.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingEngine.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingInstance.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingPSO.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingShaderTable.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingWorld.h" />
+    <ClInclude Include="..\..\MiniEngine\raytracing\TLASBuffer.h" />
+    <ClInclude Include="..\..\MiniEngine\RenderContext.h" />
+    <ClInclude Include="..\..\MiniEngine\RenderContext_inline.h" />
+    <ClInclude Include="..\..\MiniEngine\RootSignature.h" />
+    <ClInclude Include="..\..\MiniEngine\RWStructuredBuffer.h" />
+    <ClInclude Include="..\..\MiniEngine\Shader.h" />
+    <ClInclude Include="..\..\MiniEngine\Skeleton.h" />
+    <ClInclude Include="..\..\MiniEngine\Sprite.h" />
+    <ClInclude Include="..\..\MiniEngine\StructuredBuffer.h" />
+    <ClInclude Include="..\..\MiniEngine\Texture.h" />
+    <ClInclude Include="..\..\MiniEngine\tkEngine.h" />
+    <ClInclude Include="..\..\MiniEngine\tkFile\TkaFile.h" />
+    <ClInclude Include="..\..\MiniEngine\tkFile\TkmFile.h" />
+    <ClInclude Include="..\..\MiniEngine\tkFile\TksFile.h" />
+    <ClInclude Include="..\..\MiniEngine\TResourceBank.h" />
+    <ClInclude Include="..\..\MiniEngine\VertexBuffer.h" />
+    <ClInclude Include="GameTime.h" />
+    <ClInclude Include="Graphics\Bloom.h" />
+    <ClInclude Include="Graphics\DepthShadow.h" />
+    <ClInclude Include="Graphics\DoF.h" />
+    <ClInclude Include="Graphics\Fade.h" />
+    <ClInclude Include="Graphics\FontRender.h" />
+    <ClInclude Include="Graphics\FontRenderSub.h" />
+    <ClInclude Include="Graphics\HexagonBlur.h" />
+    <ClInclude Include="Graphics\Light.h" />
+    <ClInclude Include="Graphics\MiniMap.h" />
+    <ClInclude Include="Graphics\PostEffect.h" />
+    <ClInclude Include="Graphics\Silhouette.h" />
+    <ClInclude Include="Graphics\SkinModelRender.h" />
+    <ClInclude Include="Graphics\SkyCube.h" />
+    <ClInclude Include="Graphics\SpriteRender.h" />
+    <ClInclude Include="Graphics\RenderingEngine.h" />
+    <ClInclude Include="Graphics\SpriteRenderSub.h" />
+    <ClInclude Include="InGame\AccompanyAI\AccompanyAI.h" />
+    <ClInclude Include="InGame\AccompanyAI\AccompanyAIAnimation.h" />
+    <ClInclude Include="InGame\AccompanyAI\AccompanyAIShield.h" />
+    <ClInclude Include="InGame\AccompanyAI\AccompanyAISword.h" />
+    <ClInclude Include="InGame\Camera\CameraMoveDirectionChange.h" />
+    <ClInclude Include="InGame\Camera\PlayerCamera.h" />
+    <ClInclude Include="InGame\Enemy\ConfusionStar.h" />
+    <ClInclude Include="InGame\Enemy\DropCoin.h" />
+    <ClInclude Include="InGame\Enemy\EnemyBase.h" />
+    <ClInclude Include="InGame\Enemy\FirstBoss.h" />
+    <ClInclude Include="InGame\Enemy\WeakEnemy\Mole.h" />
+    <ClInclude Include="InGame\Enemy\WeakEnemy\Needle.h" />
+    <ClInclude Include="InGame\Enemy\WeakEnemy\NeedleSlime.h" />
+    <ClInclude Include="InGame\Enemy\WeakEnemy\Slime.h" />
+    <ClInclude Include="InGame\GameLimitTime.h" />
+    <ClInclude Include="InGame\GameScene.h" />
+    <ClInclude Include="InGame\GameScreenUI.h" />
+    <ClInclude Include="InGame\Item\RecoveryItem.h" />
+    <ClInclude Include="InGame\Item\Weapon\Arrow.h" />
+    <ClInclude Include="InGame\Item\Weapon\Weapon.h" />
+    <ClInclude Include="InGame\LoadScene.h" />
+    <ClInclude Include="InGame\Online\Online.h" />
+    <ClInclude Include="InGame\Online\OnlineErrorScene.h" />
+    <ClInclude Include="InGame\Online\SyncOnlineTwoPlayerMatchEngine.h" />
+    <ClInclude Include="InGame\Pause.h" />
+    <ClInclude Include="InGame\Player\Player.h" />
+    <ClInclude Include="InGame\Player\PlayerAnimation.h" />
+    <ClInclude Include="InGame\Player\PlayerCharaCon.h" />
+    <ClInclude Include="InGame\Player\PlayerRotation.h" />
+    <ClInclude Include="InGame\Player\PlayerSound.h" />
+    <ClInclude Include="InGame\Player\PlayerStatus.h" />
+    <ClInclude Include="InGame\Shop\Hotel\HotelScene.h" />
+    <ClInclude Include="InGame\Shop\Hotel\HotelSelect.h" />
+    <ClInclude Include="InGame\Shop\Hotel\HotelSelectFont.h" />
+    <ClInclude Include="InGame\Shop\ItemShop\ItemShopScene.h" />
+    <ClInclude Include="InGame\Shop\ItemShop\ItemShopSelect.h" />
+    <ClInclude Include="InGame\Shop\ItemShop\ItemShopSelectFont.h" />
+    <ClInclude Include="InGame\Stage\FirstBossStage.h" />
+    <ClInclude Include="InGame\Stage\StageBuilding.h" />
+    <ClInclude Include="InGame\Stage\Stage.h" />
+    <ClInclude Include="ResourceBankManager.h" />
+    <ClInclude Include="Result\GameClearScene.h" />
+    <ClInclude Include="Result\GameOverScene.h" />
+    <ClInclude Include="Sound\tkSoundEngine.h" />
+    <ClInclude Include="Sound\tkSoundSource.h" />
+    <ClInclude Include="Sound\tkWaveFile.h" />
+    <ClInclude Include="Sound\tkWaveFileBank.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="StopWatch.h" />
+    <ClInclude Include="system\system.h" />
+    <ClInclude Include="Title\TitleScene.h" />
+    <ClInclude Include="Title\TitleSceneSound.h" />
+    <ClInclude Include="Title\TitleSceneSprite.h" />
+    <ClInclude Include="tkUtil.h" />
+    <ClInclude Include="Utilities\GameUpdateStop.h" />
+    <ClInclude Include="Utilities\Noncopyable.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

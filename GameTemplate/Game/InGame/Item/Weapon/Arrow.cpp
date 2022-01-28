@@ -1,0 +1,61 @@
+/// <summary>
+/// 矢クラス
+/// </summary>
+#include "stdafx.h"
+#include "Arrow.h"
+
+namespace nsKabutoubatu
+{
+	namespace nsArrow
+	{
+		const float ARROW_SPEED_POWER = 15.0f;
+	}
+
+	bool Arrow::Start()
+	{
+		//正規化
+		m_moveSpeed.Normalize();
+		//地面と平行にしか移動しないためyを0にする。
+		m_moveSpeed.y = 0.0f;
+
+		//モデルを初期化
+		m_arrowModel = NewGO<SkinModelRender>();
+		m_arrowModel->SetShadowCaster(true);	//影を落とす
+		m_arrowModel->SetOutline(false);		//輪郭線をつけない
+		m_arrowModel->SetSilhouette(true);		//シルエットをつける
+		m_arrowModel->SetPlayerMode(m_playerNum);	//プレイヤー１か２かを渡す
+		m_arrowModel->Init("Arrow");
+		//モデルの位置を更新
+		m_arrowModel->SetPosition(m_pos);
+		m_moveSpeed *= nsArrow::ARROW_SPEED_POWER;
+
+		//矢の向きをセット
+		//回転角度を求める
+		float m_rotAngle = atan2(m_moveSpeed.x, m_moveSpeed.z);
+		//回転を更新
+		Quaternion m_rot;
+		m_rot.SetRotation(Vector3::AxisY, m_rotAngle);
+		m_arrowModel->SetRotation(m_rot);
+
+		return true;
+	}
+
+	Arrow::~Arrow()
+	{
+		//モデル削除
+		DeleteGO(m_arrowModel);
+	}
+
+	void Arrow::Update()
+	{
+		m_deleteTimer++;
+		if (m_deleteTimer > 120)
+		{
+			DeleteGO(this);
+		}
+
+		//モデルの位置を更新
+		m_pos += m_moveSpeed;
+		m_arrowModel->SetPosition(m_pos);
+	}
+}

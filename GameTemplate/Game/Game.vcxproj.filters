@@ -1,0 +1,911 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="MiniEngine">
+      <UniqueIdentifier>{cc7395d8-c038-48b6-8449-ccd23e842334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiniEngine\math">
+      <UniqueIdentifier>{537105af-f4ca-42d1-ab2d-d112e5b73c11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiniEngine\tkFile">
+      <UniqueIdentifier>{22cebcfb-0109-475e-8c80-6691262acbc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiniEngine\HID">
+      <UniqueIdentifier>{9f01cb00-6a78-4c93-86b4-c6d2bd22048e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiniEngine\raytracing">
+      <UniqueIdentifier>{14187c21-3fa7-4895-9517-5392eeebd991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExEngine">
+      <UniqueIdentifier>{9b6426bf-a42e-442b-9906-7f04fbaa5270}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExEngine\gameObject">
+      <UniqueIdentifier>{103836a8-41fc-4624-a457-cbf2a093308b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExEngine\physics">
+      <UniqueIdentifier>{28d50a61-e332-409d-aaf8-cee4a2b444bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiniEngine\dbg">
+      <UniqueIdentifier>{a4afebf9-da6c-48cf-86ed-ad66371d7516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiniEngine\font">
+      <UniqueIdentifier>{3ac32d04-0484-4271-9fae-9b44b0baa05e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExEngine\level2D">
+      <UniqueIdentifier>{80abc458-e4b9-4836-89c7-3eb842072871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExEngine\effect">
+      <UniqueIdentifier>{ff948bdd-482b-4d02-919f-9681d7dc43ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="cpp&amp;h\Title">
+      <UniqueIdentifier>{64b454e0-f4db-4f89-b911-7ca3aef379dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\InGame">
+      <UniqueIdentifier>{219d4b9d-b459-4393-92b2-b992b6258f89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\Sound">
+      <UniqueIdentifier>{313b221f-e05f-456a-a06e-136e80e6f228}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\System">
+      <UniqueIdentifier>{a9bb9230-eaa9-4c07-a610-f43e5384bb9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\InGame\Player">
+      <UniqueIdentifier>{b50c6bf5-a591-4350-8dd3-c3b78a7587c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\InGame\Enemy">
+      <UniqueIdentifier>{daadaee6-c3f5-4d03-a87d-671b64bda1c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\InGame\Shop">
+      <UniqueIdentifier>{9bd648e4-8d77-4d23-b7aa-50628b636339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\InGame\Enemy\WeakEnemy">
+      <UniqueIdentifier>{b2b224ec-277b-4ad1-adf4-2d0281f5308c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\InGame\Shop\ItemShop">
+      <UniqueIdentifier>{1590b49d-39a0-47f9-91ac-c09ffa4ca52d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\InGame\Item">
+      <UniqueIdentifier>{99b4b782-1535-43ea-8221-a1b3b06fb21b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\InGame\Stage">
+      <UniqueIdentifier>{1fa00234-8cdc-401b-8b0f-fdde12324287}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\Graphics">
+      <UniqueIdentifier>{83c10958-5ea3-4c00-b473-891fa9e70f39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\Result">
+      <UniqueIdentifier>{808bdf34-f293-46a6-97c2-ddc3403202a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\InGame\Item\Weapon">
+      <UniqueIdentifier>{1bc089ee-e9b2-4ab7-8949-6a17ed61647a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\InGame\Camera">
+      <UniqueIdentifier>{dc5e997f-c2fd-422f-9cc0-557be4482f36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\InGame\Shop\Hotel">
+      <UniqueIdentifier>{d7b9dea2-9a88-46b4-a5e0-a159aaf3f9d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiniEngine\camera">
+      <UniqueIdentifier>{d94eb77b-93de-4065-bbc9-dc873fd6c6d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiniEngine\animation">
+      <UniqueIdentifier>{a40f7afc-8f6e-4b4c-a75d-59c4d80a1892}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\InGame\Online">
+      <UniqueIdentifier>{d211cef1-0308-43ea-9c1a-3e90703302e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\InGame\AcompanyAI">
+      <UniqueIdentifier>{de6018d2-f320-4e62-a5e1-0b7c82e09b10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\Utilities">
+      <UniqueIdentifier>{2157fd63-bf71-45b3-b7d2-dbde25efef28}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>cpp&amp;h</Filter>
+    </ClCompile>
+    <ClCompile Include="system\system.cpp">
+      <Filter>cpp&amp;h\System</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>cpp&amp;h</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\GraphicsEngine.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\VertexBuffer.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\IndexBuffer.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\StructuredBuffer.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\ConstantBuffer.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\DescriptorHeap.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\Texture.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\Shader.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\math\Vector.cpp">
+      <Filter>MiniEngine\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\math\Matrix.cpp">
+      <Filter>MiniEngine\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\Sprite.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\PipelineState.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\RootSignature.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\tkFile\TksFile.cpp">
+      <Filter>MiniEngine\tkFile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\tkFile\TkaFile.cpp">
+      <Filter>MiniEngine\tkFile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\tkFile\TkmFile.cpp">
+      <Filter>MiniEngine\tkFile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\Skeleton.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\MeshParts.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\Material.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\Model.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\HID\GamePad.cpp">
+      <Filter>MiniEngine\HID</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\GPUBuffer.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\RWStructuredBuffer.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\NullTextureMaps.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\raytracing\TLASBuffer.cpp">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\raytracing\BLASBuffer.cpp">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingDescriptorHeaps.cpp">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingEngine.cpp">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingInstance.cpp">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingPSO.cpp">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingShaderTable.cpp">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\raytracing\RaytracingWorld.cpp">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\gameObject\IGameObject.cpp">
+      <Filter>ExEngine\gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\gameObject\Gameobjectmanager.cpp">
+      <Filter>ExEngine\gameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\tkEngine.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\physics\Physics.cpp">
+      <Filter>ExEngine\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\physics\MeshCollider.cpp">
+      <Filter>ExEngine\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\physics\RigidBody.cpp">
+      <Filter>ExEngine\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\physics\CapsuleCollider.cpp">
+      <Filter>ExEngine\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\physics\CharacterController.cpp">
+      <Filter>ExEngine\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\physics\PhysicsStaticObject.cpp">
+      <Filter>ExEngine\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\font\FontEngine.cpp">
+      <Filter>MiniEngine\font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\font\Font.cpp">
+      <Filter>MiniEngine\font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\level2D\CaslFile.cpp">
+      <Filter>ExEngine\level2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\level2D\Level2D.cpp">
+      <Filter>ExEngine\level2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\level2D\MapChip2D.cpp">
+      <Filter>ExEngine\level2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\physics\BoxCollider.cpp">
+      <Filter>ExEngine\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\effect\Effect.cpp">
+      <Filter>ExEngine\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\effect\EffectEngine.cpp">
+      <Filter>ExEngine\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\RenderTarget.cpp">
+      <Filter>MiniEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\Camera.cpp">
+      <Filter>MiniEngine\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\Animation.cpp">
+      <Filter>MiniEngine\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\AnimationClip.cpp">
+      <Filter>MiniEngine\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\AnimationPlayController.cpp">
+      <Filter>MiniEngine\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExEngine\physics\SphereCollider.cpp">
+      <Filter>ExEngine\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\PostEffect.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Silhouette.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\SkinModelRender.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\SkyCube.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\SpriteRender.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\RenderingEngine.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bloom.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\DepthShadow.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\DoF.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Fade.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\FontRender.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Light.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\MiniMap.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MiniEngine\GaussianBlur.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Camera\CameraMoveDirectionChange.cpp">
+      <Filter>cpp&amp;h\InGame\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Camera\PlayerCamera.cpp">
+      <Filter>cpp&amp;h\InGame\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Enemy\WeakEnemy\Mole.cpp">
+      <Filter>cpp&amp;h\InGame\Enemy\WeakEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Enemy\WeakEnemy\Slime.cpp">
+      <Filter>cpp&amp;h\InGame\Enemy\WeakEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Enemy\ConfusionStar.cpp">
+      <Filter>cpp&amp;h\InGame\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Enemy\DropCoin.cpp">
+      <Filter>cpp&amp;h\InGame\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Enemy\EnemyBase.cpp">
+      <Filter>cpp&amp;h\InGame\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Enemy\FirstBoss.cpp">
+      <Filter>cpp&amp;h\InGame\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Item\Weapon\Weapon.cpp">
+      <Filter>cpp&amp;h\InGame\Item\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Item\RecoveryItem.cpp">
+      <Filter>cpp&amp;h\InGame\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Online\Online.cpp">
+      <Filter>cpp&amp;h\InGame\Online</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Online\SyncOnlineTwoPlayerMatchEngine.cpp">
+      <Filter>cpp&amp;h\InGame\Online</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Player\Player.cpp">
+      <Filter>cpp&amp;h\InGame\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Shop\Hotel\HotelScene.cpp">
+      <Filter>cpp&amp;h\InGame\Shop\Hotel</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Shop\Hotel\HotelSelect.cpp">
+      <Filter>cpp&amp;h\InGame\Shop\Hotel</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Shop\Hotel\HotelSelectFont.cpp">
+      <Filter>cpp&amp;h\InGame\Shop\Hotel</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Shop\ItemShop\ItemShopScene.cpp">
+      <Filter>cpp&amp;h\InGame\Shop\ItemShop</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Shop\ItemShop\ItemShopSelect.cpp">
+      <Filter>cpp&amp;h\InGame\Shop\ItemShop</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Shop\ItemShop\ItemShopSelectFont.cpp">
+      <Filter>cpp&amp;h\InGame\Shop\ItemShop</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Stage\FirstBossStage.cpp">
+      <Filter>cpp&amp;h\InGame\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Stage\StageBuilding.cpp">
+      <Filter>cpp&amp;h\InGame\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Stage\Stage.cpp">
+      <Filter>cpp&amp;h\InGame\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\GameLimitTime.cpp">
+      <Filter>cpp&amp;h\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\GameScene.cpp">
+      <Filter>cpp&amp;h\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\GameScreenUI.cpp">
+      <Filter>cpp&amp;h\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Pause.cpp">
+      <Filter>cpp&amp;h\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Result\GameClearScene.cpp">
+      <Filter>cpp&amp;h\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Result\GameOverScene.cpp">
+      <Filter>cpp&amp;h\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\tkSoundSource.cpp">
+      <Filter>cpp&amp;h\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\tkWaveFile.cpp">
+      <Filter>cpp&amp;h\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\tkWaveFileBank.cpp">
+      <Filter>cpp&amp;h\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\tkSoundEngine.cpp">
+      <Filter>cpp&amp;h\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Title\TitleScene.cpp">
+      <Filter>cpp&amp;h\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\AccompanyAI\AccompanyAI.cpp">
+      <Filter>cpp&amp;h\InGame\AcompanyAI</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\AccompanyAI\AccompanyAIShield.cpp">
+      <Filter>cpp&amp;h\InGame\AcompanyAI</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\AccompanyAI\AccompanyAISword.cpp">
+      <Filter>cpp&amp;h\InGame\AcompanyAI</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Enemy\WeakEnemy\NeedleSlime.cpp">
+      <Filter>cpp&amp;h\InGame\Enemy\WeakEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Enemy\WeakEnemy\Needle.cpp">
+      <Filter>cpp&amp;h\InGame\Enemy\WeakEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\LoadScene.cpp">
+      <Filter>cpp&amp;h\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Title\TitleSceneSprite.cpp">
+      <Filter>cpp&amp;h\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Title\TitleSceneSound.cpp">
+      <Filter>cpp&amp;h\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Player\PlayerRotation.cpp">
+      <Filter>cpp&amp;h\InGame\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Player\PlayerAnimation.cpp">
+      <Filter>cpp&amp;h\InGame\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Player\PlayerSound.cpp">
+      <Filter>cpp&amp;h\InGame\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Player\PlayerCharaCon.cpp">
+      <Filter>cpp&amp;h\InGame\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Online\OnlineErrorScene.cpp">
+      <Filter>cpp&amp;h\InGame\Online</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\SpriteRenderSub.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\HexagonBlur.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Item\Weapon\Arrow.cpp">
+      <Filter>cpp&amp;h\InGame\Item\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\Player\PlayerStatus.cpp">
+      <Filter>cpp&amp;h\InGame\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\GameUpdateStop.cpp">
+      <Filter>cpp&amp;h\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\Noncopyable.cpp">
+      <Filter>cpp&amp;h\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\FontRenderSub.cpp">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceBankManager.cpp">
+      <Filter>cpp&amp;h</Filter>
+    </ClCompile>
+    <ClCompile Include="InGame\AccompanyAI\AccompanyAIAnimation.cpp">
+      <Filter>cpp&amp;h\InGame\AcompanyAI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\MiniEngine\GraphicsEngine.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\RenderContext.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\RenderContext_inline.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\VertexBuffer.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\IndexBuffer.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\StructuredBuffer.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\ConstantBuffer.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\DescriptorHeap.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\Texture.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\Shader.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\math\Vector.h">
+      <Filter>MiniEngine\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\MiniEngine.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\math\Math.h">
+      <Filter>MiniEngine\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\math\Matrix.h">
+      <Filter>MiniEngine\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\Sprite.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\PipelineState.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\RootSignature.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\tkFile\TkmFile.h">
+      <Filter>MiniEngine\tkFile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\tkFile\TksFile.h">
+      <Filter>MiniEngine\tkFile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\tkFile\TkaFile.h">
+      <Filter>MiniEngine\tkFile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\Skeleton.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\MeshParts.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\Material.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\Model.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\HID\GamePad.h">
+      <Filter>MiniEngine\HID</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\DescriptorHeap_inline.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\GPUBuffer.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\RWStructuredBuffer.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\NullTextureMaps.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\raytracing\TLASBuffer.h">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\raytracing\BLASBuffer.h">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\raytracing\Raytracing.h">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingDescriptorHeaps.h">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingEngine.h">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingInstance.h">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingPSO.h">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingShaderTable.h">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\raytracing\RaytracingWorld.h">
+      <Filter>MiniEngine\raytracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\gameObject\IGameobject.h">
+      <Filter>ExEngine\gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\gameObject\GameObjectManager.h">
+      <Filter>ExEngine\gameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\tkEngine.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\physics\Physics.h">
+      <Filter>ExEngine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\ExEngine.h">
+      <Filter>ExEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\physics\MeshCollider.h">
+      <Filter>ExEngine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\physics\RigidBody.h">
+      <Filter>ExEngine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\physics\ICollider.h">
+      <Filter>ExEngine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\physics\CapsuleCollider.h">
+      <Filter>ExEngine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\physics\CharacterController.h">
+      <Filter>ExEngine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\physics\PhysicsStaticObject.h">
+      <Filter>ExEngine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\font\Font.h">
+      <Filter>MiniEngine\font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\font\FontEngine.h">
+      <Filter>MiniEngine\font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\level2D\CaslFile.h">
+      <Filter>ExEngine\level2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\level2D\Level2D.h">
+      <Filter>ExEngine\level2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\level2D\MapChip2D.h">
+      <Filter>ExEngine\level2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\physics\BoxCollider.h">
+      <Filter>ExEngine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\effect\Effect.h">
+      <Filter>ExEngine\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\effect\EffectEngine.h">
+      <Filter>ExEngine\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="system\system.h">
+      <Filter>cpp&amp;h\System</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTime.h">
+      <Filter>cpp&amp;h</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>cpp&amp;h</Filter>
+    </ClInclude>
+    <ClInclude Include="StopWatch.h">
+      <Filter>cpp&amp;h</Filter>
+    </ClInclude>
+    <ClInclude Include="tkUtil.h">
+      <Filter>cpp&amp;h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\GaussianBlur.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\Camera.h">
+      <Filter>MiniEngine\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\Animation.h">
+      <Filter>MiniEngine\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\AnimationClip.h">
+      <Filter>MiniEngine\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\AnimationPlayController.h">
+      <Filter>MiniEngine\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\physics\SphereCollider.h">
+      <Filter>ExEngine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExEngine\physics\CollisionAttr.h">
+      <Filter>ExEngine\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\dbg\MyLog.h">
+      <Filter>MiniEngine\dbg</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\PostEffect.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Silhouette.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\SkinModelRender.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\SkyCube.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\SpriteRender.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\RenderingEngine.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bloom.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\DepthShadow.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\DoF.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Fade.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\FontRender.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Light.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\MiniMap.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Camera\CameraMoveDirectionChange.h">
+      <Filter>cpp&amp;h\InGame\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Camera\PlayerCamera.h">
+      <Filter>cpp&amp;h\InGame\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Enemy\WeakEnemy\Mole.h">
+      <Filter>cpp&amp;h\InGame\Enemy\WeakEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Enemy\WeakEnemy\Slime.h">
+      <Filter>cpp&amp;h\InGame\Enemy\WeakEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Enemy\ConfusionStar.h">
+      <Filter>cpp&amp;h\InGame\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Enemy\DropCoin.h">
+      <Filter>cpp&amp;h\InGame\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Enemy\EnemyBase.h">
+      <Filter>cpp&amp;h\InGame\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Enemy\FirstBoss.h">
+      <Filter>cpp&amp;h\InGame\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Item\Weapon\Weapon.h">
+      <Filter>cpp&amp;h\InGame\Item\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Item\RecoveryItem.h">
+      <Filter>cpp&amp;h\InGame\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Online\Online.h">
+      <Filter>cpp&amp;h\InGame\Online</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Online\SyncOnlineTwoPlayerMatchEngine.h">
+      <Filter>cpp&amp;h\InGame\Online</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Player\Player.h">
+      <Filter>cpp&amp;h\InGame\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Shop\Hotel\HotelScene.h">
+      <Filter>cpp&amp;h\InGame\Shop\Hotel</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Shop\Hotel\HotelSelect.h">
+      <Filter>cpp&amp;h\InGame\Shop\Hotel</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Shop\Hotel\HotelSelectFont.h">
+      <Filter>cpp&amp;h\InGame\Shop\Hotel</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Shop\ItemShop\ItemShopScene.h">
+      <Filter>cpp&amp;h\InGame\Shop\ItemShop</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Shop\ItemShop\ItemShopSelect.h">
+      <Filter>cpp&amp;h\InGame\Shop\ItemShop</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Shop\ItemShop\ItemShopSelectFont.h">
+      <Filter>cpp&amp;h\InGame\Shop\ItemShop</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Stage\Stage.h">
+      <Filter>cpp&amp;h\InGame\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Stage\FirstBossStage.h">
+      <Filter>cpp&amp;h\InGame\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Stage\StageBuilding.h">
+      <Filter>cpp&amp;h\InGame\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\GameLimitTime.h">
+      <Filter>cpp&amp;h\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\GameScene.h">
+      <Filter>cpp&amp;h\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\GameScreenUI.h">
+      <Filter>cpp&amp;h\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Pause.h">
+      <Filter>cpp&amp;h\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Result\GameClearScene.h">
+      <Filter>cpp&amp;h\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Result\GameOverScene.h">
+      <Filter>cpp&amp;h\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\tkSoundEngine.h">
+      <Filter>cpp&amp;h\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\tkSoundSource.h">
+      <Filter>cpp&amp;h\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\tkWaveFile.h">
+      <Filter>cpp&amp;h\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\tkWaveFileBank.h">
+      <Filter>cpp&amp;h\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Title\TitleScene.h">
+      <Filter>cpp&amp;h\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\AccompanyAI\AccompanyAI.h">
+      <Filter>cpp&amp;h\InGame\AcompanyAI</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\AccompanyAI\AccompanyAISword.h">
+      <Filter>cpp&amp;h\InGame\AcompanyAI</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\AccompanyAI\AccompanyAIShield.h">
+      <Filter>cpp&amp;h\InGame\AcompanyAI</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Enemy\WeakEnemy\NeedleSlime.h">
+      <Filter>cpp&amp;h\InGame\Enemy\WeakEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Enemy\WeakEnemy\Needle.h">
+      <Filter>cpp&amp;h\InGame\Enemy\WeakEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\LoadScene.h">
+      <Filter>cpp&amp;h\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Title\TitleSceneSprite.h">
+      <Filter>cpp&amp;h\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Title\TitleSceneSound.h">
+      <Filter>cpp&amp;h\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Player\PlayerRotation.h">
+      <Filter>cpp&amp;h\InGame\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Player\PlayerAnimation.h">
+      <Filter>cpp&amp;h\InGame\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Player\PlayerSound.h">
+      <Filter>cpp&amp;h\InGame\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Player\PlayerCharaCon.h">
+      <Filter>cpp&amp;h\InGame\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Online\OnlineErrorScene.h">
+      <Filter>cpp&amp;h\InGame\Online</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\SpriteRenderSub.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\HexagonBlur.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Item\Weapon\Arrow.h">
+      <Filter>cpp&amp;h\InGame\Item\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\Player\PlayerStatus.h">
+      <Filter>cpp&amp;h\InGame\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\GameUpdateStop.h">
+      <Filter>cpp&amp;h\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Noncopyable.h">
+      <Filter>cpp&amp;h\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\FontRenderSub.h">
+      <Filter>cpp&amp;h\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceBankManager.h">
+      <Filter>cpp&amp;h</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\TResourceBank.h">
+      <Filter>MiniEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="InGame\AccompanyAI\AccompanyAIAnimation.h">
+      <Filter>cpp&amp;h\InGame\AcompanyAI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MiniEngine\dbg\MyAssert.h" />
+  </ItemGroup>
+</Project>

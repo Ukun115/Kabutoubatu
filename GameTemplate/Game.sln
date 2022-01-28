@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj", "{7E02B89F-27AC-45A9-8793-FD68F5FB8266}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3E0E8608-CD9B-4C76-AF33-29CA38F2C9F0} = {3E0E8608-CD9B-4C76-AF33-29CA38F2C9F0}
+		{28EF574A-84DB-3CB0-9B45-DB3545B2D05C} = {28EF574A-84DB-3CB0-9B45-DB3545B2D05C}
+		{4DCE52A5-106C-3D94-815D-C8EBC6133B5E} = {4DCE52A5-106C-3D94-815D-C8EBC6133B5E}
+		{9BF1ADF3-EB57-35E8-B156-ADE8FFC7E2F0} = {9BF1ADF3-EB57-35E8-B156-ADE8FFC7E2F0}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXTK12", "..\MiniEngine\DirectXTK\DirectXTK_Desktop_2019_Win10.vcxproj", "{3E0E8608-CD9B-4C76-AF33-29CA38F2C9F0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletCollision", "..\ExEngine\bulletPhysics\src\BulletCollision\BulletCollision.vcxproj", "{28EF574A-84DB-3CB0-9B45-DB3545B2D05C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletDynamics", "..\ExEngine\bulletPhysics\src\BulletDynamics\BulletDynamics.vcxproj", "{9BF1ADF3-EB57-35E8-B156-ADE8FFC7E2F0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinearMath", "..\ExEngine\bulletPhysics\src\LinearMath\LinearMath.vcxproj", "{4DCE52A5-106C-3D94-815D-C8EBC6133B5E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Preview|x64 = Preview|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E02B89F-27AC-45A9-8793-FD68F5FB8266}.Debug|x64.ActiveCfg = Debug|x64
+		{7E02B89F-27AC-45A9-8793-FD68F5FB8266}.Debug|x64.Build.0 = Debug|x64
+		{7E02B89F-27AC-45A9-8793-FD68F5FB8266}.Preview|x64.ActiveCfg = Preview|x64
+		{7E02B89F-27AC-45A9-8793-FD68F5FB8266}.Preview|x64.Build.0 = Preview|x64
+		{7E02B89F-27AC-45A9-8793-FD68F5FB8266}.Release|x64.ActiveCfg = Release|x64
+		{7E02B89F-27AC-45A9-8793-FD68F5FB8266}.Release|x64.Build.0 = Release|x64
+		{3E0E8608-CD9B-4C76-AF33-29CA38F2C9F0}.Debug|x64.ActiveCfg = Debug|x64
+		{3E0E8608-CD9B-4C76-AF33-29CA38F2C9F0}.Debug|x64.Build.0 = Debug|x64
+		{3E0E8608-CD9B-4C76-AF33-29CA38F2C9F0}.Preview|x64.ActiveCfg = Release|x64
+		{3E0E8608-CD9B-4C76-AF33-29CA38F2C9F0}.Preview|x64.Build.0 = Release|x64
+		{3E0E8608-CD9B-4C76-AF33-29CA38F2C9F0}.Release|x64.ActiveCfg = Release|x64
+		{3E0E8608-CD9B-4C76-AF33-29CA38F2C9F0}.Release|x64.Build.0 = Release|x64
+		{28EF574A-84DB-3CB0-9B45-DB3545B2D05C}.Debug|x64.ActiveCfg = Debug|x64
+		{28EF574A-84DB-3CB0-9B45-DB3545B2D05C}.Debug|x64.Build.0 = Debug|x64
+		{28EF574A-84DB-3CB0-9B45-DB3545B2D05C}.Preview|x64.ActiveCfg = Release|x64
+		{28EF574A-84DB-3CB0-9B45-DB3545B2D05C}.Preview|x64.Build.0 = Release|x64
+		{28EF574A-84DB-3CB0-9B45-DB3545B2D05C}.Release|x64.ActiveCfg = Release|x64
+		{28EF574A-84DB-3CB0-9B45-DB3545B2D05C}.Release|x64.Build.0 = Release|x64
+		{9BF1ADF3-EB57-35E8-B156-ADE8FFC7E2F0}.Debug|x64.ActiveCfg = Debug|x64
+		{9BF1ADF3-EB57-35E8-B156-ADE8FFC7E2F0}.Debug|x64.Build.0 = Debug|x64
+		{9BF1ADF3-EB57-35E8-B156-ADE8FFC7E2F0}.Preview|x64.ActiveCfg = Release|x64
+		{9BF1ADF3-EB57-35E8-B156-ADE8FFC7E2F0}.Preview|x64.Build.0 = Release|x64
+		{9BF1ADF3-EB57-35E8-B156-ADE8FFC7E2F0}.Release|x64.ActiveCfg = Release|x64
+		{9BF1ADF3-EB57-35E8-B156-ADE8FFC7E2F0}.Release|x64.Build.0 = Release|x64
+		{4DCE52A5-106C-3D94-815D-C8EBC6133B5E}.Debug|x64.ActiveCfg = Debug|x64
+		{4DCE52A5-106C-3D94-815D-C8EBC6133B5E}.Debug|x64.Build.0 = Debug|x64
+		{4DCE52A5-106C-3D94-815D-C8EBC6133B5E}.Preview|x64.ActiveCfg = Release|x64
+		{4DCE52A5-106C-3D94-815D-C8EBC6133B5E}.Preview|x64.Build.0 = Release|x64
+		{4DCE52A5-106C-3D94-815D-C8EBC6133B5E}.Release|x64.ActiveCfg = Release|x64
+		{4DCE52A5-106C-3D94-815D-C8EBC6133B5E}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40F660DE-8C79-4EDC-A219-A906F45E19C8}
+	EndGlobalSection
+EndGlobal
