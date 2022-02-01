@@ -43,6 +43,7 @@ namespace nsKabutoubatu
 		//状態
 		enum enState
 		{
+			enIdle,			//アイドル
 			enNormalState,	//通常
 			enDeathState	//死亡
 		};
@@ -51,18 +52,31 @@ namespace nsKabutoubatu
 		enum enMoveState
 		{
 			enRandomMoveState,			//ランダム移動
-			enRunAttackState,			//ダッシュ攻撃
+			enDashAttackState,			//ダッシュ攻撃
 			enAttackHornsUpState,		//角上げ攻撃
 			enAttackHornsForwardState	//角突き攻撃
+		};
+
+		//サウンド
+		enum enFirstBossSound
+		{
+			enLandingSound,					//着地音
+			enChargeSound,					//チャージ音
+			enDashAttackSound,				//突進攻撃音
+			enAttackHornsUpSound,			//角上げ音
+			enAttackHornsForwardSound,		//角突き音
+			enSoundNum						//効果音の総数
 		};
 
 		SpriteRender* m_hpBarUI[enHPBarUINum] = { nullptr };
 		FontRender* m_firstBossName = nullptr;
 		FontRender* m_salespersonTalk = nullptr;
 		ConfusionStar* m_confusionStar = nullptr;
+		SoundSource* m_sound[enSoundNum] = { nullptr };
 
 		AnimationClip m_animationClips[enAnimationNum];
 
+		int m_idleTimer = 0;
 		int m_moveState = enRandomMoveState;
 		wchar_t m_firstBossNameText[256];
 		Vector3 m_playerToEnemyDistanceDirecion[enPlayerNum];	//プレイヤーに伸びているベクトル
@@ -73,8 +87,11 @@ namespace nsKabutoubatu
 		//正面ベクトル
 		Vector3 m_forward;
 		int m_animState = enIdleAnimation;
-		bool m_canConfusion = true;
 		int m_confusionTimer = 0;
+		/// <summary>
+		/// フラグ
+		/// </summary>
+		bool m_canConfusion = true;
 		bool m_gameClearFlg = false;
 
 		/// <summary>

@@ -12,7 +12,7 @@ namespace nsKabutoubatu
 	namespace nsFirstBoss
 	{
 		//スポーンする初期座標
-		const Vector3 INIT_POSITION = { 0.0f,-10000.0f,-400.0f };
+		const Vector3 INIT_POSITION = { 0.0f,-9500.0f,-400.0f };
 		//ヒットポイン0トの最大値
 		const float MAX_HITPOINT = 40;
 		//ランダム移動の移動力
@@ -26,6 +26,31 @@ namespace nsKabutoubatu
 		const float     FONT_SCA = 0.5f;			//フォントの拡大率
 
 		const float ATTACK_RANGE = 200.0f;
+
+		//ボスのモデルのファイルパス
+		const char* BOSS_MODEL_FILE_PATH = {"enemy_firstBoss"};
+		//アニメーションのファイルパス
+		const char* ANIMATION_FILE_PATH[7] =
+		{
+			"enemy_firstBoss_idle",					//アイドル
+			"enemy_firstBoss_walk",					//歩き
+			"enemy_firstBoss_run",					//走り
+			"enemy_firstBoss_Attack_HornsUp",		//角突き上げ
+			"enemy_firstBoss_Attack_HornsForward",	//角突き
+			"enemy_firstBoss_Damage",				//ダメージ
+			"enemy_firstBoss_death",				//死亡
+		};
+		//アニメーションそれぞれのループアニメーションかどうかのフラグ
+		const bool ANIMATION_LOOP_FLAG[7] =
+		{
+			true,	//アイドル
+			true,	//歩き
+			true,	//走り
+			false,	//角突き上げ
+			false,	//角突き
+			false,	//ダメージ
+			false,	//死亡
+		};
 	}
 
 	void FirstBoss::SubStart()
@@ -71,8 +96,6 @@ namespace nsKabutoubatu
 		swprintf_s(m_firstBossNameText, L"Boss");
 		m_firstBossName->SetText(m_firstBossNameText);
 
-
-
 		//モデルを初期化
 		m_model = NewGO<SkinModelRender>();
 		//モデルの上方向をZアップに指定
@@ -82,34 +105,18 @@ namespace nsKabutoubatu
 		m_model->SetPlayerMode(2);	//敵用のシルエット
 		m_model->SetOutline(true);//輪郭線をつける
 		//アニメーションをロード
-		m_animationClips[enIdleAnimation].Load("enemy_firstBoss_idle");									//アニメーションをロード
-		m_animationClips[enIdleAnimation].SetLoopFlag(true);											//ループ再生にする。
-		m_animationClips[enWalkAnimation].Load("enemy_firstBoss_walk");									//歩きアニメーションをロード
-		m_animationClips[enWalkAnimation].SetLoopFlag(true);											//ループ再生にする。
-		m_animationClips[enRunAnimation].Load("enemy_firstBoss_run");									//走りアニメーションをロード
-		m_animationClips[enRunAnimation].SetLoopFlag(true);												//ループ再生にする。
-		m_animationClips[enAttackHornsUpAnimation].Load("enemy_firstBoss_Attack_HornsUp");				//角突き上げアニメーションをロード
-		m_animationClips[enAttackHornsUpAnimation].SetLoopFlag(false);									//ワンショット再生にする。
-		m_animationClips[enAttackHornsForwardAnimation].Load("enemy_firstBoss_Attack_HornsForward");	//角突きアニメーションをロード
-		m_animationClips[enAttackHornsForwardAnimation].SetLoopFlag(false);								//ワンショット再生にする。
-		m_animationClips[enDamageAnimation].Load("enemy_firstBoss_Damage");								//ダメージ受けたアニメーションをロード
-		m_animationClips[enDamageAnimation].SetLoopFlag(false);											//ワンショット再生にする。
-		m_animationClips[enDeathAnimation].Load("enemy_firstBoss_death");								//死亡アニメーションをロード
-		m_animationClips[enDeathAnimation].SetLoopFlag(false);											//ワンショット再生にする。
+		for (int animationNum = enIdleAnimation; animationNum < enAnimationNum; animationNum++)
+		{
+			m_animationClips[animationNum].Load(nsFirstBoss::ANIMATION_FILE_PATH[animationNum]);
+			m_animationClips[animationNum].SetLoopFlag(nsFirstBoss::ANIMATION_LOOP_FLAG[animationNum]);
+		}
 		//敵のモデル情報を初期化
-		m_model->Init("enemy_firstBoss", "enemy_firstBoss", m_animationClips, enAnimationNum);
+		m_model->Init(nsFirstBoss::BOSS_MODEL_FILE_PATH, nsFirstBoss::BOSS_MODEL_FILE_PATH, m_animationClips, enAnimationNum);
 		//モデルの位置を更新
 		m_pos = nsFirstBoss::INIT_POSITION;
 		m_model->SetPosition(m_pos);
 		//キャラコンを初期化
 		m_charaCon.Init(100.0f, 100.0f, m_pos);
-		//キャラクターコントローラーを使った移動処理に変更。
-		m_pos = m_charaCon.Execute(
-			m_moveSpeed,
-			1.0f,
-			m_isHitGround,
-			m_hitGroundNormal
-		);
 		//正面ベクトルを計算
 		m_forward = Vector3::AxisZ;
 		m_rot.Apply(m_forward);
@@ -130,202 +137,247 @@ namespace nsKabutoubatu
 
 	void FirstBoss::SubUpdate()
 	{
-		switch(m_nowState)
+		//地面についていないときは移動処理をしない。
+		if (m_charaCon.IsOnGround())
 		{
-		//通常状態
-		case enNormalState:
-			//移動状態
-			switch (m_moveState)
+			switch (m_nowState)
 			{
-				//ランダム移動状態
-			case enRandomMoveState:
-				//ランダム移動
-				RandomMove();
-				//プレイヤー位置検索
-				DistanceSearch();
+			//アイドル状態
+			case enIdle:
+				if (m_idleTimer == 0)
+				{
+					//着地音再生
+					m_sound[enLandingSound] = NewGO<SoundSource>();
+					m_sound[enLandingSound]->Init(L"Assets/sound/FirstBoss_Landing.wav");
+					m_sound[enLandingSound]->SetVolume(0.5f);
+					m_sound[enLandingSound]->Play(false);
+				}
+				m_idleTimer++;
+				if (m_idleTimer > 60)
+				{
+					//通常状態にする
+					m_nowState = enNormalState;
+				}
 
 				break;
 
-				//走り攻撃
-			case enRunAttackState:
-				m_moveStopTimer++;
-				if (m_moveStopTimer >= 120)
+				//通常状態
+			case enNormalState:
+				//移動状態
+				switch (m_moveState)
 				{
-					if (m_moveStopTimer == 120)
+					//ランダム移動状態
+				case enRandomMoveState:
+					//ランダム移動
+					RandomMove();
+					//プレイヤー位置検索
+					DistanceSearch();
+
+					break;
+
+					//ダッシュ攻撃
+				case enDashAttackState:
+					if (m_moveStopTimer == 0)
 					{
-						m_moveSpeed *= 20.0f;
+						//チャージ音再生
+						m_sound[enChargeSound] = NewGO<SoundSource>();
+						m_sound[enChargeSound]->Init(L"Assets/sound/FirstBoss_Charge.wav");
+						m_sound[enChargeSound]->SetVolume(0.5f);
+						m_sound[enChargeSound]->Play(false);
 					}
-					//接触判定をなくす
-					SetCanHitBody(false);
-
-					//壁に当たったら、
-					if (m_charaCon.IsHitWall())
+					m_moveStopTimer++;
+					if (m_moveStopTimer >= 120)
 					{
-						if (m_animState != enIdleAnimation)
+						if (m_moveStopTimer == 120)
 						{
-							//混乱状態
+							m_moveSpeed *= 20.0f;
 
-							//敵を止める
-							m_moveSpeed.Normalize();
-							m_moveSpeed /= 10.0f;
-							//アニメーションをアイドル状態にする
-							m_animState = enIdleAnimation;
-							//混乱ができるとき、
-							if (m_canConfusion)
+							//突進音再生
+							m_sound[enDashAttackSound] = NewGO<SoundSource>();
+							m_sound[enDashAttackSound]->Init(L"Assets/sound/FirstBoss_DashAttack.wav");
+							m_sound[enDashAttackSound]->SetVolume(0.5f);
+							m_sound[enDashAttackSound]->Play(false);
+						}
+						//接触判定をなくす
+						SetCanHitBody(false);
+
+						//壁に当たったら、かつ、混乱していないとき、
+						if (m_charaCon.IsHitWall() && m_confusionStar == nullptr)
+						{
+							if (m_animState != enIdleAnimation)
 							{
-								//混乱モデルを表示
-								m_confusionStar = NewGO<ConfusionStar>();
-								m_confusionStar->SetPosition(m_pos);
+								//混乱状態
 
-								//混乱できないようにする
-								m_canConfusion = false;
+								//敵を止める
+								m_moveSpeed.Normalize();
+								m_moveSpeed /= 10.0f;
+								//アニメーションをアイドル状態にする
+								m_animState = enIdleAnimation;
+								//混乱ができるとき、
+								if (m_canConfusion)
+								{
+									//混乱モデルを表示
+									m_confusionStar = NewGO<ConfusionStar>();
+									m_confusionStar->SetPosition(m_pos);
+
+									//混乱できないようにする
+									m_canConfusion = false;
+								}
+							}
+						}
+						//混乱しているとき、
+						if (m_confusionStar != nullptr)
+						{
+							m_confusionTimer++;
+							if (m_confusionTimer == 300)
+							{
+								//歩きアニメーションにする
+								m_animState = enWalkAnimation;
+							}
+							if (m_confusionTimer > 500)
+							{
+								//混乱モデルを削除
+								DeleteGO(m_confusionStar);
+								m_confusionStar = nullptr;
+								//混乱状態を解除(ランダム移動になる)
+								m_moveState = enRandomMoveState;
+								//タイマーを初期化
+								m_confusionTimer = 0;
+								//混乱できるようにする
+								m_canConfusion = true;
+								//接触判定を復活させrう
+								SetCanHitBody(true);
+								//移動ストップタイマーを初期化
+								m_moveStopTimer = 0;
 							}
 						}
 					}
-					//混乱しているとき、
-					if (m_confusionStar != nullptr)
+
+					break;
+
+					//角上げ攻撃状態
+				case enAttackHornsUpState:
+					if (m_moveStopTimer == 0)
 					{
-						m_confusionTimer++;
-						if (m_confusionTimer == 300)
+						//角上げ攻撃音再生
+						m_sound[enAttackHornsUpSound] = NewGO<SoundSource>();
+						m_sound[enAttackHornsUpSound]->Init(L"Assets/sound/FirstBoss_Attack.wav");
+						m_sound[enAttackHornsUpSound]->SetVolume(0.5f);
+						m_sound[enAttackHornsUpSound]->Play(false);
+					}
+					m_moveStopTimer++;
+					if (m_moveStopTimer >= 60)
+					{
+						//アニメーションを角上げ攻撃に切り替え
+						m_animState = enAttackHornsUpAnimation;
+
+						if (IsAttackRangeIn())
 						{
-							//歩きアニメーションにする
-							m_animState = enWalkAnimation;
+							//1ボスの正面に突き飛ばす
+							m_player[m_nearPlayer]->SetMoveSpeed(m_forward * 10.0f);
 						}
-						if (m_confusionTimer > 500)
+
+						//アニメーションが終了したら、
+						if (!m_model->IsPlaying())
 						{
-							//混乱モデルを削除
-							DeleteGO(m_confusionStar);
-							//混乱状態を解除(ランダム移動になる)
-							m_moveState = enRandomMoveState;
-							//タイマーを初期化
-							m_confusionTimer = 0;
-							//混乱できるようにする
-							m_canConfusion = true;
-							//接触判定を復活させrう
-							SetCanHitBody(true);
-							//移動ストップタイマーを初期化
-							m_moveStopTimer = 0;
+							m_moveStopTimer++;
+							if (m_moveStopTimer > 120)
+							{
+								//ランダム移動状態にする
+								m_moveState = enRandomMoveState;
+								//ランダム移動タイマーを初期化
+								m_randomMoveTimer = 0;
+								//移動ストップタイマーを初期化
+								m_moveStopTimer = 0;
+							}
 						}
 					}
+
+					break;
+
+					//角突き攻撃状態
+				case enAttackHornsForwardState:
+					if (m_moveStopTimer == 0)
+					{
+						//角突き攻撃音再生
+						m_sound[enAttackHornsForwardSound] = NewGO<SoundSource>();
+						m_sound[enAttackHornsForwardSound]->Init(L"Assets/sound/FirstBoss_Attack.wav");
+						m_sound[enAttackHornsForwardSound]->SetVolume(0.5f);
+						m_sound[enAttackHornsForwardSound]->Play(false);
+					}
+					m_moveStopTimer++;
+					if (m_moveStopTimer >= 60)
+					{
+						//アニメーションを角突き攻撃に切り替え
+						m_animState = enAttackHornsForwardAnimation;
+
+						if (IsAttackRangeIn())
+						{
+							//1ボスの正面に突き飛ばす
+							m_player[m_nearPlayer]->SetMoveSpeed(m_forward * 10.0f);
+						}
+
+						//アニメーションが終了したら、
+						if (!m_model->IsPlaying())
+						{
+							m_moveStopTimer2++;
+							if (m_moveStopTimer2 > 120)
+							{
+								//ランダム移動状態にする
+								m_moveState = enRandomMoveState;
+								//ランダム移動タイマーを初期化
+								m_randomMoveTimer = 0;
+								//移動ストップタイマーを初期化
+								m_moveStopTimer = 0;
+								m_moveStopTimer2 = 0;
+							}
+						}
+					}
+
+					break;
+				}
+
+				//攻撃を受けた時、
+				if (GetReceiveAttackFlg())
+				{
+					//ヒットポイントを１減らす
+					m_hitPoint--;
+				}
+				//HPが０以下にならないように補正
+				m_hitPoint = int(max(0.0f, m_hitPoint));
+				//HPが０になったら死ぬ
+				if (m_hitPoint == 0)
+				{
+					//死亡アニメーションを再生
+					m_animState = enDeathAnimation;
+					//死亡状態
+					m_nowState = enDeathState;
+					//敵を倒した数を+1する
+					m_playerStatus[GetLastKillPlayer()]->AddEnemyKillNum();
+					//移動速度を０にする
+					m_moveSpeed = Vector3::Zero;
+					//接触範囲をセット
+					SetHitBodyLength(1.0f);
 				}
 
 				break;
 
-				//角上げ攻撃状態
-			case enAttackHornsUpState:
-				m_moveStopTimer++;
-				if (m_moveStopTimer >= 60)
-				{
-					//アニメーションを角上げ攻撃に切り替え
-					m_animState = enAttackHornsUpAnimation;
-
-					if (IsAttackRangeIn())
-					{
-						//1ボスの正面に突き飛ばす
-						m_player[m_nearPlayer]->SetMoveSpeed(m_forward * 10.0f);
-					}
-
-					//アニメーションが終了したら、
-					if (!m_model->IsPlaying())
-					{
-						m_moveStopTimer++;
-						if (m_moveStopTimer > 120)
-						{
-							//ランダム移動状態にする
-							m_moveState = enRandomMoveState;
-							//ランダム移動タイマーを初期化
-							m_randomMoveTimer = 0;
-							//移動ストップタイマーを初期化
-							m_moveStopTimer = 0;
-						}
-					}
-				}
-
-				break;
-
-				//角突き攻撃状態
-			case enAttackHornsForwardState:
-				m_moveStopTimer++;
-				if (m_moveStopTimer >= 60)
-				{
-					//アニメーションを角突き攻撃に切り替え
-					m_animState = enAttackHornsForwardAnimation;
-
-					if (IsAttackRangeIn())
-					{
-						//1ボスの正面に突き飛ばす
-						m_player[m_nearPlayer]->SetMoveSpeed(m_forward * 10.0f);
-					}
-
-					//アニメーションが終了したら、
-					if (!m_model->IsPlaying())
-					{
-						m_moveStopTimer2++;
-						if (m_moveStopTimer2 > 120)
-						{
-							//ランダム移動状態にする
-							m_moveState = enRandomMoveState;
-							//ランダム移動タイマーを初期化
-							m_randomMoveTimer = 0;
-							//移動ストップタイマーを初期化
-							m_moveStopTimer = 0;
-							m_moveStopTimer2 = 0;
-						}
-					}
-				}
-
-				break;
-			}
-
-			//攻撃を受けた時、
-			if (GetReceiveAttackFlg())
-			{
-				//ヒットポイントを１減らす
-				m_hitPoint--;
-
-				//ヒットポイントが半分になったら、
-				if (m_hitPoint == nsFirstBoss::MAX_HITPOINT / 2)
-				{
-					//攻撃受けたアニメーションを再生
-					m_animState = enDamageAnimation;
-
-					//モードチェンジ
-				}
-			}
-			//HPが０以下にならないように補正
-			m_hitPoint = int(max(0.0f, m_hitPoint));
-			//HPが０になったら死ぬ
-			if (m_hitPoint == 0)
-			{
-				//死亡アニメーションを再生
-				m_animState = enDeathAnimation;
 				//死亡状態
-				m_nowState = enDeathState;
-				//敵を倒した数を+1する
-				m_playerStatus[GetLastKillPlayer()]->AddEnemyKillNum();
-				//移動速度を０にする
-				m_moveSpeed = Vector3::Zero;
-				//接触範囲をセット
-				SetHitBodyLength(1.0f);
-			}
+			case enDeathState:
+				//死んだときに混乱が消えてなかったら、
+				if (m_confusionStar != nullptr)
+				{
+					//混乱モデルを削除
+					DeleteGO(m_confusionStar);
+				}
+				//死亡アニメーションが終了したら、
+				if (!m_model->IsPlaying())
+				{
+					m_gameClearFlg = true;
+				}
 
-			break;
-
-		//死亡状態
-		case enDeathState:
-			//死んだときに混乱が消えてなかったら、
-			if (m_confusionStar != nullptr)
-			{
-				//混乱モデルを削除
-				DeleteGO(m_confusionStar);
+				break;
 			}
-			//死亡アニメーションが終了したら、
-			if (!m_model->IsPlaying())
-			{
-				m_gameClearFlg = true;
-			}
-
-			break;
 		}
 
 		//HPバー更新処理
@@ -489,7 +541,7 @@ namespace nsKabutoubatu
 			{
 			case 0:
 				//ダッシュ攻撃状態にする
-				m_moveState = enRunAttackState;
+				m_moveState = enDashAttackState;
 				//プレイヤー方向に向かせる
 				m_moveSpeed = m_playerToEnemyDistanceDirecion[m_nearPlayer];
 				//アニメーションを走り攻撃に切り替え
@@ -528,4 +580,4 @@ namespace nsKabutoubatu
 			return false;
 		}
 	}
-}
+};

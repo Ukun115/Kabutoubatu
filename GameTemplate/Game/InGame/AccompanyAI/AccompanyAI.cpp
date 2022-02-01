@@ -278,6 +278,7 @@ namespace nsKabutoubatu
 			m_pos = m_player->GetPosition();
 			//キャラコンを削除
 			m_charaCon.RemoveRigidBoby();
+
 			//キャラコンを再初期化
 			m_charaCon.Init(25.0f, 30.0f, m_pos);
 			//体力を１減らす

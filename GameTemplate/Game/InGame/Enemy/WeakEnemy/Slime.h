@@ -33,9 +33,12 @@ namespace nsKabutoubatu
 
 		AnimationClip m_animationClips[enAnimationNum];
 
-		bool m_jumpStartFlg = true;
 		//ジャンプ力
 		float m_jumpPower = 7.5f;
+		/// <summary>
+		/// フラグ
+		/// </summary>
+		bool m_jumpStartFlg = true;
 
 		/// <summary>
 		/// 呼ばれて最初に実行される関数

@@ -59,14 +59,14 @@ namespace nsKabutoubatu
 			m_shopItem[shopItemNum]->SetPosition(m_itemPos);
 		}
 
-		m_coinSpritePos = -275.0f;
+		m_coinSpritePos = -295.0f;
 		for (int i = 0; i < 3; i++)
 		{
 			//コイン画像を初期化
 			m_coinSprite[i] = NewGO<SpriteRender>();
 			m_coinSprite[i]->Init("Coin", 25, 25);
 			m_coinSprite[i]->SetPosition({ m_coinSpritePos,-177.0f,0.0f });
-			m_coinSpritePos += 275.0f;
+			m_coinSpritePos += 270.0f;
 		}
 
 		m_hukidasi = NewGO<SpriteRender>(nsStdafx::PRIORITY_0);
@@ -128,6 +128,13 @@ namespace nsKabutoubatu
 
 	void ItemShopScene::Update()
 	{
+		//お辞儀が終わったら、
+		if (!m_salesperson->IsPlaying())
+		{
+			//アイドル状態にする
+			m_salesperson->PlayAnimation(enIdle,1.0f);
+		}
+
 		if (m_fade[0] != nullptr && m_fade[0]->GetNowState() == 2)
 		{
 			DeleteGO(m_fade[0]);
@@ -198,12 +205,15 @@ namespace nsKabutoubatu
 		m_salesperson->SetModelUpAxis(enModelUpAxisZ);
 		m_salesperson->SetOutline(true);		//輪郭線をつける
 		//アニメーションをロード
-		m_animationClips[0].Load("SalesPerson_Idle");
+		m_animationClips[enIdle].Load("SalesPerson_Idle");			//アイドル
+		m_animationClips[enGreething].Load("SalesPerson_Greething");		//お辞儀
 		//ループアニメーションかどうかを設定
-		m_animationClips[0].SetLoopFlag(true);
-		m_salesperson->Init("SalesPerson","SalesPerson", m_animationClips,1);
+		m_animationClips[enIdle].SetLoopFlag(true);
+		m_animationClips[enGreething].SetLoopFlag(false);
+		m_salesperson->Init("SalesPerson","SalesPerson", m_animationClips, enAnimationNum);
+		m_salesperson->SetAnimationSpeed(1.5f);
 		//アニメーションの状態更新
-		m_salesperson->PlayAnimation(0);
+		m_salesperson->PlayAnimation(enGreething,1.0f);
 		//位置をセット
 		m_salesperson->SetPosition({ m_pos.x,m_pos.y,m_pos.z - 100.0f });
 	}
@@ -211,6 +221,9 @@ namespace nsKabutoubatu
 	//アイテムショップから出るメソッド
 	void ItemShopScene::EnterFromShop()
 	{
+		//お辞儀アニメーション
+		m_salesperson->PlayAnimation(enGreething,1.0f);
+
 		if (m_fade[1] == nullptr)
 		{
 			m_fade[1] = NewGO<Fade>();

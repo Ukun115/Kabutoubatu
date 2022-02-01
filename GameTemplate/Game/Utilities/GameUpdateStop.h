@@ -19,8 +19,11 @@ namespace nsKabutoubatu
 			enCameraMove	//ƒJƒƒ‰ˆÚ“®
 		};
 
-		bool m_isStop = false;
 		int m_moveTarget = 0;
+		/// <summary>
+		/// ƒtƒ‰ƒO
+		/// </summary>
+		bool m_isStop = false;
 
 	public:
 		void SetMoveTarget(const int moveTarget) { m_moveTarget = moveTarget; };

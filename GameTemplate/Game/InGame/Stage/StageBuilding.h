@@ -80,8 +80,6 @@ namespace nsKabutoubatu
 		Quaternion m_rot;	//回転
 		//シーンに入るまでの遅延タイマー
 		int m_sceneChangeDelayTimer = 0;
-		//ドアに触れているかどうか
-		bool m_doorTatchFlg[enPlayerNum] = { false };
 		int m_doorSlideTimer = 0;
 		int m_gyaku = 1;
 		int m_doorState = enOpen;
@@ -90,6 +88,11 @@ namespace nsKabutoubatu
 		float m_canDoorTatchLength = 0.0f;
 		//ショップタイプ
 		int m_shopType = enHotel;
+		/// <summary>
+		/// フラグ
+		/// </summary>
+		//ドアに触れているかどうか
+		bool m_doorTatchFlg[enPlayerNum] = { false };
 
 		/// <summary>
 		/// 呼ばれて最初に実行される関数

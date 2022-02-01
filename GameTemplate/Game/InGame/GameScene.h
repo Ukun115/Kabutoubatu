@@ -67,15 +67,17 @@ namespace nsKabutoubatu
 		wchar_t m_haveRecoveryItemNumText[256];
 		//オンライン時のプレイヤー番号
 		int m_onlinePlayerNo = 0;
-		bool m_onlineError = false;
 		//スカイキューブのテクスチャを変更する変数
 		int m_skyCubeMapTextureNum = 0;
 		//プレイヤー番号
 		int m_playerNo = enPlayer1;
 		//他のプレイヤー番号
 		int m_otherPlayerNo = enPlayer1;
-
+		/// <summary>
+		/// フラグ
+		/// </summary>
 		bool m_online = false;
+		bool m_onlineError = false;
 
 		/// <summary>
 		/// 呼ばれて最初に実行される関数

@@ -31,6 +31,14 @@ namespace nsKabutoubatu
 			enPlayerNum		//プレイヤーの総数
 		};
 
+		//アニメーション
+		enum enAnimation
+		{
+			enIdle,			//アイドル
+			enGreething,	//挨拶
+			enAnimationNum	//アニメーションの総数
+		};
+
 		SpriteRender* m_coinSprite[3] = { nullptr };
 		SkinModelRender* m_itemShopInterior = nullptr;	//アイテムショップの内装モデル
 		SkinModelRender* m_shopItem[3] = { nullptr };	//アイテムショップの商品モデル
@@ -47,7 +55,7 @@ namespace nsKabutoubatu
 		ItemShopSelect* m_ItemShopSelect[enPlayerNum] = { nullptr };
 
 		PhysicsStaticObject m_physicsStaticObject;		//静的物理オブジェクトクラス
-		AnimationClip m_animationClips[1];
+		AnimationClip m_animationClips[enAnimationNum];
 
 		int m_playerNum = enPlayerNum;
 		float m_coinSpritePos = 0.0f;

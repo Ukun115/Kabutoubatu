@@ -6,25 +6,42 @@
 
 namespace nsKabutoubatu
 {
+	namespace nsAccompanyAIAnimation
+	{
+		//アニメーションのファイルパス
+		const char* ANIMATION_FILE_PATH[8] =
+		{
+			"AccompanyAI_idle",			//アイドル
+			"AccompanyAI_shieldIdle",	//守備アイドル
+			"AccompanyAI_walk",			//歩き
+			"AccompanyAI_shieldWalk",	//守備歩き
+			"AccompanyAI_run",			//走り
+			"AccompanyAI_attack1",		//攻撃１
+			"AccompanyAI_attack2",		//攻撃２
+			"AccompanyAI_attack3",		//攻撃３
+		};
+		//アニメーションそれぞれのループアニメーションかどうかのフラグ
+		const bool ANIMATION_LOOP_FLAG[8] =
+		{
+			true,	//アイドル
+			true,	//守備アイドル
+			true,	//歩き
+			true,	//守備歩き
+			true,	//走り
+			false,	//攻撃１
+			false,	//攻撃２
+			false,	//攻撃３
+		};
+	}
+
 	bool AccompanyAIAnimation::Start()
 	{
 		//アニメーションをロード
-		m_animationClips[enAnimationClip_idle].Load("AccompanyAI_idle");		//アイドルモーションをロード
-		m_animationClips[enAnimationClip_idle].SetLoopFlag(true);	//ループモーションにする。
-		m_animationClips[enAnimationClip_shieldIdle].Load("AccompanyAI_shieldIdle");		//守備アイドルモーションをロード
-		m_animationClips[enAnimationClip_shieldIdle].SetLoopFlag(true);	//ループモーションにする。
-		m_animationClips[enAnimationClip_walk].Load("AccompanyAI_walk");		//歩きモーションをロード
-		m_animationClips[enAnimationClip_walk].SetLoopFlag(true);	//ループモーションにする。
-		m_animationClips[enAnimationClip_shieldWalk].Load("AccompanyAI_shieldWalk");		//守備歩きモーションをロード
-		m_animationClips[enAnimationClip_shieldWalk].SetLoopFlag(true);	//ループモーションにする。
-		m_animationClips[enAnimationClip_run].Load("AccompanyAI_run");			//走りモーションをロード
-		m_animationClips[enAnimationClip_run].SetLoopFlag(true);	//ループモーションにする。
-		m_animationClips[enAnimationClip_attack1].Load("AccompanyAI_attack1");			//攻撃１モーションをロード
-		m_animationClips[enAnimationClip_attack1].SetLoopFlag(false);	//ワンショット再生にする。
-		m_animationClips[enAnimationClip_attack2].Load("AccompanyAI_attack2");			//攻撃２モーションをロード
-		m_animationClips[enAnimationClip_attack2].SetLoopFlag(false);	//ワンショット再生にする。
-		m_animationClips[enAnimationClip_attack3].Load("AccompanyAI_attack3");			//攻撃３モーションをロード
-		m_animationClips[enAnimationClip_attack3].SetLoopFlag(false);	//ワンショット再生にする。
+		for (int animationNum = enAnimationClip_idle; animationNum < enAnimationClips_num; animationNum++)
+		{
+			m_animationClips[animationNum].Load(nsAccompanyAIAnimation::ANIMATION_FILE_PATH[animationNum]);
+			m_animationClips[animationNum].SetLoopFlag(nsAccompanyAIAnimation::ANIMATION_LOOP_FLAG);
+		}
 
 		return true;
 	}

@@ -70,7 +70,7 @@ namespace nsKabutoubatu
 
 		CharacterController m_charaCon;		//キャラクタコントローラークラスを作成
 
-		float m_playerToMeLength;
+		float m_playerToMeLength = 0.0f;
 		Vector3 m_playerToMeDirection;
 		int m_attackComboNo = 0;
 		int m_attackAndDefenseMode = enDefenseMode;
@@ -78,19 +78,22 @@ namespace nsKabutoubatu
 		int m_randomTimer = 0;
 		Vector3 m_playerPos;
 		Vector3 m_circleSetPos;
-		bool m_isPlayerGroundWalk = false;
 		int m_loop = 0;
 		Vector3 m_pos;	//位置
 		Vector3 m_moveSpeed;	//移動速度
 		float m_rotAngle = 0;	//回転角度
 		Quaternion m_rot;	//回転
-		bool m_isHitGround;
+		bool m_isHitGround = false;
 		Vector3 m_hitGroundNormal;
 		int m_hitPoint = 10;	//体力
 		int m_randomAngle = 0;
 		//移動速度を取得するための変数
 		Vector3 m_playerLookingDirection;
 		int m_attackJumpTimer = 0;
+		/// <summary>
+		/// フラグ
+		/// </summary>
+		bool m_isPlayerGroundWalk = false;
 
 		/// <summary>
 		/// 呼ばれて最初に実行される関数

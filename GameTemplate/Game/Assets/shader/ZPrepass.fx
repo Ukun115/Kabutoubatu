@@ -86,8 +86,6 @@ SPSIn VSMainCore(SVSIn vsIn, uniform bool hasSkin)
     psIn.pos = mul(mView, psIn.pos); // ワールド座標系からカメラ座標系に変換
     psIn.depth.z = psIn.pos.z;
     psIn.pos = mul(mProj, psIn.pos); // カメラ座標系からスクリーン座標系に変換
-    psIn.depth.x = psIn.pos.z / psIn.pos.w;
-    psIn.depth.y = saturate( psIn.pos.w / 1000.0f );
 
     return psIn;
 }
@@ -109,5 +107,7 @@ SPSIn VSSkinMain(SVSIn vsIn)
 // モデル用のピクセルシェーダーのエントリーポイント
 float4 PSMain(SPSIn psIn) : SV_Target0
 {
+    psIn.depth.x = psIn.pos.z / psIn.pos.w;
+    psIn.depth.y = saturate(psIn.pos.w / 1000.0f);
     return float4( psIn.depth.x, psIn.depth.y, psIn.depth.z, 1.0f );
 }

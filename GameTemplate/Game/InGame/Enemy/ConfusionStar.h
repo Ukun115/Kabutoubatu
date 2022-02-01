@@ -15,6 +15,7 @@ namespace nsKabutoubatu
 	private:
 		SkinModelRender* m_model = nullptr;
 		PlayerCamera* m_playerCamera = nullptr;
+		SoundSource* m_sound = nullptr;
 
 		Vector3 m_pos;		//ˆÊ’u
 		float m_rotationAngle = 0.0f;	//‰ñ“]Šp“x

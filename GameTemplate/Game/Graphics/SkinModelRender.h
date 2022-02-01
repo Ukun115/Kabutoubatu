@@ -92,10 +92,14 @@ namespace nsKabutoubatu
 		const char* m_tksFilePath = nullptr;					//スケルトンのファイルパス
 		char m_filePathM[256];						//モデルのファイルパス
 		char m_filePathS[256];						//スケルトンのファイルパス
+		float m_animationSpeed = 1.0f;
+
+		/// <summary>
+		/// フラグ
+		/// </summary>
 		//シャドウキャスターかどうか(シャドウを落とす物体かどうか)のフラグ
 		bool m_shadowCaster = false;
 		bool m_silhouetteFlg = false;
-		float m_animationSpeed = 1.0f;
 		//火の玉モードかどうかフラグ
 		bool m_fireBallFlg = false;
 

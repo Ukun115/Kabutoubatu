@@ -47,17 +47,18 @@ namespace nsKabutoubatu
 		Vector3 m_decreasePower;	//移動速度減衰力
 		Quaternion m_rot;			//回転
 		float m_rotAngle = 0.0f;	//回転角度
-		bool m_isHitGround = false;			//地面に乗っているかのフラグ
 		Vector3 m_hitGroundNormal;	//乗っている地面の法線
-		bool m_canPlayerMoveSpeedGet = true;	//プレイヤーの移動速度をゲットできるかの判定
 		int m_fallTimer = 0;//自動削除するためのタイマー
 		int m_playerNum = 0;	//プレイヤー番号
-
 		int m_recoveryPower = 0;
-
+		/// <summary>
+		/// フラグ
+		/// </summary>
+		bool m_isHitGround = false;			//地面に乗っているかのフラグ
+		bool m_canPlayerMoveSpeedGet = true;	//プレイヤーの移動速度をゲットできるかの判定
 		bool m_isSoloPlay = false;
-
 		bool m_playerHit = false;
+
 
 		/// <summary>
 		/// 呼ばれて最初に実行される関数

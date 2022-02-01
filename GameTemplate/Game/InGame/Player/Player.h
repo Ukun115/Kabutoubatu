@@ -82,7 +82,7 @@ namespace nsKabutoubatu
 		//プレイヤーのキャラコンクラス
 		PlayerCharaCon* m_playerCharaCon = nullptr;
 		//プレイヤーのステータスクラス
-		PlayerStatus* m_playerStatus = nullptr;
+		PlayerStatus* m_playerStatus[enPlayerNum] = { nullptr };
 		GamePad* m_gamePad;
 		MiniMap* m_miniMap = nullptr;
 
@@ -95,24 +95,27 @@ namespace nsKabutoubatu
 		Vector3 m_moveSpeed;
 		Vector3 m_friction;		//摩擦
 		int m_nowState = 0;
-		bool m_isHitGround;
 		Vector3 m_hitGroundNormal;
 		int m_recoveryState = enRecoveryStay;
+		//正面ベクトル
+		Vector3 m_forward;
+		//最後に着地していた場所のポジション
+		Vector3 m_finalOnGroundPos;
+		int m_damageTimer = 0;
+		int m_fireBallEffectTimer = 0;
+		/// <summary>
+		/// フラグ
+		/// </summary>
+		bool m_isHitGround;
 		bool m_haveRecoveryItem = false;
 		//攻撃中かどうかのフラグ
 		bool m_isAttackStateFlg = false;
-		//正面ベクトル
-		Vector3 m_forward;
 		bool m_nowDoorTatch = false;
 		bool m_isSoloPlay = false;
 		//回避中フラグ
 		bool m_isAvoidance = false;
-		//最後に着地していた場所のポジション
-		Vector3 m_finalOnGroundPos;
-		int m_damageTimer = 0;
 		bool m_damageFlg = false;
 		bool m_fireBallEffectActive = false;
-		int m_fireBallEffectTimer = 0;
 
 		/// <summary>
 		/// 呼ばれて最初に実行される関数

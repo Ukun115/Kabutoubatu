@@ -47,6 +47,9 @@ namespace nsKabutoubatu
 		int m_measureTime = 0;
 		int m_nowLimitTime[enSecondsMinutesNum] = { 0 };
 		int m_seconds = 60;
+		/// <summary>
+		/// ƒtƒ‰ƒO
+		/// </summary>
 		bool m_minuteChangeFlg = false;
 		bool m_canMeasure = true;
 

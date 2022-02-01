@@ -31,10 +31,13 @@ namespace nsKabutoubatu
 		float m_hitBodyLength = 0.0f;
 		int m_attackJudgeTimer[2] = { 0 };
 		Vector3 m_dir[2];
+		Vector3 m_playerToEnemyVector;
+		/// <summary>
+		/// フラグ
+		/// </summary>
 		bool m_canHitBody = true;
 		//攻撃を受けた！フラグ
 		bool m_receiveDamageFlg = false;
-		Vector3 m_playerToEnemyVector;
 
 		/// <summary>
 		/// 呼ばれて最初に実行される関数

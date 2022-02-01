@@ -32,6 +32,14 @@ namespace nsKabutoubatu
 			enPlayerNum		//プレイヤーの総数
 		};
 
+		//アニメーション
+		enum enAnimation
+		{
+			enIdle,			//アイドル
+			enGreething,	//挨拶
+			enAnimationNum	//アニメーションの総数
+		};
+
 
 		PlayerCamera* m_playerCamera = nullptr;
 		Player* m_player[enPlayerNum] = { nullptr };
@@ -49,7 +57,7 @@ namespace nsKabutoubatu
 		SpriteRender* m_coinSprite[2] = { nullptr };
 
 		PhysicsStaticObject m_physicsStaticObject;		//静的物理オブジェクトクラス
-		AnimationClip m_animationClips[1];
+		AnimationClip m_animationClips[enAnimationNum];
 
 		int m_playerNum = enPlayerNum;
 		wchar_t m_talkText[256];	//店員の会話文

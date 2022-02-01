@@ -13,7 +13,7 @@ namespace nsKabutoubatu
 		const Vector2   FONT_PIV = { 1.0f,1.0f };	//フォントの基点
 		const float     FONT_SCA = 1.0f;			//フォントの拡大率
 
-		const Vector2 ITEM_VALUE_POS[3] = { {-300.0f,-160.0f},{-30.0f,-160.0f},{240.0f,-160.0f} };
+		const Vector2 ITEM_VALUE_POS[3] = { {-320.0f,-160.0f},{-50.0f,-160.0f},{220.0f,-160.0f} };
 
 		const wchar_t* CURSOR_NAME = L"o";
 		const wchar_t* KUD_NAME[3] = { L"買う",L"売る",L"出る" };

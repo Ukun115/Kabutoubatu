@@ -56,6 +56,9 @@ namespace nsKabutoubatu
 		char m_gamePadNo[256];
 		int m_playerNo = 0;
 		int m_otherPlayerNo = 0;
+		/// <summary>
+		/// ƒtƒ‰ƒO
+		/// </summary>
 		bool m_isRoomCreate = false;
 
 		/// <summary>

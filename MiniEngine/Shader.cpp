@@ -14,7 +14,7 @@ namespace {
 void Shader::Load(const wchar_t* filePath, const char* entryFuncName, const char* shaderModel)
 {
 	ID3DBlob* errorBlob;
-#ifdef _DEBUG
+#ifdef MY_DEBUG
 	// Enable better shader debugging with the graphics debugging tools.
 	UINT compileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
 #else

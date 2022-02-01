@@ -22,9 +22,14 @@ namespace nsKabutoubatu
 
 		m_playerCamera = FindGO<PlayerCamera>(nsStdafx::PLAYER_CAMERA_NAME);
 
-		//TODO:ピヨピヨ音を再生
+		//ピヨピヨ音を再生
 		if ((m_playerCamera->GetCameraTarget() - m_pos).Length() < nsStdafx::SOUND_CAN_HEARD_RANGE)
 		{
+			//混乱効果音再生
+			m_sound = NewGO<SoundSource>();
+			m_sound->Init(L"Assets/sound/FirstBoss_Confusion.wav");
+			m_sound->SetVolume(0.5f);
+			m_sound->Play(false);
 
 		}
 
@@ -35,6 +40,8 @@ namespace nsKabutoubatu
 	{
 		//混乱モデル削除
 		DeleteGO(m_model);
+		//混乱効果音を削除
+		DeleteGO(m_sound);
 	}
 
 	void ConfusionStar::Update()

@@ -34,7 +34,6 @@ namespace nsKabutoubatu
 		SoundSource* m_coinSound = nullptr;
 
 		int m_playerNum = enPlayerNum;
-		bool m_getOkFlg = false;
 		Vector3 m_pos;		//位置
 		float m_playerToCoinDistancelength = 0.0f;	//プレイヤーとモデルとの距離の長さ
 		//コインの値
@@ -46,6 +45,10 @@ namespace nsKabutoubatu
 		int m_boundPowerDown = 5;	//バウンド力を下げる力
 		//回転初速度
 		float m_firstRotSpeed = 30.0f;
+		/// <summary>
+		/// フラグ
+		/// </summary>
+		bool m_getOkFlg = false;
 
 		/// <summary>
 		/// 呼ばれて最初に実行される関数

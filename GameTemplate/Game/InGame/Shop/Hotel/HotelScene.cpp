@@ -106,6 +106,13 @@ namespace nsKabutoubatu
 
 	void HotelScene::Update()
 	{
+		//お辞儀が終わったら、
+		if (!m_salesperson->IsPlaying())
+		{
+			//アイドル状態にする
+			m_salesperson->PlayAnimation(enIdle);
+		}
+
 		if (m_fade[0] != nullptr && m_fade[0]->GetNowState() == 2)
 		{
 			DeleteGO(m_fade[0]);
@@ -181,12 +188,15 @@ namespace nsKabutoubatu
 		m_salesperson->SetModelUpAxis(enModelUpAxisZ);
 		m_salesperson->SetOutline(true);		//輪郭線をつける
 		//アニメーションをロード
-		m_animationClips[0].Load("SalesPerson_Idle");
+		m_animationClips[enIdle].Load("SalesPerson_Idle");
+		m_animationClips[enGreething].Load("SalesPerson_Greething");		//お辞儀
 		//ループアニメーションかどうかを設定
-		m_animationClips[0].SetLoopFlag(true);
-		m_salesperson->Init("SalesPerson", "SalesPerson", m_animationClips, 1);
+		m_animationClips[enIdle].SetLoopFlag(true);
+		m_animationClips[enGreething].SetLoopFlag(false);
+		m_salesperson->Init("SalesPerson", "SalesPerson", m_animationClips, enAnimationNum);
+		m_salesperson->SetAnimationSpeed(1.5f);
 		//店員のアニメーションの状態更新
-		m_salesperson->PlayAnimation(0);
+		m_salesperson->PlayAnimation(enGreething);
 		//位置をセット
 		m_salesperson->SetPosition({ m_pos.x,m_pos.y,m_pos.z - 100.0f });
 	}
@@ -194,6 +204,9 @@ namespace nsKabutoubatu
 	//宿屋から出るメソッド
 	void HotelScene::EnterFromHotel()
 	{
+		//お辞儀アニメーション
+		m_salesperson->PlayAnimation(enGreething);
+
 		if (m_fade[1] == nullptr)
 		{
 			m_fade[1] = NewGO<Fade>();

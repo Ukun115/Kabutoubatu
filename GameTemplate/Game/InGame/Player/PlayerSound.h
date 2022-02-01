@@ -41,10 +41,13 @@ namespace nsKabutoubatu
 
 		SoundSource* m_playerSound[enPlayerSoundNum] = { nullptr };
 
-		bool m_attackSoundFlg = false;
 		int m_haveWeaponNo = 0;
 		int m_attackSoundTimer = 0;
 		int m_weaponSoundTiming = 0;
+		/// <summary>
+		/// ƒtƒ‰ƒO
+		/// </summary>
+		bool m_attackSoundFlg = false;
 
 		void Update()override final;
 

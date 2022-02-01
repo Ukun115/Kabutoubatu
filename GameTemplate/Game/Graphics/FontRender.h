@@ -25,6 +25,9 @@ namespace nsKabutoubatu
 		Font m_font;				//フォントクラスを作成
 		FontValue m_fontValue;		//フォント構造体のデータを作成
 
+		/// <summary>
+		/// フラグ
+		/// </summary>
 		bool m_pivotChangeFlg = false;
 
 	public:

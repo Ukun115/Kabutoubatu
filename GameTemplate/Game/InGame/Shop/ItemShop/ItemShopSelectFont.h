@@ -76,9 +76,12 @@ namespace nsKabutoubatu
 		int m_nowShoppingState = enShoppingModeSelectState;
 		//現在のショッピングモード
 		int m_nowShoppingMode = 0;
-		bool m_isFontActive = true;
 		Vector2 FONT_POS[6] = { {-550.0f,200.0f},{-550.0f,150.0f},{-550.0f,100.0f},{-550.0f,50.0f},{-500.0f,0.0f},{-500.0f,-50.0f} };
 		Vector2 CURSOR_POS[6] = { {-600.0f,200.0f},{-600.0f,150.0f},{-600.0f,100.0f},{-600.0f,50.0f},{-600.0f,0.0f},{-600.0f,-50.0f} };
+		/// <summary>
+		/// フラグ
+		/// </summary>
+		bool m_isFontActive = true;
 
 		/// <summary>
 		/// 呼ばれて最初に実行される関数

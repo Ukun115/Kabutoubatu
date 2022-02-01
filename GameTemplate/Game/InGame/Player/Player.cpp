@@ -16,10 +16,8 @@ namespace nsKabutoubatu
 {
 	namespace nsPlayer
 	{
-		//プレイヤー１の初期位置
-		const Vector3 PLAYER1_START_POS = { 70.0f,0.0f,0.0f };
-		//プレイヤー２の初期位置
-		const Vector3 PLAYER2_START_POS = { -70.0f,0.0f,0.0f };
+		//プレイヤーの初期位置
+		const Vector3 PLAYER_START_POS[2] = {{ 70.0f,0.0f,0.0f }, { -70.0f,0.0f,0.0f }};
 		//ゴースト状態の移動力
 		const float GHOST_MOVE_POWER = 400.0f;
 		//通常の摩擦力
@@ -30,6 +28,8 @@ namespace nsKabutoubatu
 
 	bool Player::Start()
 	{
+		//インスタンスを検索
+		//ミニマップ
 		m_miniMap = FindGO<MiniMap>(nsStdafx::MINIMAP_NAME);
 
 		//プレイヤーの回転クラス
@@ -42,10 +42,9 @@ namespace nsKabutoubatu
 		m_playerSound = NewGO< PlayerSound >(nsStdafx::PRIORITY_0,nsStdafx::PLAYER_SOUND_NAME[m_playerNum]);
 		//プレイヤーのキャラコンクラス
 		m_playerCharaCon = NewGO<PlayerCharaCon >(nsStdafx::PRIORITY_0, nsStdafx::PLAYER_CHARACON_NAME[m_playerNum]);
-		m_playerCharaCon->InitRigidBody(m_pos);
 		//プレイヤーのステータスクラス
-		m_playerStatus = NewGO< PlayerStatus >(nsStdafx::PRIORITY_0,nsStdafx::PLAYER_STATUS_NAME[m_playerNum]);
-		m_playerStatus->SetPlayerNum(m_playerNum);
+		m_playerStatus[m_playerNum] = NewGO< PlayerStatus >(nsStdafx::PRIORITY_0,nsStdafx::PLAYER_STATUS_NAME[m_playerNum]);
+		m_playerStatus[m_playerNum]->SetPlayerNum(m_playerNum);
 
 		//モデルを初期化
 		m_model = NewGO<SkinModelRender>();
@@ -55,52 +54,36 @@ namespace nsKabutoubatu
 		//初期のプレイヤーの状態は通常
 		m_nowState = enNormal;
 
+		//相方の情報を取得できるようにする
+		if (!m_isSoloPlay)
+		{
+			//インスタンスを検索
+			m_otherPlayer = FindGO<Player>(nsStdafx::PLAYER_NAME[m_playerNum]);
+		}
+		m_model->SetPlayerMode(m_playerNum);	//プレイヤー番号をfxに渡すためのセットメソッド
+		//Zアップに変更
+		m_model->SetModelUpAxis(enModelUpAxisZ);
+		m_pos = nsPlayer::PLAYER_START_POS[m_playerNum];
+		m_playerCharaCon->InitRigidBody(m_pos);
 		switch (m_playerNum)
 		{
-		//１P
+			//１P
 		case enPlayer1:
-
-			//相方の情報を取得できるようにする
-			if (!m_isSoloPlay)
-			{
-				m_otherPlayer = FindGO<Player>(nsStdafx::PLAYER_NAME[enPlayer2]);
-			}
-
-			m_model->SetPlayerMode(enPlayer1);	//１Pだということをfxに渡すためのセットメソッド
-			//Zアップに変更
-			m_model->SetModelUpAxis(enModelUpAxisZ);
 			m_model->Init("Player1", "Player1", m_playerAnimation->GetAnimationClips(), m_playerAnimation->GetAnimationNum());
-			m_pos = nsPlayer::PLAYER1_START_POS;
-			m_playerCharaCon->InitRigidBody(m_pos);
-			DataUpdate();
-
 			//火の玉エフェクトの初期化
 			m_fireBallEffect.Init(u"Assets/effect/efk/FireBall_Red.efk");
 
 			break;
 
-		//２P
+			//２P
 		case enPlayer2:
-
-			//１Pの情報を取得できるようにする
-			if (!m_isSoloPlay)
-			{
-				m_otherPlayer = FindGO<Player>(nsStdafx::PLAYER_NAME[enPlayer1]);
-			}
-
-			m_model->SetPlayerMode(enPlayer2);	//2Pだということをfxに渡すためのセットメソッド
-			//Zアップに変更
-			m_model->SetModelUpAxis(enModelUpAxisZ);
 			m_model->Init("Player2", "Player2", m_playerAnimation->GetAnimationClips(), m_playerAnimation->GetAnimationNum());
-			m_pos = nsPlayer::PLAYER2_START_POS;
-			m_playerCharaCon->InitRigidBody(m_pos);
-			DataUpdate();
-
 			//火の玉エフェクトの初期化
 			m_fireBallEffect.Init(u"Assets/effect/efk/FireBall_Blue.efk");
 
 			break;
 		}
+		DataUpdate();
 
 		return true;
 	}
@@ -114,10 +97,6 @@ namespace nsKabutoubatu
 		{
 			DeleteGO(m_recoveryItem);
 		}
-		if (!m_isSoloPlay)
-		{
-			DeleteGO(m_otherPlayer);
-		}
 
 		//プレイヤーの回転クラスを削除
 		DeleteGO(m_playerRotation);
@@ -128,7 +107,7 @@ namespace nsKabutoubatu
 		//プレイヤーのキャラコンクラスを削除
 		DeleteGO(m_playerCharaCon);
 		//プレイヤーのステータスクラスを削除
-		DeleteGO(m_playerStatus);
+		DeleteGO(m_playerStatus[m_playerNum]);
 
 		//マップ非表示
 		m_miniMap->Deactivate();
@@ -167,7 +146,7 @@ namespace nsKabutoubatu
 			Friction(nsPlayer::NORMAL_FRICTION_POWER);
 
 			//残り体力を調べて、残り体力が０になったら、
-			if (m_playerStatus->GetHitPoint() == 0)
+			if (m_playerStatus[m_playerNum]->GetHitPoint() == 0)
 			{
 				//ゴースト状態になる。
 				m_nowState = enGhost;
@@ -192,7 +171,7 @@ namespace nsKabutoubatu
 			if (m_moveSpeed.Length() < 1.0f)
 			{
 				//残り体力を調べて、残り体力が０になったら、
-				if (m_playerStatus->GetHitPoint() == 0)
+				if (m_playerStatus[m_playerNum]->GetHitPoint() == 0)
 				{
 					//ゴースト状態になる。
 					m_nowState = enGhost;
@@ -201,7 +180,7 @@ namespace nsKabutoubatu
 					//ゴースト状態なのでキャラコンを削除
 					m_playerCharaCon->RemoveRigidBoby();
 					//デス数を増やす
-					m_playerStatus->AddDeathNum();
+					m_playerStatus[m_playerNum]->AddDeathNum();
 
 					m_damageTimer = 0;
 					m_damageFlg = false;
@@ -233,7 +212,7 @@ namespace nsKabutoubatu
 		case enGhost:
 			if (m_model->GetFireBall())
 			{
-				if (m_playerStatus->GetHitPoint() > 0)
+				if (m_playerStatus[m_playerNum]->GetHitPoint() > 0)
 				{
 					//モデルを見えるようにする。
 					m_model->SetFireBall(false);
@@ -255,15 +234,20 @@ namespace nsKabutoubatu
 				{
 					if (!m_isSoloPlay)
 					{
+						if (m_playerStatus[!m_playerNum] == nullptr)
+						{
+							m_playerStatus[!m_playerNum] = FindGO<PlayerStatus>(nsStdafx::PLAYER_STATUS_NAME[!m_playerNum]);
+						}
+
 						//相方プレイヤーのHPが３以上ならHP譲渡可能
-						if (m_otherPlayer->m_playerStatus->GetHitPoint() >= 3)
+						if (m_playerStatus[!m_playerNum]->GetHitPoint() >= 3)
 						{
 							//相方の体力を２減らす
-							m_otherPlayer->m_playerStatus->ReduceHitPoint(2);
+							m_otherPlayer->m_playerStatus[!m_playerNum]->ReduceHitPoint(2);
 							//総回復してもらった量をセットする
-							m_playerStatus->AddRecoveryReceiveNum(2);
+							m_playerStatus[m_playerNum]->AddRecoveryReceiveNum(2);
 							//自分の体力を１にする
-							m_playerStatus->SetHitPoint(1);
+							m_playerStatus[m_playerNum]->SetHitPoint(1);
 							//モデルを見えるようにする。
 							m_model->SetFireBall(false);
 							//通常状態に戻る
@@ -317,6 +301,11 @@ namespace nsKabutoubatu
 				m_model->SetFireBall(true);
 
 				m_fireBallEffectActive = true;
+
+				//ダメージを受けた時の赤色をなくす
+				m_model->SetDameageRed(false);
+				m_damageFlg = false;
+				m_damageTimer = 0;
 			}
 
 			break;
@@ -348,7 +337,6 @@ namespace nsKabutoubatu
 		m_playerAnimation->ChangeAnimation(enPlayerAnimation::enAnimationClip_idle);
 		//アニメーションの状態更新
 		m_model->PlayAnimation(m_playerAnimation->GetAnimationState());
-
 	}
 
 	//摩擦メソッド
@@ -367,17 +355,17 @@ namespace nsKabutoubatu
 	void Player::NormalMove()
 	{
 		//大剣をもっているときは移動速度低下
-		if (m_playerStatus->GetHaveWeapon() == enLargeSword)
+		if (m_playerStatus[m_playerNum]->GetHaveWeapon() == enLargeSword)
 		{
 			//左スティックの入力量を加算する
-			m_moveSpeed.x -= m_gamePad->GetLStickXF() * m_playerStatus->GetMovePower()/2 * g_gameTime->GetFrameDeltaTime();
-			m_moveSpeed.z -= m_gamePad->GetLStickYF() * m_playerStatus->GetMovePower() /2 * g_gameTime->GetFrameDeltaTime();
+			m_moveSpeed.x -= m_gamePad->GetLStickXF() * m_playerStatus[m_playerNum]->GetMovePower()/2 * g_gameTime->GetFrameDeltaTime();
+			m_moveSpeed.z -= m_gamePad->GetLStickYF() * m_playerStatus[m_playerNum]->GetMovePower() /2 * g_gameTime->GetFrameDeltaTime();
 		}
 		else
 		{
 			//左スティックの入力量を加算する
-			m_moveSpeed.x -= m_gamePad->GetLStickXF() * m_playerStatus->GetMovePower() * g_gameTime->GetFrameDeltaTime();
-			m_moveSpeed.z -= m_gamePad->GetLStickYF() * m_playerStatus->GetMovePower() * g_gameTime->GetFrameDeltaTime();
+			m_moveSpeed.x -= m_gamePad->GetLStickXF() * m_playerStatus[m_playerNum]->GetMovePower() * g_gameTime->GetFrameDeltaTime();
+			m_moveSpeed.z -= m_gamePad->GetLStickYF() * m_playerStatus[m_playerNum]->GetMovePower() * g_gameTime->GetFrameDeltaTime();
 		}
 	}
 
@@ -413,10 +401,10 @@ namespace nsKabutoubatu
 			//アニメーションをジャンプに切り替え
 			m_playerAnimation->ChangeAnimation(enPlayerAnimation::enAnimationClip_jump);
 
-			m_moveSpeed.y = m_playerStatus->GetJumpPower();
+			m_moveSpeed.y = m_playerStatus[m_playerNum]->GetJumpPower();
 
 			//大剣をもっているときはジャンプ力低下
-			if (m_playerStatus->GetHaveWeapon() == enLargeSword)
+			if (m_playerStatus[m_playerNum]->GetHaveWeapon() == enLargeSword)
 			{
 				m_moveSpeed.y /= 2.0f;
 			}
@@ -499,7 +487,7 @@ namespace nsKabutoubatu
 	void Player::Recovery()
 	{
 		//１以上持っているときのみ回復アイテムを使える、
-		if (m_playerStatus->GetRecoveryItemNum() != 0)
+		if (m_playerStatus[m_playerNum]->GetRecoveryItemNum() != 0)
 		{
 			//回復アイテムを持つ＆しまう処理
 			// 投げる処理は回復アイテムクラスに書く。
@@ -543,16 +531,16 @@ namespace nsKabutoubatu
 					m_recoveryState = enRecoveryThrow;
 
 					//所持数を１減らす
-					m_playerStatus->ReduceRecoveryItemNum();
+					m_playerStatus[m_playerNum]->ReduceRecoveryItemNum();
 				}
 				//持っていないときは攻撃中にする
 				else
 				{
 					//攻撃音
-					m_playerSound->SetAttackSoundFlg(m_playerStatus->GetHaveWeapon());
+					m_playerSound->SetAttackSoundFlg(m_playerStatus[m_playerNum]->GetHaveWeapon());
 
 					//攻撃アニメーション
-					switch (m_playerStatus->GetHaveWeapon())
+					switch (m_playerStatus[m_playerNum]->GetHaveWeapon())
 					{
 					//木の棒
 					case enWoodStick:
@@ -597,7 +585,7 @@ namespace nsKabutoubatu
 			//プレイヤー番号をセット
 			m_recoveryItem->SetPlayerNum(m_playerNum);
 			//プレイヤーの回復力をセット
-			m_recoveryItem->SetRecoveryPower(m_playerStatus->GetRecoveryPower());
+			m_recoveryItem->SetRecoveryPower(m_playerStatus[m_playerNum]->GetRecoveryPower());
 
 			m_recoveryState = enRecoveryStay;
 			break;
@@ -632,12 +620,12 @@ namespace nsKabutoubatu
 	//回復アイテムをしまうメソッド
 	void Player::RecoveryItemDelete()
 	{
+		m_recoveryState = enRecoveryStay;
+		m_haveRecoveryItem = false;
 		if (m_recoveryItem)
 		{
 			DeleteGO(m_recoveryItem);
 		}
-		m_haveRecoveryItem = false;
-		m_recoveryState = enRecoveryStay;
 	}
 
 	//落下処理メソッド
@@ -662,7 +650,7 @@ namespace nsKabutoubatu
 			//キャラコンを再初期化
 			m_playerCharaCon->InitRigidBody(m_pos);
 			//体力を１減らす
-			m_playerStatus->ReduceHitPoint(1);
+			m_playerStatus[m_playerNum]->ReduceHitPoint(1);
 
 			//半重力でリスポーン
 			m_gravityState = enHalfGravity;
@@ -748,6 +736,7 @@ namespace nsKabutoubatu
 			//ダメージを受けた時の赤色をなくす
 			m_model->SetDameageRed(false);
 			m_damageFlg = false;
+			m_damageTimer = 0;
 		}
 	}
 };

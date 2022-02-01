@@ -23,6 +23,9 @@ namespace nsKabutoubatu
 		SpriteRenderSub* m_pauseSprite = nullptr;	//ポーズ画像
 		SpriteRenderSub* m_grayBack = nullptr;		//ポーズ中の背景画像
 
+		/// <summary>
+		/// フラグ
+		/// </summary>
 		bool m_isPauseFlg = false;		//ポーズ中かどうかフラグ
 		bool m_canPause = false;			//ポーズ機能をそもそも使えるかどうかフラグ
 

@@ -17,6 +17,9 @@ namespace nsKabutoubatu
 		Vector4    m_mulColor = Vector4::White;		//カラー
 		Vector2    m_pivot;							//基点
 		char m_filePath[256];						//ファイルパス
+		/// <summary>
+		/// フラグ
+		/// </summary>
 		bool m_pivotChangeFlg = false;
 
 		/// <summary>

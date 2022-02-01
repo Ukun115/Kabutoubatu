@@ -36,6 +36,9 @@ namespace nsKabutoubatu
 
 		//プレイヤー番号
 		int m_playerNo = -1;
+		/// <summary>
+		/// フラグ
+		/// </summary>
 		//すべてのプレイヤーがルームにジョインしたかどうか
 		bool m_isJoined = false;
 

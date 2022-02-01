@@ -103,9 +103,12 @@ void Material::InitFromTkmMaterila(
 	//ルートシグネチャを初期化。
 	m_rootSignature.Init(
 		D3D12_FILTER_MIN_MAG_MIP_LINEAR,
-		D3D12_TEXTURE_ADDRESS_MODE_WRAP,
-		D3D12_TEXTURE_ADDRESS_MODE_WRAP,
-		D3D12_TEXTURE_ADDRESS_MODE_WRAP);
+		D3D12_TEXTURE_ADDRESS_MODE_CLAMP,		//WRAPモードではエッジ描画の際、
+		D3D12_TEXTURE_ADDRESS_MODE_CLAMP,		//画面端のエッジがおかしくなるので
+		D3D12_TEXTURE_ADDRESS_MODE_CLAMP);		//CLAMPモードにした。
+
+	//WRAPモードは端に来ると逆の端にいき、ループする
+	//CLAMPモードは端に来ると引き伸ばす
 
 	if (wcslen(fxFilePath) > 0) {
 		//シェーダーを初期化。

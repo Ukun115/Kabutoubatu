@@ -145,7 +145,7 @@ StructuredBuffer<float4x4> g_boneMatrix : register(t3);		//ボーン行列。
 Texture2D<float4> g_toonMap		: register(t4);				//トゥーンシェーダーテクスチャー
 
 Texture2D<float4> g_shadowMap			: register(t10);		// シャドウマップ
-Texture2D<float4> g_modelDoFMap			: register(t11);		//カメラから見たプレイヤーの被写界深度テクスチャー
+Texture2D<float4> g_depthMap			: register(t11);		//カメラから見たプレイヤーの被写界深度テクスチャー
 Texture2D<float4> g_silhouetteMap		: register(t12);		//シルエットマップ
 
 ////////////////////////////////////////////////
@@ -470,17 +470,17 @@ SPSOut PSMain(SPSIn psIn) : SV_Target0
 			float2(-1.0f / 1280.0f, -1.0f / 720.0f)		//左下
 		};
 		//このピクセルの深度値を取得
-		float modelPixelDepth = g_modelDoFMap.Sample(g_sampler, uv).x;
+		float modelPixelDepth = g_depthMap.Sample(g_sampler, uv).z;
 		float aroundPixelDepth = 0.0f;
 		//近傍8テクセルの深度値の合計を取得
 		for (int i = 0; i < 8; i++)
 		{
-			aroundPixelDepth += g_modelDoFMap.Sample(g_sampler, uv + uvOffset[i]).x;
+			aroundPixelDepth += g_depthMap.Sample(g_sampler, uv + uvOffset[i]).z;
 		}
 		//近傍8テクセルの深度値の平均値を取得
 		aroundPixelDepth /= 8.0f;
 		//自身の深度値と近傍8テクセルの深度値の平均の差を調べる。
-		if (abs(modelPixelDepth - aroundPixelDepth) > 0.000005f)
+		if (abs(modelPixelDepth - aroundPixelDepth) > 1.0f)
 		{
 			float4 outLineColor = { 0.0f,0.0f,0.0f,1.0f };
 			switch (playerMode)
