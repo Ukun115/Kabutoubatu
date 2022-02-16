@@ -340,7 +340,7 @@ namespace nsKabutoubatu
 			m_hotelScene->SetPlayerNumber(m_playerNum);
 			//建物の場所をシーンに渡しておく
 			m_hotelScene->SetHotelPosition(m_pos);
-			m_hotelScene->Set
+			m_hotelScene->SetPlayerGamePad(*m_playerGamePad[m_playerNum],m_playerNum);
 			break;
 		//アイテムショップ
 		case enItemShop:

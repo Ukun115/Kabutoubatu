@@ -29,7 +29,7 @@ namespace nsKabutoubatu
 	}
 }
 
-#ifdef K2_DEBUG
+#ifdef MY_DEBUG
 	#define K2_LOG( format, ... )	Log(format, __VA_ARGS__)
 	#define K2_LOG_W( format, ... )	LogW(format, __VA_ARGS__)
 #else // _DEBUG

@@ -163,7 +163,7 @@ namespace nsKabutoubatu
 	//初期化ステップの更新処理関数
 	void SyncOnlineTwoPlayerMatchEngine::Update_Initialized()
 	{
-		//ONLINE_LOG("Update_Initialized()\n");
+		ONLINE_LOG("Update_Initialized()\n");
 
 		ExitGames::LoadBalancing::ConnectOptions connectOption;
 		connectOption.setAuthenticationValues(ExitGames::LoadBalancing::AuthenticationValues().setUserID(ExitGames::Common::JString() + GETTIMEMS())).setUsername(PLAYER_NAME + GETTIMEMS());
@@ -176,7 +176,7 @@ namespace nsKabutoubatu
 	//Photonサーバーに接続済みの時の更新処理関数
 	void SyncOnlineTwoPlayerMatchEngine::Update_Connected()
 	{
-		//ONLINE_LOG("Update_Connected()\n");
+		ONLINE_LOG("Update_Connected()\n");
 
 		// サーバーに接続できたので、部屋を作る。
 		ExitGames::LoadBalancing::RoomOptions roomOption;
@@ -202,7 +202,7 @@ namespace nsKabutoubatu
 	//部屋に入っているときの処理関数
 	void SyncOnlineTwoPlayerMatchEngine::Update_Joined()
 	{
-		//ONLINE_LOG("Update_Joined()\n");
+		ONLINE_LOG("Update_Joined()\n");
 
 		//１フレームの経過時間をタイマーに加算する
 		m_timer += g_gameTime->GetFrameDeltaTime();
@@ -230,7 +230,7 @@ namespace nsKabutoubatu
 	//ゲームの開始待ち中の更新処理関数
 	void SyncOnlineTwoPlayerMatchEngine::Update_WaitStartGame()
 	{
-		//ONLINE_LOG("Update_WaitStartGame()\n");
+		ONLINE_LOG("Update_WaitStartGame()\n");
 
 		//１フレームの経過時間をタイマーに加算する
 		m_timer += g_gameTime->GetFrameDeltaTime();
@@ -260,7 +260,7 @@ namespace nsKabutoubatu
 	//インゲーム(パッドデータのバッファリング中)
 	void SyncOnlineTwoPlayerMatchEngine::Update_InGameBufferingPadData()
 	{
-		//ONLINE_LOG("Update_InGameBufferingPadData()\n");
+		ONLINE_LOG("Update_InGameBufferingPadData()\n");
 
 		// パッドデータを送信。
 		if (m_frameNo < 3) {
@@ -320,6 +320,7 @@ namespace nsKabutoubatu
 				m_loadBalancingClient->service();
 				//ループカウント変数のカウンターが100になったら、
 				if (loopCount == 100) {
+					OutputDebugStringA("ループカウント変数のカウンターが100になったら");
 					// 接続エラー。
 					//エラー処理を実行
 					m_errorFunc();
