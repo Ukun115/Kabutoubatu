@@ -44,27 +44,32 @@ namespace nsKabutoubatu
 
 	void OnlineErrorScene::PauseUpdate()
 	{
-		//TODO:↓機能していないので機能させる
-		if (m_errorMessageBoxXscale < 1.0f)
-		{
-			m_errorMessageBoxXscale += 0.01f;
-			m_errorMessageBox->SetScale({ m_errorMessageBoxXscale,1.0f,1.0f });
-		}
+		////TODO:↓機能していないので機能させる
+		//if (m_errorMessageBoxXscale < 1.0f)
+		//{
+		//	m_errorMessageBoxXscale += 0.01f;
+		//	m_errorMessageBox->SetScale({ m_errorMessageBoxXscale,1.0f,1.0f });
+		//}
 
-		BackTitle(m_padNo);
+		//Aボタンでタイトル画面に戻る
+		BackTitle();
 	}
 
 	//Aボタンでタイトル画面に戻るメソッド
-	void OnlineErrorScene::BackTitle(const int padNo)
+	void OnlineErrorScene::BackTitle()
 	{
-		if (g_pad[m_padNo]->IsTrigger(enButtonA))
-		{
+		//Aボタンを押したら、
+		//if (m_playerGamePad->IsTrigger(enButtonA))
+		//{
 			//ゲームシーンを削除し、タイトルシーンを生成
-			m_gameScene->SetOnlineError(true);
+			m_gameScene->DeleteGameSceneClass();
 			NewGO<TitleScene>(nsStdafx::PRIORITY_0, nsStdafx::TITLESCENE_NAME);
-
+			//ポーズ機能を利用しないようにする
+			m_pause->SetPause(false);
+			//ポーズ機能を使えるようにする
+			m_pause->SetCanPause(true);
 			//クラスを破棄
 			DeleteGO(this);
-		}
+		//}
 	}
 }

@@ -64,6 +64,7 @@ namespace nsKabutoubatu
 
 		//通信エラーシーンに遷移
 		m_onlineErrorScene = NewGO<OnlineErrorScene>();
+		m_onlineErrorScene->SetPlayerGamePad(m_onlineTwoPlayerMatchEngine->GetGamePad(m_playerNo));
 	}
 
 	void Online::DeleteData()

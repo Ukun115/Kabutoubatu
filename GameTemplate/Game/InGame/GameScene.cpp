@@ -186,19 +186,6 @@ namespace nsKabutoubatu
 			m_gameSceneSound->Play(true);	//ループ再生
 		}
 
-		////プレイヤー１のRBボタンが押されたら、
-		//if (g_pad[0]->IsTrigger(enButtonRB1))
-		//{
-		//	m_skyCubeMapTextureNum++;
-		//	InitSky();
-		//}
-
-		//通信エラーになったらゲームを破棄する
-		if (m_onlineError)
-		{
-			DeleteGO(this);
-		}
-
 		//ゲームオーバー移行処理
 		GameOver();
 

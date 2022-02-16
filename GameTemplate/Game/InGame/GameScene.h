@@ -75,7 +75,6 @@ namespace nsKabutoubatu
 		/// フラグ
 		/// </summary>
 		bool m_online = false;
-		bool m_onlineError = false;
 
 		/// <summary>
 		/// 呼ばれて最初に実行される関数
@@ -120,8 +119,6 @@ namespace nsKabutoubatu
 		void SetOnlinePlay(bool online) { m_online = online; };
 
 		void SetPlayerNumber(const int playerNum) { m_playerNum = playerNum; };
-
-		void SetOnlineError(const bool onlineError) { m_onlineError = onlineError; };
 
 		//ゲーム音を止めるメソッド
 		void GameBGMStop() { m_gameSceneSound->Stop(); };

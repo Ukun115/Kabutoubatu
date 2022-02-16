@@ -222,21 +222,26 @@ namespace nsKabutoubatu
 		{
 		//オンラインモード
 		case enSelectOnline:
-			// 自分が操作するゲームパッドナンバーを渡す
+			// 自分が操作するゲームパッドナンバーを設定する
 			m_playerNo = m_online->GetPlayerNo();
+			//通信相手のゲームパッドナンバーを設定する
 			m_otherPlayerNo = m_online->GetOtherPlayerNo();
+			//自身のゲームパッドナンバーをゲームシーンクラスに渡す
 			m_gameScene->SetPlayerNo(m_playerNo);
+			//自身のゲームパッドをゲームシーンクラスに渡す
 			m_gameScene->SetPlayerGamePad(m_online->GetPlayerGamePad(m_playerNo));
+			//通信相手のゲームパッドナンバーをゲームシーンクラスに渡す
 			m_gameScene->SetOtherPlayerNo(m_otherPlayerNo);
+			//通信相手のゲームパッドをゲームシーンクラスに渡す
+			m_gameScene->SetOtherPlayerGamePad(m_online->GetPlayerGamePad(m_otherPlayerNo));
 
 			//自身のゲームパッド番号を出力にデバック表示
 			sprintf(m_gamePadNo, "自分のゲームパッド番号は%dです。\n", m_playerNo);
 			OutputDebugStringA(m_gamePadNo);
-			//自身のゲームパッド番号を出力にデバック表示
+			//通信相手のゲームパッド番号を出力にデバック表示
 			sprintf(m_gamePadNo, "相手のゲームパッド番号は%dです。\n", m_otherPlayerNo);
 			OutputDebugStringA(m_gamePadNo);
 
-			m_gameScene->SetOtherPlayerGamePad(m_online->GetPlayerGamePad(m_otherPlayerNo));
 			m_gameScene->SetOnlinePlay(true);
 
 			m_online->GameStart();
