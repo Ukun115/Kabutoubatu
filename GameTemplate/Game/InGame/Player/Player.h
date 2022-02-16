@@ -188,7 +188,7 @@ namespace nsKabutoubatu
 		void SetMoveSpeed(const Vector3& moveSpeed) { m_moveSpeed = moveSpeed; };
 
 		//プレイヤーの位置を移動させる
-		void SetPositionA(const Vector3& position);
+		void Warp(const Vector3& position);
 
 		//ドアを開閉しているかの判定を変更するメソッド
 		void SetNowDoorTatch(const bool nowDoorTatch){ m_nowDoorTatch = nowDoorTatch;};

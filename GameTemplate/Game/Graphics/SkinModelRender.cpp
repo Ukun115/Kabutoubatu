@@ -36,7 +36,7 @@ namespace nsKabutoubatu
 		//輪郭線の位置、回転、拡大を更新
 		if (m_modelMode.outline)
 		{
-			m_zPrepassModel.UpdateWorldMatrix(m_pos, m_rot, m_sca);
+			m_outLineModel.UpdateWorldMatrix(m_pos, m_rot, m_sca);
 		}
 		//シルエットの位置、回転、拡大を更新
 		if (m_modelMode.silhouetteFlg)
@@ -69,7 +69,7 @@ namespace nsKabutoubatu
 		//輪郭線の位置、回転、拡大を更新
 		if (m_modelMode.outline)
 		{
-			m_zPrepassModel.UpdateWorldMatrix(m_pos, m_rot, m_sca);
+			m_outLineModel.UpdateWorldMatrix(m_pos, m_rot, m_sca);
 		}
 		//シルエットの位置、回転、拡大を更新
 		if (m_modelMode.silhouetteFlg)
@@ -222,7 +222,7 @@ namespace nsKabutoubatu
 			m_zPrepassModelInitData.m_vsSkinEntryPointFunc = "VSSkinMain";
 			m_zPrepassModelInitData.m_colorBufferFormat = DXGI_FORMAT_R32G32_FLOAT;
 			//ZPrepassモデルを初期化
-			m_zPrepassModel.Init(m_zPrepassModelInitData);
+			m_outLineModel.Init(m_zPrepassModelInitData);
 		}
 		//////////////////////////ZPrepassEND///////////////////////////////////////
 
@@ -299,7 +299,7 @@ namespace nsKabutoubatu
 		}
 
 		//輪郭線モデル
-		m_zPrepassModel.Draw(rc);
+		m_outLineModel.Draw(rc);
 	}
 	//シルエットモデルの描画メソッド
 	void SkinModelRender::SilhouetteRender(RenderContext& rc)

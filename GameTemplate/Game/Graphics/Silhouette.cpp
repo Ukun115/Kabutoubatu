@@ -9,8 +9,8 @@ namespace nsKabutoubatu
 	namespace nsSilhouette
 	{
 		//シルエットマップの解像度
-		const int SILHOUETTEMAP_WIDTH = 1024;
-		const int SILHOUETTEMAP_HEIGHT = 1024;
+		const int SILHOUETTEMAP_WIDTH = 2048;
+		const int SILHOUETTEMAP_HEIGHT = 2048;
 		//ミップレベル
 		const int MIP_LEVEL = 1;
 		//テクスチャ配列のサイズ

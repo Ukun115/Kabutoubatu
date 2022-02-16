@@ -57,17 +57,12 @@ namespace nsKabutoubatu
 	{
 		if (g_pad[m_padNo]->IsTrigger(enButtonA))
 		{
-			//TODO:タイトル画面に戻るようにする。
+			//ゲームシーンを削除し、タイトルシーンを生成
+			m_gameScene->SetOnlineError(true);
+			NewGO<TitleScene>(nsStdafx::PRIORITY_0, nsStdafx::TITLESCENE_NAME);
 
-			////ゲームシーンを削除し、タイトルシーンを生成
-			//m_gameScene->SetOnlineError(true);
-			//NewGO<TitleScene>(nsStdafx::PRIORITY_0, nsStdafx::TITLESCENE_NAME);
-
-			////クラスを破棄
-			//DeleteGO(this);
-
-			//exeを閉じてゲーム終了
-			exit(EXIT_SUCCESS);
+			//クラスを破棄
+			DeleteGO(this);
 		}
 	}
 }

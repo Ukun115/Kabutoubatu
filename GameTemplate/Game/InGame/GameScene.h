@@ -67,8 +67,6 @@ namespace nsKabutoubatu
 		wchar_t m_haveRecoveryItemNumText[256];
 		//オンライン時のプレイヤー番号
 		int m_onlinePlayerNo = 0;
-		//スカイキューブのテクスチャを変更する変数
-		int m_skyCubeMapTextureNum = 0;
 		//プレイヤー番号
 		int m_playerNo = enPlayer1;
 		//他のプレイヤー番号
@@ -108,9 +106,6 @@ namespace nsKabutoubatu
 
 		//お金の所持数文字の数更新7
 		void NowMoneyNumUpdate(const int playerNum);
-
-		//スカイキューブ初期化メソッド
-		void InitSky();
 
 	public:
 		//プレイヤー番号をセットするメソッド

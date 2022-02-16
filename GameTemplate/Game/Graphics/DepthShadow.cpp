@@ -8,8 +8,8 @@ namespace nsKabutoubatu
 {
 	namespace nsDepthShadow
 	{
-		const int WIDTH = 2048;
-		const int HEIGHT = 2048;
+		const int WIDTH = 8192;
+		const int HEIGHT = 8192;
 		const int MIP_LEBEL = 1;
 		const int ARRAY_SIZE = 1;
 	}

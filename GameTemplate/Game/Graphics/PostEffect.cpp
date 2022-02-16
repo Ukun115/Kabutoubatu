@@ -64,6 +64,7 @@ namespace nsKabutoubatu
 		rc.ClearRenderTargetView(mainRenderTarget);
 
 		//被写界深度のレンダーターゲットをセット
+		//被写界深度を移さないようにするため、下記をコメントアウトしています。
 		//m_dof->SettingDoFRenderTarget(rc, mainRenderTarget);
 	}
 

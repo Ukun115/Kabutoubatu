@@ -20,7 +20,7 @@ namespace nsKabutoubatu
 		//被写界深度のオンオフ
 		struct stCanDoF
 		{
-			bool canDoF = false;	//被写界深度のオンオフフラグ
+			bool canDoF = true;	//被写界深度のオンオフフラグ
 		};
 
 		GaussianBlur* m_gaussianBlur;		//ガウシアンブラー

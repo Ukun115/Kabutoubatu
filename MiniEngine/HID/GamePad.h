@@ -150,7 +150,7 @@ public:
 private:
 		void UpdateCore(XINPUT_STATE xInputState);
 public:
-	enum { MAX_PAD = 4 };
+	enum { MAX_PAD = 2 };
 	enum class EnXInputPadState {
 		Undef,		//•s–¾B
 		Connect,	//Ú‘±‚³‚ê‚Ä‚¢‚éB

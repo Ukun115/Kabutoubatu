@@ -300,13 +300,4 @@ namespace nsKabutoubatu
 		swprintf_s(m_nowMoneyText, L"%d", m_playerStatus[playerNum]->GetCoinNum());
 		m_nowMoney[playerNum]->SetText(m_nowMoneyText);
 	}
-
-	void GameScene::InitSky()
-	{
-		// Œ»İ‚Ì‹ó‚ğ”jŠüB
-		DeleteGO(m_skyCube);
-		//V‹K‚Åì‚é
-		m_skyCube = NewGO<SkyCube>();
-		m_skyCube->SetChangeMap(m_skyCubeMapTextureNum);
-	}
 }

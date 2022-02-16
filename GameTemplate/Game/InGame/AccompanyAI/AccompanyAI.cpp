@@ -187,7 +187,6 @@ namespace nsKabutoubatu
 				m_charaCon.RemoveRigidBoby();
 				//キャラコンを再初期化
 				m_charaCon.Init(25.0f, 30.0f, m_pos);
-				//体力を１減らす
 			}
 
 			break;

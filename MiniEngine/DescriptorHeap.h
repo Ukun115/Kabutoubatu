@@ -34,7 +34,7 @@ public:
 			L"DescriptorHeap::RegistShaderResource() レジスタ番号が範囲外です。"
 		);
 	}
-	
+
 	/// <summary>
 	/// アンオーダーアクセスリソースを登録。
 	/// </summary>
@@ -45,11 +45,11 @@ public:
 	void RegistUnorderAccessResource(int registerNo, IUnorderAccessResrouce& sr)
 	{
 		RegistResource(
-			registerNo, 
+			registerNo,
 			&sr,
-			m_uavResoruces, 
-			m_numUavResource, 
-			MAX_SHADER_RESOURCE, 
+			m_uavResoruces,
+			m_numUavResource,
+			MAX_SHADER_RESOURCE,
 			L"DescriptorHeap::RegistUnorderAccessResource() レジスタ番号が範囲外です。"
 		);
 	}
@@ -99,7 +99,7 @@ public:
 	/// サンプラステート用のディスクリプタヒープへの登録。
 	/// </summary>
 	void CommitSamperHeap();
-	
+
 	/// <summary>
 	/// 定数バッファのディスクリプタの開始ハンドルを取得。
 	/// </summary>
@@ -220,11 +220,11 @@ private:
 	int m_numConstantBuffer = 0;	//定数バッファの数。
 	int m_numUavResource = 0;		//アンオーダーアクセスリソースの数。
 	int m_numSamplerDesc = 0;		//サンプラの数。
-	ID3D12DescriptorHeap* m_descriptorHeap[3] = { nullptr };										//ディスクリプタヒープ。
-	IShaderResource* m_shaderResources[MAX_SHADER_RESOURCE] = {nullptr};			//シェーダーリソース。7
+	IShaderResource* m_shaderResources[MAX_SHADER_RESOURCE] = {nullptr};			//シェーダーリソース。
 	IUnorderAccessResrouce* m_uavResoruces[MAX_SHADER_RESOURCE] = { nullptr };	//UAVリソース。
 	ConstantBuffer* m_constantBuffers[MAX_CONSTANT_BUFFER] = { nullptr };			//定数バッファ。
 	D3D12_SAMPLER_DESC m_samplerDescs[MAX_SAMPLER_STATE];						//サンプラステート。
+	ID3D12DescriptorHeap* m_descriptorHeap[3] = { nullptr };										//ディスクリプタヒープ。
 	D3D12_GPU_DESCRIPTOR_HANDLE m_cbGpuDescriptorStart[3];							//定数バッファのディスクリプタヒープの開始ハンドル。
 	D3D12_GPU_DESCRIPTOR_HANDLE m_srGpuDescriptorStart[3];							//シェーダーリソースのディスクリプタヒープの開始ハンドル。
 	D3D12_GPU_DESCRIPTOR_HANDLE m_uavGpuDescriptorStart[3];							//UAVリソースのディスクリプタヒープの開始ハンドル。

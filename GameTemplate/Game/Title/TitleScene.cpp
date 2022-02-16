@@ -245,8 +245,9 @@ namespace nsKabutoubatu
 
 		//ローカルマルチプレイモード
 		case enSelectLocalMult:
-			//何もなし。
-
+			//ポーズ機能を使えるようにする
+			m_pause = FindGO<Pause>(nsStdafx::PAUSE_NAME);
+			m_pause->SetCanPause(true);
 			break;
 
 			//ソロモード

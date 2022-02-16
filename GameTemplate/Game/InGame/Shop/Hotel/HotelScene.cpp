@@ -217,11 +217,11 @@ namespace nsKabutoubatu
 			//プレイヤーの状態を通常状態にする
 			m_player[enPlayer1]->SetNowState(0);
 			//プレイヤーの位置を宿屋の前に移動させる
-			m_player[enPlayer1]->SetPositionA({ m_hotelPos.x - 50.0f,m_hotelPos.y,m_hotelPos.z + 500.0f });
+			m_player[enPlayer1]->Warp({ m_hotelPos.x - 50.0f,m_hotelPos.y,m_hotelPos.z + 500.0f });
 			if (m_playerNum == 2)
 			{
 				m_player[enPlayer2]->SetNowState(0);
-				m_player[enPlayer2]->SetPositionA({ m_hotelPos.x + 50.0f,m_hotelPos.y,m_hotelPos.z + 500.0f });
+				m_player[enPlayer2]->Warp({ m_hotelPos.x + 50.0f,m_hotelPos.y,m_hotelPos.z + 500.0f });
 			}
 
 			if (m_playerNum == 1)

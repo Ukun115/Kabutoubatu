@@ -6,13 +6,13 @@
 
 #include <list>
 #include <string>
-//#include "../../GameTemplate/Game/Noncopyable.h"
+#include "../../GameTemplate/Game/Utilities/Noncopyable.h"
 class RenderContext;
 
 /*!
-	*@brief	ゲームオブジェクト。
-	*/
-class IGameObject// : public Noncopyable
+*@brief	ゲームオブジェクト。
+*/
+class IGameObject : private Noncopyable	//コピー禁止のためのNoncopyableクラスを継承
 {
 public:
 	/*!
@@ -224,12 +224,6 @@ public:
 		}
 	}
 
-	void UpdateWrapper()
-	{
-		if (m_isActive && m_isStart && !m_isDead ) {
-			Update();
-		}
-	}
 	//ポーズ中のみ呼ばれる更新メソッド
 	void PauseUpdateWrapper()
 	{
@@ -242,6 +236,13 @@ public:
 	{
 		if (m_isActive && m_isStart && !m_isDead) {
 			UiUpdate();
+		}
+	}
+
+	void UpdateWrapper()
+	{
+		if (m_isActive && m_isStart && !m_isDead ) {
+			Update();
 		}
 	}
 

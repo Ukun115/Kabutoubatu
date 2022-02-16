@@ -75,7 +75,7 @@ namespace nsKabutoubatu
 		ModelInitData m_miniMapModelInitData;		//ミニマップモデルのデータ
 		Model m_model;				//モデル
 		Model m_shadowModel;		//シャドウのモデル
-		Model m_zPrepassModel;		//ZPrepassのモデル
+		Model m_outLineModel;		//輪郭線のモデル
 		Model m_silhouetteModel;	//シルエットのモデル
 		Model m_miniMapModel;		//ミニマップのモデル
 		Skeleton m_skeleton;		//スケルトン

@@ -232,158 +232,160 @@ SPSOut PSMain(SPSIn psIn) : SV_Target0
 	//法線カラーを返すデバック。
 	//return float4(psIn.normal,1.0f);
 
-	////////////////////////////////////ライティング/////////////////////////////////////////////////////////
+	////////////////////////////////////ライトの計算/////////////////////////////////////////////////////////
 
-	//ディレクションライト
-	//ディレクションライトのフォン拡散反射を計算
-	/*
-	float3 diffDirection = CalculateLambertDiffuse(
-		directionLight.direction,
-		directionLight.color,
-		psIn.normal
-	);
-	//ディレクションライトのフォン鏡面反射を計算
-	float3 specDirection = CalculatePhoneSpecular(
-		directionLight.direction,
-		directionLight.color,
-		psIn.worldPos,
-		psIn.normal
-	);
-	//ディレクションライトのライティングをまとめる
-	float3 finalDirectionLig = diffDirection + specDirection;
-
-
-
-	//ポイントライト
-
-	//サーフェイスに入射するポイントライトの光の向きを計算する。
-	float3 ligDir = psIn.worldPos - pointLight[0].position;
-	//正規化する。
-	ligDir = normalize(ligDir);
-
-	//減衰なしのランバート拡散反射光を計算
-	float3 diffPoint = CalculateLambertDiffuse(
-		ligDir,
-		pointLight[0].color,
-		psIn.normal
-	);
-	//減衰なしのフォン鏡面反射光を計算
-	float3 specPoint = CalculatePhoneSpecular(
-		ligDir,
-		pointLight[0].color,
-		psIn.worldPos,
-		psIn.normal
-	);
-
-	float pAffect;	//影響率
-	//距離による影響率を計算
-	pAffect = CalculateImpactRate(pointLight[0].position, pointLight[0].Range, psIn.worldPos);
-
-	//拡散反射光と鏡面反射光に減衰率を乗算して影響を弱める。
-	diffPoint *= pAffect;
-	specPoint *= pAffect;
-	//ポイントライトのライティングをまとめる
-	float3 finalPointLig = diffPoint + specPoint;
+	////ディレクションライト
+	////ディレクションライトのフォン拡散反射を計算
+	//float3 diffDirection = CalculateLambertDiffuse(
+	//	directionLight.direction,
+	//	directionLight.color,
+	//	psIn.normal
+	//);
+	////ディレクションライトのフォン鏡面反射を計算
+	//float3 specDirection = CalculatePhoneSpecular(
+	//	directionLight.direction,
+	//	directionLight.color,
+	//	psIn.worldPos,
+	//	psIn.normal
+	//);
+	////ディレクションライトのライティングをまとめる
+	//float3 finalDirectionLig = diffDirection + specDirection;
 
 
 
-	//スポットライト用
+	////ポイントライト
 
-	//サーフェイスに入射するポイントライトの光の向きを計算する。
-	float3 sLigDir = psIn.worldPos - spotLight.position;
-	//正規化する。
-	sLigDir = normalize(sLigDir);
+	////サーフェイスに入射するポイントライトの光の向きを計算する。
+	//float3 ligDir = psIn.worldPos - pointLight[0].position;
+	////正規化する。
+	//ligDir = normalize(ligDir);
 
-	//減衰なしのランバート拡散反射光を計算する。
-	float3 diffSpot = CalculateLambertDiffuse(
-		sLigDir,
-		spotLight.color,
-		psIn.normal
-	);
+	////減衰なしのランバート拡散反射光を計算
+	//float3 diffPoint = CalculateLambertDiffuse(
+	//	ligDir,
+	//	pointLight[0].color,
+	//	psIn.normal
+	//);
+	////減衰なしのフォン鏡面反射光を計算
+	//float3 specPoint = CalculatePhoneSpecular(
+	//	ligDir,
+	//	pointLight[0].color,
+	//	psIn.worldPos,
+	//	psIn.normal
+	//);
 
-	//減衰なしのフォン鏡面反射光を計算する。
-	float3 specSpot = CalculatePhoneSpecular(
-		sLigDir,
-		spotLight.color,
-		psIn.worldPos,
-		psIn.normal
-	);
+	//float pAffect;	//影響率
+	////距離による影響率を計算
+	//pAffect = CalculateImpactRate(pointLight[0].position, pointLight[0].Range, psIn.worldPos);
 
-	//距離による影響率を計算する。
-	float sAffect = CalculateImpactRate(spotLight.position, spotLight.Range, psIn.worldPos);
-
-	//拡散反射光と鏡面反射光に減衰率を乗算して影響を弱める。
-	diffSpot *= sAffect;
-	specSpot *= sAffect;
-
-
-	//入射光と射出方向の角度を求める。
-	//dot()を利用して内積を求める。
-	float sAngle = dot(sLigDir, spotLight.direction);
-	//dot()で求めた値をacosに渡して角度を求める。
-	sAngle = acos(sAngle);
-
-	float aAffect;
-	//角度による影響率を求める。
-	//角度に比例して小さくなっていく影響率を計算する。
-	aAffect = 1.0f - 1.0f / spotLight.angle * sAngle;
-	//影響力がマイナスにならないように補正をかける。
-	aAffect = max(0.0f, aAffect);
-	//影響の仕方を指数関数的にする。
-	aAffect = pow(aAffect, 3.0f);
-	//拡散反射光と鏡面反射光に減衰率を乗算して影響を弱める。
-	diffSpot *= aAffect;
-	specSpot *= aAffect;
-	//スポットライトのライティングをまとめる
-	float3 finalSpotLig = diffSpot + specSpot;
+	////拡散反射光と鏡面反射光に減衰率を乗算して影響を弱める。
+	//diffPoint *= pAffect;
+	//specPoint *= pAffect;
+	////ポイントライトのライティングをまとめる
+	//float3 finalPointLig = diffPoint + specPoint;
 
 
 
-	//リムライト
+	////スポットライト用
 
-	float3 dirLim = CalculateRimlight(
-		directionLight.direction,
-		directionLight.color,
-		psIn.normal,
-		psIn.normalInView.z
-	);
-	float3 spotLim = CalculateRimlight(
-		spotLight.direction,
-		spotLight.color,
-		psIn.normal,
-		psIn.normalInView.z
-	);
-	//拡散反射光と鏡面反射光に減衰率を乗算して影響を弱める。
-	dirLim *= aAffect;
-	spotLim *= aAffect;
-	//リムライトのライティングをまとめる
-	float3 finalLimLig = dirLim + spotLim;
+	////サーフェイスに入射するポイントライトの光の向きを計算する。
+	//float3 sLigDir = psIn.worldPos - spotLight.position;
+	////正規化する。
+	//sLigDir = normalize(sLigDir);
 
+	////減衰なしのランバート拡散反射光を計算する。
+	//float3 diffSpot = CalculateLambertDiffuse(
+	//	sLigDir,
+	//	spotLight.color,
+	//	psIn.normal
+	//);
 
+	////減衰なしのフォン鏡面反射光を計算する。
+	//float3 specSpot = CalculatePhoneSpecular(
+	//	sLigDir,
+	//	spotLight.color,
+	//	psIn.worldPos,
+	//	psIn.normal
+	//);
 
-	//半球ライト
+	////距離による影響率を計算する。
+	//float sAffect = CalculateImpactRate(spotLight.position, spotLight.Range, psIn.worldPos);
 
-	//サーフェイスの法線と地面の法線との内積を計算する。
-	float hLigT = dot(psIn.normal, hemiSphereLight.groundNormal);
-	//内積の結果を0~1の範囲に変換する。
-	hLigT = (hLigT + 1.0f) / 2.0f;
-	//地面色と天球色を補完率hLigTで線形補完する。
-	float3 hemiLight = lerp(hemiSphereLight.groundColor, hemiSphereLight.skyColor, hLigT);
+	////拡散反射光と鏡面反射光に減衰率を乗算して影響を弱める。
+	//diffSpot *= sAffect;
+	//specSpot *= sAffect;
 
 
-	//環境光(簡易)
-	//これを加えて一律にライトの明るさを底上げ
-	const float3 ambientLig = { 0.3f,0.3f,0.3f };
+	////入射光と射出方向の角度を求める。
+	////dot()を利用して内積を求める。
+	//float sAngle = dot(sLigDir, spotLight.direction);
+	////dot()で求めた値をacosに渡して角度を求める。
+	//sAngle = acos(sAngle);
+
+	//float aAffect;
+	////角度による影響率を求める。
+	////角度に比例して小さくなっていく影響率を計算する。
+	//aAffect = 1.0f - 1.0f / spotLight.angle * sAngle;
+	////影響力がマイナスにならないように補正をかける。
+	//aAffect = max(0.0f, aAffect);
+	////影響の仕方を指数関数的にする。
+	//aAffect = pow(aAffect, 3.0f);
+	////拡散反射光と鏡面反射光に減衰率を乗算して影響を弱める。
+	//diffSpot *= aAffect;
+	//specSpot *= aAffect;
+	////スポットライトのライティングをまとめる
+	//float3 finalSpotLig = diffSpot + specSpot;
 
 
-	//拡散反射光・鏡面反射光・リムライト・半球ライト・環境光を加算して最終的な光を求める。
-	float3 lig = finalDirectionLig + finalPointLig + finalSpotLig + finalLimLig + hemiLight + ambientLig;
-	*/
+
+	////リムライト
+
+	//float3 dirLim = CalculateRimlight(
+	//	directionLight.direction,
+	//	directionLight.color,
+	//	psIn.normal,
+	//	psIn.normalInView.z
+	//);
+	//float3 spotLim = CalculateRimlight(
+	//	spotLight.direction,
+	//	spotLight.color,
+	//	psIn.normal,
+	//	psIn.normalInView.z
+	//);
+	////拡散反射光と鏡面反射光に減衰率を乗算して影響を弱める。
+	//dirLim *= aAffect;
+	//spotLim *= aAffect;
+	////リムライトのライティングをまとめる
+	//float3 finalLimLig = dirLim + spotLim;
+
+
+	////半球ライト
+
+	////サーフェイスの法線と地面の法線との内積を計算する。
+	//float hLigT = dot(psIn.normal, hemiSphereLight.groundNormal);
+	////内積の結果を0~1の範囲に変換する。
+	//hLigT = (hLigT + 1.0f) / 2.0f;
+	////地面色と天球色を補完率hLigTで線形補完する。
+	//float3 hemiLight = lerp(hemiSphereLight.groundColor, hemiSphereLight.skyColor, hLigT);
+
+
+	////環境光(簡易)
+	////これを加えて一律にライトの明るさを底上げ
+	//const float3 ambientLig = { 0.3f,0.3f,0.3f };
+
+
+	////拡散反射光・鏡面反射光・リムライト・半球ライト・環境光を加算して最終的な光を求める。
+	//float3 lig = finalDirectionLig + finalPointLig + finalSpotLig + finalLimLig + hemiLight + ambientLig;
+	////////////////////////////////////ライトの計算///////////////////////////////////////////////////////////
+
+
+
+	////////////////////////////////////ライティング//////////////////////////////////////////////////////////////
 	//モデルのテクスチャから色をフェッチする
 	float4 albedoColor = g_albedoMap.Sample(g_sampler, psIn.uv);
 	//テクスチャカラーに求めた光を乗算して最終出力カラーを求める。
 	float4 finalColor;
-	finalColor.xyz = albedoColor.xyz /* lig*/;
+	finalColor.xyz = albedoColor.xyz;// *lig;
 	//完全に初期化するためにwの値も設定
 	finalColor.w = 1.0f;
 	////////////////////////////////////ライティングEND///////////////////////////////////////////////////////////
@@ -482,6 +484,7 @@ SPSOut PSMain(SPSIn psIn) : SV_Target0
 		//自身の深度値と近傍8テクセルの深度値の平均の差を調べる。
 		if (abs(modelPixelDepth - aroundPixelDepth) > 1.0f)
 		{
+			//初めは黒
 			float4 outLineColor = { 0.0f,0.0f,0.0f,1.0f };
 			switch (playerMode)
 			{

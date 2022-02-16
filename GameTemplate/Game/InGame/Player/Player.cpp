@@ -658,7 +658,7 @@ namespace nsKabutoubatu
 	}
 
 	//プレイヤーの位置を移動させる
-	void Player::SetPositionA(const Vector3& position)
+	void Player::Warp(const Vector3& position)
 	{
 		m_pos = position;
 		//キャラコンを一旦破棄

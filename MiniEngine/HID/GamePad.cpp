@@ -62,7 +62,7 @@ namespace {
 		{ enButtonLB3		, 'M',			0xFFFFFFFF	},
 	};
 }
-GamePad::EnXInputPadState GamePad::m_padStates[4] = { GamePad::EnXInputPadState::Disconnect };
+GamePad::EnXInputPadState GamePad::m_padStates[2] = { GamePad::EnXInputPadState::Disconnect };
 GamePad::GamePad()
 {
 	memset(&m_state, 0, sizeof(m_state));

@@ -366,10 +366,10 @@ namespace nsKabutoubatu
 			switch (playerNum)
 			{
 			case enPlayer1:
-				m_player[playerNum]->SetPositionA({ 130.0f, 10000.0f* m_gyaku, 250.0f });
+				m_player[playerNum]->Warp({ 130.0f, 10000.0f* m_gyaku, 250.0f });
 				break;
 			case enPlayer2:
-				m_player[playerNum]->SetPositionA({ -130.0f, 10000.0f* m_gyaku, 250.0f });
+				m_player[playerNum]->Warp({ -130.0f, 10000.0f* m_gyaku, 250.0f });
 				break;
 			}
 
