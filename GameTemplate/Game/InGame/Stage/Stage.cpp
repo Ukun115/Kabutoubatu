@@ -64,6 +64,7 @@ namespace nsKabutoubatu
 		{
 			m_shopBuiding[shopNum] = NewGO<StageBuilding>();
 			m_shopBuiding[shopNum]->SetPlayerNumber(m_playerNum);
+			m_shopBuiding[shopNum]->SetPlayerGamePad(*m_playerGamePad[m_playerNum],m_playerNum);
 			//アイテムショップか宿屋か最初のボスの家かを設定
 			m_shopBuiding[shopNum]->SetShopType(shopNum);
 			//位置をセット

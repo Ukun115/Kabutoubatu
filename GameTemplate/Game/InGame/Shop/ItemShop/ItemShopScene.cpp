@@ -95,6 +95,8 @@ namespace nsKabutoubatu
 			m_ItemShopSelect[playerNum] = NewGO<ItemShopSelect>();
 			//プレイヤーの番号をセット
 			m_ItemShopSelect[playerNum]->SetPlayerNum(playerNum);
+
+			m_ItemShopSelect[playerNum]->SetPlayerGamePad(*m_playerGamePad[playerNum]);
 		}
 
 		return true;

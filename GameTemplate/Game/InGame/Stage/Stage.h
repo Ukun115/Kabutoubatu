@@ -26,7 +26,7 @@ namespace nsKabutoubatu
 		Mole* m_mole[4] = { nullptr };
 		Slime* m_slime[4] = { nullptr };
 		NeedleSlime* m_needleSlime[4] = { nullptr };
-
+		GamePad* m_playerGamePad[2] = { nullptr };
 		PhysicsStaticObject m_physicsStaticObject[2];		//静的物理オブジェクトクラス
 
 		Vector3 m_weakEnemyRandomRespownPos;
@@ -56,5 +56,7 @@ namespace nsKabutoubatu
 
 	public:
 		void SetPlayerNumber(const int playerNum) { m_playerNum = playerNum; };
+
+		void SetPlayerGamePad(GamePad& gamePad, const int playerNo) { m_playerGamePad[playerNo] = &gamePad; };
 	};
 }

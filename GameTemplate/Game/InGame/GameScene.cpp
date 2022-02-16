@@ -52,6 +52,10 @@ namespace nsKabutoubatu
 		m_playerCamera = NewGO <PlayerCamera>(nsStdafx::PRIORITY_0, nsStdafx::PLAYER_CAMERA_NAME);
 		m_playerCamera->SetTargetPlayer(m_playerNo);
 
+		//ステージを生成
+		m_stage = NewGO<Stage>();
+		m_stage->SetPlayerNumber(m_playerNum);
+
 		//オンラインプレイの時、
 		if (m_online)
 		{
@@ -86,6 +90,10 @@ namespace nsKabutoubatu
 			NowMoneyFontInit(m_otherPlayerNo);
 			//回復アイテム文字を初期化
 			RecoveryItemFontInit(m_otherPlayerNo);
+
+			//プレイヤーのパッド情報をステージに送る
+			m_stage->SetPlayerGamePad(*m_playerGamePad, m_playerNo);
+			m_stage->SetPlayerGamePad(*m_otherPlayerGamePad, m_otherPlayerNo);
 		}
 		//オンラインプレイじゃないとき、
 		else
@@ -117,10 +125,6 @@ namespace nsKabutoubatu
 				}
 			}
 		}
-
-		//ステージを生成
-		m_stage = NewGO<Stage>();
-		m_stage->SetPlayerNumber(m_playerNum);
 
 		return true;
 	}

@@ -53,6 +53,7 @@ namespace nsKabutoubatu
 		SkinModelRender* m_salesperson = nullptr;	//店員モデル
 		FontRender* m_salespersonTalk = nullptr;	//店員の会話文
 		ItemShopSelect* m_ItemShopSelect[enPlayerNum] = { nullptr };
+		GamePad* m_playerGamePad[enPlayerNum] = { nullptr };
 
 		PhysicsStaticObject m_physicsStaticObject;		//静的物理オブジェクトクラス
 		AnimationClip m_animationClips[enAnimationNum];
@@ -94,5 +95,7 @@ namespace nsKabutoubatu
 		void SetItemShopPosition(Vector3& shopPosition) { m_shopPos = shopPosition; };
 
 		void SetPlayerNumber(const int playerNum) { m_playerNum = playerNum; };
+
+		void SetPlayerGamePad(GamePad& gamePad, const int playerNo) { m_playerGamePad[playerNo] = &gamePad; };
 	};
 }

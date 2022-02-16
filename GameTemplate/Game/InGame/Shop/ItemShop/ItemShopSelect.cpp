@@ -86,7 +86,7 @@ namespace nsKabutoubatu
 			CursorMove(enBuy, enEnter);
 
 			//Aボタンが押されたら、
-			if (g_pad[m_playerNum]->IsTrigger(enButtonA)&& !m_ItemSetumeiSprite->IsActive())
+			if (m_playerGamePad->IsTrigger(enButtonA)&& !m_ItemSetumeiSprite->IsActive())
 			{
 				//購入モード、売却モード、店から出るスタンバイ状態のいずれかに行く。
 				NextState();
@@ -109,14 +109,14 @@ namespace nsKabutoubatu
 			CursorMove(enFirstItem, enBackState);
 
 			//Aボタンが押されたら、
-			if (g_pad[m_playerNum]->IsTrigger(enButtonA)&& !m_ItemSetumeiSprite->IsActive())
+			if (m_playerGamePad->IsTrigger(enButtonA)&& !m_ItemSetumeiSprite->IsActive())
 			{
 				//購入
 				BuySelect();
 			}
 
 			//もしXボタンが押されたなら、
-			if (g_pad[m_playerNum]->IsTrigger(enButtonX) && m_nowShoppingMode != enBackState)
+			if (m_playerGamePad->IsTrigger(enButtonX) && m_nowShoppingMode != enBackState)
 			{
 				//表示されているとき、
 				if (m_ItemSetumeiSprite->IsActive())
@@ -140,14 +140,14 @@ namespace nsKabutoubatu
 			CursorMove(enStatusUpItem1, enBack);
 
 			//Aボタンが押されたら
-			if (g_pad[m_playerNum]->IsTrigger(enButtonA)&& !m_ItemSetumeiSprite->IsActive())
+			if (m_playerGamePad->IsTrigger(enButtonA)&& !m_ItemSetumeiSprite->IsActive())
 			{
 				//売却
 				SoldSelect();
 			}
 
 			//もしXボタンが押されたなら、
-			if (g_pad[m_playerNum]->IsTrigger(enButtonX)&& m_nowShoppingMode!= enBack)
+			if (m_playerGamePad->IsTrigger(enButtonX)&& m_nowShoppingMode!= enBack)
 			{
 				//表示されているとき、
 				if (m_ItemSetumeiSprite->IsActive())
@@ -179,7 +179,7 @@ namespace nsKabutoubatu
 	void ItemShopSelect::CursorMove(const int selectMin, const int selectMax)
 	{
 		//下入力
-		if (g_pad[m_playerNum]->IsTrigger(enButtonDown) && !m_ItemSetumeiSprite->IsActive()) {
+		if (m_playerGamePad->IsTrigger(enButtonDown) && !m_ItemSetumeiSprite->IsActive()) {
 			//現在セレクトされているのが「出る」だったら、
 			if (m_nowShoppingMode == selectMax) {
 				//選択を一番上に戻す
@@ -198,7 +198,7 @@ namespace nsKabutoubatu
 			m_selectSound->Play(false);	//ワンショット再生
 		}
 		//上入力
-		if (g_pad[m_playerNum]->IsTrigger(enButtonUp) && !m_ItemSetumeiSprite->IsActive()) {
+		if (m_playerGamePad->IsTrigger(enButtonUp) && !m_ItemSetumeiSprite->IsActive()) {
 			//現在セレクトされているのが「出る」だったら、
 			if (m_nowShoppingMode == selectMin) {
 				//選択を一番下に戻す

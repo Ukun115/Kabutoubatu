@@ -61,7 +61,7 @@ namespace nsKabutoubatu
 			CursorMove(enStay, enEnter);
 
 			//Aボタンが押されたら、
-			if (g_pad[m_playerNum]->IsTrigger(enButtonA))
+			if (m_playerGamePad->IsTrigger(enButtonA))
 			{
 				//泊まる状態、店から出るスタンバイ状態のいずれかに行く。
 				NextState();
@@ -90,7 +90,7 @@ namespace nsKabutoubatu
 	void HotelSelect::CursorMove(const int selectMin, const int selectMax)
 	{
 		//下入力
-		if (g_pad[m_playerNum]->IsTrigger(enButtonDown)) {
+		if (m_playerGamePad->IsTrigger(enButtonDown)) {
 			//現在セレクトされているのが「出る」だったら、
 			if (m_nowHotelMode == selectMax) {
 				//選択を一番上に戻す
@@ -109,7 +109,7 @@ namespace nsKabutoubatu
 			m_selectSound->Play(false);	//ワンショット再生
 		}
 		//上入力
-		if (g_pad[m_playerNum]->IsTrigger(enButtonUp)) {
+		if (m_playerGamePad->IsTrigger(enButtonUp)) {
 			//現在セレクトされているのが「出る」だったら、
 			if (m_nowHotelMode == selectMin) {
 				//選択を一番下に戻す
