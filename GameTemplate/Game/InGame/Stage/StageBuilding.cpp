@@ -212,7 +212,7 @@ namespace nsKabutoubatu
 				HukidasiActivate(playerNum);
 
 				//Aボタンが押されたら、
-				if (g_pad[playerNum]->IsTrigger(enButtonA))
+				if (m_playerGamePad[playerNum]->IsTrigger(enButtonA))
 				{
 					//ドアの状態の入れ替え
 					switch (m_doorState)
@@ -340,6 +340,7 @@ namespace nsKabutoubatu
 			m_hotelScene->SetPlayerNumber(m_playerNum);
 			//建物の場所をシーンに渡しておく
 			m_hotelScene->SetHotelPosition(m_pos);
+			m_hotelScene->Set
 			break;
 		//アイテムショップ
 		case enItemShop:

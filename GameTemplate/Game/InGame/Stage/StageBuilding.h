@@ -69,6 +69,8 @@ namespace nsKabutoubatu
 		//最初のボスステージ
 		FirstBossStage* m_firstBossStage = nullptr;
 
+		GamePad* m_playerGamePad[enPlayerNum] = { nullptr };
+
 		PhysicsStaticObject m_physicsStaticObject[2];		//静的物理オブジェクトクラス
 
 		int m_playerNum = enPlayerNum;
@@ -141,5 +143,7 @@ namespace nsKabutoubatu
 		/// </summary>
 		/// <returns>ドアに触れているかどうか</returns>
 		bool GetDoorTatchFlg(const int playerNum){ return m_doorTatchFlg[playerNum]; };
+
+		void SetPlayerGamePad(GamePad& gamePad,const int playerNo) { m_playerGamePad[playerNo] = &gamePad; };
 	};
 }

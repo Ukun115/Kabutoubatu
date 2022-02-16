@@ -232,7 +232,7 @@ namespace nsKabutoubatu {
 		/// <summary>
 		/// 他プレイヤーを初期化するための情報を送る。
 		/// </summary>
-		void SendInitDataOtherPlayer()
+		void SendInitDataOtherPlayer();
 		/// <summary>
 		/// パッド情報をP2Pで直接送信。
 		/// </summary>

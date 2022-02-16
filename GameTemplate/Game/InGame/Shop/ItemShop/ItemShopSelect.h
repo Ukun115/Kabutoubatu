@@ -71,6 +71,8 @@ namespace nsKabutoubatu
 		SoundSource* m_buySound = nullptr;
 		Weapon* m_weapon = nullptr;
 
+		GamePad* m_playerGamePad;
+
 		int m_nowShoppingMode = enBuy;	//買う。売る。出る。の３つ
 		int m_nowShoppingState = enShoppingModeSelectState;
 		int m_playerNum = 0;
@@ -113,5 +115,7 @@ namespace nsKabutoubatu
 		/// </summary>
 		/// <returns>現在のショッピング状態</returns>
 		int GetNowShoppingState()const { return m_nowShoppingState; };
+
+		void SetPlayerGamePad(GamePad& gamePad) { m_playerGamePad = &gamePad; };
 	};
 }

@@ -41,6 +41,8 @@ namespace nsKabutoubatu
 		SoundSource* m_cantDecideSound = nullptr;
 		SoundSource* m_buySound = nullptr;
 
+		GamePad* m_playerGamePad;
+
 		int m_nowHotelMode = enStay;	//泊まる、泊まらない。の２択
 		int m_nowHotelState = enSelectState;
 		int m_playerNum = 0;
@@ -77,5 +79,7 @@ namespace nsKabutoubatu
 		/// </summary>
 		/// <returns>現在のショッピング状態</returns>
 		int GetNowSelectState()const { return m_nowHotelState; };
+
+		void SetPlayerGamePad(GamePad& gamePad) { m_playerGamePad = &gamePad; };
 	};
 }
