@@ -7,6 +7,7 @@
 #include "../../Title/TitleScene.h"
 #include "../Pause.h"
 #include "../../Graphics/SpriteRenderSub.h"
+#include "Online.h"
 
 namespace nsKabutoubatu
 {
@@ -59,8 +60,12 @@ namespace nsKabutoubatu
 	void OnlineErrorScene::BackTitle()
 	{
 		//Aボタンを押したら、
-		//if (m_playerGamePad->IsTrigger(enButtonA))
-		//{
+		if (g_pad[0]->IsTrigger(enButtonA))
+		{
+			//オンラインのインスタンスを削除する
+			m_online = FindGO<Online>(nsStdafx::ONLINE_NAME);
+			DeleteGO(m_online);
+
 			//ゲームシーンを削除し、タイトルシーンを生成
 			m_gameScene->DeleteGameSceneClass();
 			NewGO<TitleScene>(nsStdafx::PRIORITY_0, nsStdafx::TITLESCENE_NAME);
@@ -70,6 +75,6 @@ namespace nsKabutoubatu
 			m_pause->SetCanPause(true);
 			//クラスを破棄
 			DeleteGO(this);
-		//}
+		}
 	}
 }

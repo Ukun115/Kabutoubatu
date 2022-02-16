@@ -17,12 +17,18 @@ namespace nsKabutoubatu
 		const int TIMER_COUNT_INIT = 0;
 		//シーン遷移できるフレーム間隔
 		const int CAN_SCENECHANGE_FRAME_INTERVAL = 5;
+		//オンライン時じゃないときの通常fps値
+		const int NORMAL_FPS_VALUE = 60;
 	}
 
 	bool TitleScene::Start()
 	{
-		//インスタンスを検索
-		m_online = FindGO<Online>(nsStdafx::ONLINE_NAME);
+		//フレームレートモードを設定する。
+		//初期設定は60fps。オンラインになると30fpsに落とす。
+		g_engine->SetFrameRateMode(TkEngine::enFrameRateMode_Fix, nsTitleScene::NORMAL_FPS_VALUE);
+
+		//オンライン通信エンジン
+		m_online = NewGO<nsKabutoubatu::Online>(nsStdafx::PRIORITY_0, nsStdafx::ONLINE_NAME);
 
 		//タイトルシーンの画像クラス
 		m_titleSceneSprite = NewGO<TitleSceneSprite>();

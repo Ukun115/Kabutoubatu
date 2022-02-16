@@ -4,10 +4,8 @@
 #include "StopWatch.h"
 #include "../Game/Graphics/RenderingEngine.h"
 #include "../Game/InGame/Camera/PlayerCamera.h"
-#include "StopWatch.h"
 #include "../Game/InGame/Pause.h"
 #include "Utilities/GameUpdateStop.h"
-#include "../Game/InGame/Online/Online.h"
 #include "ResourceBankManager.h"
 
 /// <summary>
@@ -56,9 +54,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//サウンドエンジンのインスタンスを作成する。
 	SoundEngine::CreateInstance();
 	SoundEngine::GetInstance()->Init();
-
-	//オンライン通信エンジン
-	nsKabutoubatu::Online* online = NewGO<nsKabutoubatu::Online>(nsStdafx::PRIORITY_0, nsStdafx::ONLINE_NAME);
 
 	//ライト
 	nsKabutoubatu::Light* light = NewGO<nsKabutoubatu::Light>(nsStdafx::PRIORITY_0,nsStdafx::LIGHT_NAME);

@@ -71,7 +71,6 @@ namespace nsKabutoubatu
 		m_frameRateInfoBackup = g_engine->GetFrameRateInfo();
 		//フレームレートモードを設定する。
 		g_engine->SetFrameRateMode(TkEngine::enFrameRateMode_Fix, MAX_FPS);
-
 	}
 
 	//他プレイヤーを初期化するための情報を送る関数

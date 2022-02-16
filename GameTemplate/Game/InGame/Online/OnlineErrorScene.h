@@ -11,6 +11,7 @@ namespace nsKabutoubatu
 	class GameScene;		//ゲームシーン
 	class Pause;			//ポーズ機能
 	class SpriteRenderSub;	//画像描画処理サブ
+	class Online;			//オンライン
 
 	class OnlineErrorScene : public IGameObject
 	{
@@ -19,6 +20,8 @@ namespace nsKabutoubatu
 		Pause* m_pause = nullptr;
 		SpriteRenderSub* m_grayBack = nullptr;
 		SpriteRenderSub* m_errorMessageBox = nullptr;
+
+		Online* m_online = nullptr;
 
 		int m_padNo = 0;
 		float m_errorMessageBoxXscale = 0.0f;
