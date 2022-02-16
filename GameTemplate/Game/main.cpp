@@ -7,7 +7,7 @@
 #include "../Game/InGame/Pause.h"
 #include "Utilities/GameUpdateStop.h"
 #include "ResourceBankManager.h"
-#include "InGame/Online/Online.h"
+
 
 /// <summary>
 /// 標準入出力コンソールを初期化
@@ -55,9 +55,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//サウンドエンジンのインスタンスを作成する。
 	SoundEngine::CreateInstance();
 	SoundEngine::GetInstance()->Init();
-
-	//オンライン通信エンジン
-	nsKabutoubatu::Online* m_online = NewGO<nsKabutoubatu::Online>(nsStdafx::PRIORITY_0, nsStdafx::ONLINE_NAME);
 
 	//ライト
 	nsKabutoubatu::Light* light = NewGO<nsKabutoubatu::Light>(nsStdafx::PRIORITY_0,nsStdafx::LIGHT_NAME);

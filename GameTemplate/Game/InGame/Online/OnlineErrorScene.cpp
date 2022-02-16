@@ -11,6 +11,12 @@
 
 namespace nsKabutoubatu
 {
+	namespace nsOnlineErrorScene
+	{
+		//オンライン時じゃないときの通常fps値
+		const int NORMAL_FPS_VALUE = 60;
+	}
+
 	bool OnlineErrorScene::Start()
 	{
 		//ゲームシーンのインスタンスを検索
@@ -75,6 +81,10 @@ namespace nsKabutoubatu
 			m_pause->SetCanPause(true);
 			//クラスを破棄
 			DeleteGO(this);
+
+			//オンラインは通常60fpsからオンライン用に30fpsまで下げていたので、
+			//下げていた分を戻しておく。
+			g_engine->SetFrameRateMode(TkEngine::enFrameRateMode_Fix, nsOnlineErrorScene::NORMAL_FPS_VALUE);
 		}
 	}
 }

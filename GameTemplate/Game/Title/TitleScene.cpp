@@ -23,11 +23,8 @@ namespace nsKabutoubatu
 
 	bool TitleScene::Start()
 	{
-		//フレームレートモードを設定する。
-		//初期設定は60fps。オンラインになると30fpsに落とす。
-		g_engine->SetFrameRateMode(TkEngine::enFrameRateMode_Fix, nsTitleScene::NORMAL_FPS_VALUE);
-
-		m_online = FindGO<Online>(nsStdafx::ONLINE_NAME);
+		//オンライン通信エンジン
+		m_online = NewGO<nsKabutoubatu::Online>(nsStdafx::PRIORITY_0, nsStdafx::ONLINE_NAME);
 
 		//タイトルシーンの画像クラス
 		m_titleSceneSprite = NewGO<TitleSceneSprite>();
