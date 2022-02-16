@@ -122,7 +122,7 @@ namespace nsKabutoubatu
 	//パッド情報をP2Pで直接送信する関数
 	void SyncOnlineTwoPlayerMatchEngine::SendPadDataDirect()
 	{
-		//ONLINE_LOG("SendPadData:frameNo = %d\n", m_frameNo);
+		ONLINE_LOG("SendPadData:frameNo = %d\n", m_frameNo);
 
 		// 送るパッドデータを構築する。
 		SPadData padData;
@@ -148,7 +148,7 @@ namespace nsKabutoubatu
 	//パッドデータの再送リクエストをP2Pで送信する関数
 	void SyncOnlineTwoPlayerMatchEngine::SendRequestResendPadDataDirect(int frameNo)
 	{
-		//ONLINE_LOG("RequestResendPadData : frameNo = %d\n", frameNo);
+		ONLINE_LOG("RequestResendPadData : frameNo = %d\n", frameNo);
 
 		SRequestResendPadData reqResendPadData;
 		reqResendPadData.dataType = enDirectMessageType_RequestResendPadData;
@@ -278,7 +278,7 @@ namespace nsKabutoubatu
 	//インゲーム中の更新処理関数
 	void SyncOnlineTwoPlayerMatchEngine::Update_InGame()
 	{
-		//ONLINE_LOG("Update_InGame()\n");
+		ONLINE_LOG("Update_InGame()\n");
 
 		//ループカウント変数
 		int loopCount = 0;
@@ -404,7 +404,7 @@ namespace nsKabutoubatu
 				//K2_ASSERT(!m_isHoge, "二回呼ばれている");
 				m_isHoge = true;
 
-				//ONLINE_LOG("enEvent_SendInitDataForOtherPlayer\n");
+				ONLINE_LOG("enEvent_SendInitDataForOtherPlayer\n");
 
 				auto valuObj = (ExitGames::Common::ValueObject<std::uint8_t*>*)(eventContent.getValue(0));
 				m_recieveDataSize = valuObj->getSizes()[0];
