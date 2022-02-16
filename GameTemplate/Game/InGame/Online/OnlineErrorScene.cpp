@@ -36,7 +36,9 @@ namespace nsKabutoubatu
 
 	OnlineErrorScene::~OnlineErrorScene()
 	{
+		//背景を暗くする画像を削除
 		DeleteGO(m_grayBack);
+		//エラーメッセージ画像を削除
 		DeleteGO(m_errorMessageBox);
 	}
 

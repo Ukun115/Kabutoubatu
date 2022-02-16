@@ -84,7 +84,7 @@ namespace nsKabutoubatu
 		/// 通信相手のプレイヤー番号を取得
 		/// </summary>
 		/// <returns>通信相手のプレイヤー番号</returns>
-		int GetOtherPlayerNo() { return !GetPlayerNo(); };
+		int GetOtherPlayerNo() { return !m_playerNo; };
 
 		/// <summary>
 		/// すべてのプレイヤーがルームにジョインしたかどうかを取得

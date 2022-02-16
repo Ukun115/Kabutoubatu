@@ -29,6 +29,7 @@ namespace nsKabutoubatu
 
 	bool GameScene::Start()
 	{
+
 		//ランダム関数の種を決める(数値はなんでもいい)
 		//オンラインの際はランダム数値を相手側と合わせないといけないので、
 		//ランダムの種を合わせる
@@ -64,7 +65,7 @@ namespace nsKabutoubatu
 			m_weapon[m_playerNo] = NewGO<Weapon>(nsStdafx::PRIORITY_0, nsStdafx::WEAPON_NAME[m_playerNo]);
 			m_weapon[m_playerNo]->SetPlayerNum(m_playerNo);
 			//初期装備武器を設定
-			m_weapon[m_playerNo]->SetWeaponNum(1);
+			m_weapon[m_playerNo]->SetWeaponNum(enWoodStick);
 			//現在のお金文字を初期化
 			NowMoneyFontInit(m_playerNo);
 			//回復アイテム文字を初期化

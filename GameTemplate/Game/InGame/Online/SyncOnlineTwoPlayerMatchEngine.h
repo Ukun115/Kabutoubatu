@@ -104,11 +104,15 @@ namespace nsKabutoubatu {
 		/// <returns></returns>
 		int GetPlayerNo() const
 		{
+			//ホスト
 			if (m_playerType == enPlayerType_Host) {
 				return 0;
 			}
-			// クライアント。
-			return 1;
+			// クライアント
+			else
+			{
+				return 1;
+			}
 		}
 		/// <summary>
 		/// 対戦相手のプレイヤー番号を取得。
@@ -228,7 +232,7 @@ namespace nsKabutoubatu {
 		/// <summary>
 		/// 他プレイヤーを初期化するための情報を送る。
 		/// </summary>
-		void SendInitDataOtherPlayer();
+		void SendInitDataOtherPlayer()
 		/// <summary>
 		/// パッド情報をP2Pで直接送信。
 		/// </summary>
@@ -317,7 +321,7 @@ namespace nsKabutoubatu {
 		// 他プレイヤーの状態。
 		enum EnOtherPlayerState
 		{
-			enOtherPlayerState_Undef,				// 不明
+			enOtherPlayerState_Undef,				// m_playerType
 			enOtherPlayerState_JoinedRoom,			// 部屋に入ってきた。
 			enOtherPlayerState_PossibleGameStart,	// ゲーム開始可能状態
 			enOtherPlayerState_LeftRoom,			// 部屋から抜けた。

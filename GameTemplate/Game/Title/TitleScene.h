@@ -44,6 +44,14 @@ namespace nsKabutoubatu
 			enSelectBackGameMode,		//ゲームモード選択にもどる
 		};
 
+
+		enum enPlayerNo
+		{
+			enPlayer1,		//1P
+			enPlayer2,		//2P
+			enPlayerNum		//プレイヤーの総数
+		};
+
 		//ゲームシーン
 		GameScene* m_gameScene = nullptr;
 		TitleSceneSprite* m_titleSceneSprite = nullptr;

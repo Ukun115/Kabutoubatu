@@ -26,10 +26,11 @@ void PreLoad();
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
 	//FPS値表示のOnOffはここで設定。
-	bool m_fpsValueOn = false;
+	bool m_fpsValueOn = true;
 
 	//ゲームの初期化。
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("ふたりで!! かぶとうばつ"));
+
 
 	// 標準入出力コンソールの初期化
 	//コマンドプロンプトを起動
