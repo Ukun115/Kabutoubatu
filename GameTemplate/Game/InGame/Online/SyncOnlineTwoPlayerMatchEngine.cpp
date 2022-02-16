@@ -291,6 +291,7 @@ namespace nsKabutoubatu
 			if (m_otherPlayerState == enOtherPlayerState_LeftRoom) {
 				//エラー処理を実行
 				m_errorFunc();
+				ONLINE_LOG("プレイヤーが部屋から抜けた");
 				m_loadBalancingClient->disconnect();
 				break;
 			}
@@ -464,6 +465,7 @@ namespace nsKabutoubatu
 	void SyncOnlineTwoPlayerMatchEngine::disconnectReturn(void)
 	{
 		// 切断済みにする。
+		ONLINE_LOG("disconnectReturn");
 		m_state = State::DISCONNECTED;
 	}
 
@@ -496,7 +498,7 @@ namespace nsKabutoubatu
 			// サーバーへの接続エラーが発生したので、切断済みにする。
 
 			//ONLINE_LOG_W(errorString.toString());
-
+			ONLINE_LOG("connectReturn");
 			m_state = State::DISCONNECTED;
 			return;
 		}
@@ -507,6 +509,7 @@ namespace nsKabutoubatu
 	void SyncOnlineTwoPlayerMatchEngine::connectionErrorReturn(int errorCode)
 	{
 		// 接続に失敗したので、切断済みにする。
+		ONLINE_LOG("connectionErrorReturn");
 		m_state = State::DISCONNECTED;
 	}
 
