@@ -16,26 +16,11 @@
     <Filter Include="MiniEngine\raytracing">
       <UniqueIdentifier>{14187c21-3fa7-4895-9517-5392eeebd991}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ExEngine">
-      <UniqueIdentifier>{9b6426bf-a42e-442b-9906-7f04fbaa5270}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ExEngine\gameObject">
-      <UniqueIdentifier>{103836a8-41fc-4624-a457-cbf2a093308b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ExEngine\physics">
-      <UniqueIdentifier>{28d50a61-e332-409d-aaf8-cee4a2b444bb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MiniEngine\dbg">
       <UniqueIdentifier>{a4afebf9-da6c-48cf-86ed-ad66371d7516}</UniqueIdentifier>
     </Filter>
     <Filter Include="MiniEngine\font">
       <UniqueIdentifier>{3ac32d04-0484-4271-9fae-9b44b0baa05e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ExEngine\level2D">
-      <UniqueIdentifier>{80abc458-e4b9-4836-89c7-3eb842072871}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ExEngine\effect">
-      <UniqueIdentifier>{ff948bdd-482b-4d02-919f-9681d7dc43ef}</UniqueIdentifier>
     </Filter>
     <Filter Include="cpp&amp;h">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
@@ -77,9 +62,6 @@
     <Filter Include="cpp&amp;h\Graphics">
       <UniqueIdentifier>{83c10958-5ea3-4c00-b473-891fa9e70f39}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cpp&amp;h\Result">
-      <UniqueIdentifier>{808bdf34-f293-46a6-97c2-ddc3403202a1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="cpp&amp;h\InGame\Item\Weapon">
       <UniqueIdentifier>{1bc089ee-e9b2-4ab7-8949-6a17ed61647a}</UniqueIdentifier>
     </Filter>
@@ -103,6 +85,24 @@
     </Filter>
     <Filter Include="cpp&amp;h\Utilities">
       <UniqueIdentifier>{2157fd63-bf71-45b3-b7d2-dbde25efef28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\ExEngine">
+      <UniqueIdentifier>{9b6426bf-a42e-442b-9906-7f04fbaa5270}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\ExEngine\gameObject">
+      <UniqueIdentifier>{103836a8-41fc-4624-a457-cbf2a093308b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\ExEngine\physics">
+      <UniqueIdentifier>{28d50a61-e332-409d-aaf8-cee4a2b444bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\ExEngine\level2D">
+      <UniqueIdentifier>{80abc458-e4b9-4836-89c7-3eb842072871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\ExEngine\effect">
+      <UniqueIdentifier>{ff948bdd-482b-4d02-919f-9681d7dc43ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cpp&amp;h\InGame\Result">
+      <UniqueIdentifier>{808bdf34-f293-46a6-97c2-ddc3403202a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -212,31 +212,31 @@
       <Filter>MiniEngine\raytracing</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\gameObject\IGameObject.cpp">
-      <Filter>ExEngine\gameObject</Filter>
+      <Filter>cpp&amp;h\ExEngine\gameObject</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\gameObject\Gameobjectmanager.cpp">
-      <Filter>ExEngine\gameObject</Filter>
+      <Filter>cpp&amp;h\ExEngine\gameObject</Filter>
     </ClCompile>
     <ClCompile Include="..\..\MiniEngine\tkEngine.cpp">
       <Filter>MiniEngine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\physics\Physics.cpp">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\physics\MeshCollider.cpp">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\physics\RigidBody.cpp">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\physics\CapsuleCollider.cpp">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\physics\CharacterController.cpp">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\physics\PhysicsStaticObject.cpp">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\MiniEngine\font\FontEngine.cpp">
       <Filter>MiniEngine\font</Filter>
@@ -245,22 +245,22 @@
       <Filter>MiniEngine\font</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\level2D\CaslFile.cpp">
-      <Filter>ExEngine\level2D</Filter>
+      <Filter>cpp&amp;h\ExEngine\level2D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\level2D\Level2D.cpp">
-      <Filter>ExEngine\level2D</Filter>
+      <Filter>cpp&amp;h\ExEngine\level2D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\level2D\MapChip2D.cpp">
-      <Filter>ExEngine\level2D</Filter>
+      <Filter>cpp&amp;h\ExEngine\level2D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\physics\BoxCollider.cpp">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\effect\Effect.cpp">
-      <Filter>ExEngine\effect</Filter>
+      <Filter>cpp&amp;h\ExEngine\effect</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\effect\EffectEngine.cpp">
-      <Filter>ExEngine\effect</Filter>
+      <Filter>cpp&amp;h\ExEngine\effect</Filter>
     </ClCompile>
     <ClCompile Include="..\..\MiniEngine\RenderTarget.cpp">
       <Filter>MiniEngine</Filter>
@@ -278,7 +278,7 @@
       <Filter>MiniEngine\animation</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExEngine\physics\SphereCollider.cpp">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\PostEffect.cpp">
       <Filter>cpp&amp;h\Graphics</Filter>
@@ -401,10 +401,10 @@
       <Filter>cpp&amp;h\InGame</Filter>
     </ClCompile>
     <ClCompile Include="Result\GameClearScene.cpp">
-      <Filter>cpp&amp;h\Result</Filter>
+      <Filter>cpp&amp;h\InGame\Result</Filter>
     </ClCompile>
     <ClCompile Include="Result\GameOverScene.cpp">
-      <Filter>cpp&amp;h\Result</Filter>
+      <Filter>cpp&amp;h\InGame\Result</Filter>
     </ClCompile>
     <ClCompile Include="Sound\tkSoundSource.cpp">
       <Filter>cpp&amp;h\Sound</Filter>
@@ -604,37 +604,37 @@
       <Filter>MiniEngine\raytracing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\gameObject\IGameobject.h">
-      <Filter>ExEngine\gameObject</Filter>
+      <Filter>cpp&amp;h\ExEngine\gameObject</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\gameObject\GameObjectManager.h">
-      <Filter>ExEngine\gameObject</Filter>
+      <Filter>cpp&amp;h\ExEngine\gameObject</Filter>
     </ClInclude>
     <ClInclude Include="..\..\MiniEngine\tkEngine.h">
       <Filter>MiniEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\physics\Physics.h">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\ExEngine.h">
-      <Filter>ExEngine</Filter>
+      <Filter>cpp&amp;h\ExEngine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\physics\MeshCollider.h">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\physics\RigidBody.h">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\physics\ICollider.h">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\physics\CapsuleCollider.h">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\physics\CharacterController.h">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\physics\PhysicsStaticObject.h">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\MiniEngine\font\Font.h">
       <Filter>MiniEngine\font</Filter>
@@ -643,22 +643,22 @@
       <Filter>MiniEngine\font</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\level2D\CaslFile.h">
-      <Filter>ExEngine\level2D</Filter>
+      <Filter>cpp&amp;h\ExEngine\level2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\level2D\Level2D.h">
-      <Filter>ExEngine\level2D</Filter>
+      <Filter>cpp&amp;h\ExEngine\level2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\level2D\MapChip2D.h">
-      <Filter>ExEngine\level2D</Filter>
+      <Filter>cpp&amp;h\ExEngine\level2D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\physics\BoxCollider.h">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\effect\Effect.h">
-      <Filter>ExEngine\effect</Filter>
+      <Filter>cpp&amp;h\ExEngine\effect</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\effect\EffectEngine.h">
-      <Filter>ExEngine\effect</Filter>
+      <Filter>cpp&amp;h\ExEngine\effect</Filter>
     </ClInclude>
     <ClInclude Include="system\system.h">
       <Filter>cpp&amp;h\System</Filter>
@@ -691,10 +691,10 @@
       <Filter>MiniEngine\animation</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\physics\SphereCollider.h">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExEngine\physics\CollisionAttr.h">
-      <Filter>ExEngine\physics</Filter>
+      <Filter>cpp&amp;h\ExEngine\physics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\MiniEngine\dbg\MyLog.h">
       <Filter>MiniEngine\dbg</Filter>
@@ -817,10 +817,10 @@
       <Filter>cpp&amp;h\InGame</Filter>
     </ClInclude>
     <ClInclude Include="Result\GameClearScene.h">
-      <Filter>cpp&amp;h\Result</Filter>
+      <Filter>cpp&amp;h\InGame\Result</Filter>
     </ClInclude>
     <ClInclude Include="Result\GameOverScene.h">
-      <Filter>cpp&amp;h\Result</Filter>
+      <Filter>cpp&amp;h\InGame\Result</Filter>
     </ClInclude>
     <ClInclude Include="Sound\tkSoundEngine.h">
       <Filter>cpp&amp;h\Sound</Filter>
