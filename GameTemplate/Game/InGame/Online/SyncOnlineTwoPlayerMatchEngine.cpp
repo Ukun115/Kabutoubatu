@@ -465,7 +465,7 @@ namespace nsKabutoubatu
 	void SyncOnlineTwoPlayerMatchEngine::disconnectReturn(void)
 	{
 		// 切断済みにする。
-		ONLINE_LOG("disconnectReturn");
+		ONLINE_LOG("disconnectReturn\n");
 		m_state = State::DISCONNECTED;
 	}
 
@@ -498,7 +498,7 @@ namespace nsKabutoubatu
 			// サーバーへの接続エラーが発生したので、切断済みにする。
 
 			//ONLINE_LOG_W(errorString.toString());
-			ONLINE_LOG("connectReturn");
+			ONLINE_LOG("connectReturn\n");
 			m_state = State::DISCONNECTED;
 			return;
 		}
@@ -509,7 +509,7 @@ namespace nsKabutoubatu
 	void SyncOnlineTwoPlayerMatchEngine::connectionErrorReturn(int errorCode)
 	{
 		// 接続に失敗したので、切断済みにする。
-		ONLINE_LOG("connectionErrorReturn");
+		ONLINE_LOG("connectionErrorReturn errorCode = %d\n", errorCode);
 		m_state = State::DISCONNECTED;
 	}
 
