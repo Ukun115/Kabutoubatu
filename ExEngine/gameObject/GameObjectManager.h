@@ -105,6 +105,7 @@ public:
 	void DeleteGameObject( IGameObject* gameObject )
 	{
 		if (gameObject != nullptr) {
+			gameObject->OnDestroy();
 			gameObject->Dead();
 		}
 	}

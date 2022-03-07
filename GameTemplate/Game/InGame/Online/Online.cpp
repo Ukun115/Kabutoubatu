@@ -105,7 +105,7 @@ namespace nsKabutoubatu
 		m_onlineUpdateSpeed->SetIsOnline(true);
 	}
 
-	GamePad& Online::GetPlayerGamePad(int no)
+	GamePad& Online::GetPlayerGamePad(const int no)
 	{
 		return m_onlineTwoPlayerMatchEngine->GetGamePad(no);
 	};
