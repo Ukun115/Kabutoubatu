@@ -139,6 +139,7 @@ namespace nsKabutoubatu
 						m_lastAttackPlayer = playerNum;
 						//–î‚ğÁ‚·
 						DeleteGO(m_arrow);
+						m_arrow = nullptr;
 
 						return true;
 					}

@@ -52,6 +52,7 @@ namespace nsKabutoubatu
 		if (m_fade != nullptr && m_fade->GetNowState() == 2)
 		{
 			DeleteGO(m_fade);
+			m_fade = nullptr;
 		}
 
 		if (m_firstBossBGM == nullptr)

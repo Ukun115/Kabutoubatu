@@ -66,6 +66,7 @@ namespace nsKabutoubatu
 			//オンラインのインスタンスを削除する
 			m_online = FindGO<Online>(nsStdafx::ONLINE_NAME);
 			DeleteGO(m_online);
+			m_online = nullptr;
 
 			//ゲームシーンのインスタンスを検索
 			m_gameScene = FindGO<GameScene>(nsStdafx::GAMESCENE_NAME);

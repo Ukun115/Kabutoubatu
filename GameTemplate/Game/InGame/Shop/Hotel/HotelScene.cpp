@@ -115,6 +115,7 @@ namespace nsKabutoubatu
 		if (m_fade[0] != nullptr && m_fade[0]->GetNowState() == 2)
 		{
 			DeleteGO(m_fade[0]);
+			m_fade[0] = nullptr;
 		}
 
 		if (m_gameScene == nullptr)

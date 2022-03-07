@@ -155,7 +155,7 @@ namespace nsKabutoubatu
 			//もぐらが死んだとき、
 			if (m_mole[weakEnemyNum]->IsDead() || m_mole[weakEnemyNum]->GetFall())
 			{
-				//DeleteGO(m_mole[weakEnemyNum]);
+				m_mole[weakEnemyNum] = nullptr;
 				//新しいもぐらを生成させる。
 				m_mole[weakEnemyNum] = NewGO<Mole>();
 				//ゲームに参加しているプレイヤーの人数を渡しておく。
@@ -180,7 +180,7 @@ namespace nsKabutoubatu
 			//スライムが死んだとき、
 			if (m_slime[weakEnemyNum]->IsDead() || m_slime[weakEnemyNum]->GetFall())
 			{
-				//DeleteGO(m_slime[weakEnemyNum]);
+				m_slime[weakEnemyNum] = nullptr;
 				//新しいスライムを生成させる。
 				m_slime[weakEnemyNum] = NewGO<Slime>();
 				//ゲームに参加しているプレイヤーの人数を渡しておく。
@@ -205,7 +205,7 @@ namespace nsKabutoubatu
 			//とげスライムが死んだとき、
 			if (m_needleSlime[weakEnemyNum]->IsDead()|| m_needleSlime[weakEnemyNum]->GetFall())
 			{
-				//DeleteGO(m_needleSlime[weakEnemyNum]);
+				m_needleSlime[weakEnemyNum] = nullptr;
 				//新しいとげスライムを生成させる。
 				m_needleSlime[weakEnemyNum] = NewGO<NeedleSlime>();
 				//ゲームに参加しているプレイヤーの人数を渡しておく。

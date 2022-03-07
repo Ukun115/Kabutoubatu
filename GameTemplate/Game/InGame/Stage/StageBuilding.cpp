@@ -114,6 +114,7 @@ namespace nsKabutoubatu
 				SceneTransition();
 
 				DeleteGO(m_fade);
+				m_fade = nullptr;
 			}
 		}
 	}
