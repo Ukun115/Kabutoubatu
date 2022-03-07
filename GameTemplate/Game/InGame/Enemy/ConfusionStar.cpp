@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "ConfusionStar.h"
 #include "../Camera/PlayerCamera.h"
+#include "../Online/OnlineUpdateSpeed.h"
 
 namespace nsKabutoubatu
 {
@@ -12,6 +13,8 @@ namespace nsKabutoubatu
 	{
 		//敵の頭の上
 		m_pos.y += 200.0f;
+
+		m_onlineUpdateSpeed = FindGO< OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
 
 		m_model = NewGO<SkinModelRender>();
 		m_model->SetShadowCaster(false);
@@ -40,8 +43,6 @@ namespace nsKabutoubatu
 	{
 		//混乱モデル削除
 		DeleteGO(m_model);
-		//混乱効果音を削除
-		DeleteGO(m_sound);
 	}
 
 	void ConfusionStar::Update()
@@ -53,7 +54,7 @@ namespace nsKabutoubatu
 	//回転するメソッド
 	void ConfusionStar::Rotation()
 	{
-		m_rotationAngle -= 0.05f;
+		m_rotationAngle -= 0.05f * m_onlineUpdateSpeed->GetSpeed();
 		//回転を更新
 		m_rot.SetRotation(Vector3::AxisY, m_rotationAngle);
 		m_model->SetRotation(m_rot);

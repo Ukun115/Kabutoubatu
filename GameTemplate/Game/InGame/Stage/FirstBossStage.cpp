@@ -45,8 +45,6 @@ namespace nsKabutoubatu
 		DeleteGO(m_stageModel);
 		//ボス敵を削除
 		DeleteGO(m_firstBoss);
-		//ファーストボスBGMを削除
-		DeleteGO(m_firstBossBGM);
 	}
 
 	void FirstBossStage::Update()

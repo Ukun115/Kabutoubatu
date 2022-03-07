@@ -487,6 +487,9 @@
     <ClCompile Include="InGame\AccompanyAI\AccompanyAIAnimation.cpp">
       <Filter>cpp&amp;h\InGame\AcompanyAI</Filter>
     </ClCompile>
+    <ClCompile Include="InGame\Online\OnlineUpdateSpeed.cpp">
+      <Filter>cpp&amp;h\InGame\Online</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\MiniEngine\GraphicsEngine.h">
@@ -907,5 +910,8 @@
       <Filter>cpp&amp;h\InGame\AcompanyAI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\MiniEngine\dbg\MyAssert.h" />
+    <ClInclude Include="InGame\Online\OnlineUpdateSpeed.h">
+      <Filter>cpp&amp;h\InGame\Online</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

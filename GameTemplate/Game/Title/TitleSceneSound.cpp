@@ -7,25 +7,25 @@
 
 namespace nsKabutoubatu
 {
+	namespace nsTitleSceneSound
+	{
+		const float GINGLE_SOUND_VOLUME = 0.5f;
+	}
+
 	bool TitleSceneSound::Start()
 	{
 		//タイトルジングルサウンドの初期化
-		m_titleSceneSound = NewGO<SoundSource>();
-		m_titleSceneSound->Init(L"Assets/sound/TitleGingle.wav");
-		m_titleSceneSound->SetVolume(0.5f);
-		m_titleSceneSound->Play(false);	//ワンショット再生
+		m_gingleSound = NewGO<SoundSource>();
+		m_gingleSound->Init(L"Assets/sound/TitleGingle.wav");
+		m_gingleSound->SetVolume(nsTitleSceneSound::GINGLE_SOUND_VOLUME);
+		m_gingleSound->Play(false);	//ワンショット再生
 
 		return true;
 	}
 
 	TitleSceneSound::~TitleSceneSound()
 	{
-		//ジングルサウンドを削除
-		DeleteGO(m_titleSceneSound);
-		//選択サウンドを削除
-		DeleteGO(m_selectSound);
-		//決定サウンドを削除
-		DeleteGO(m_decideSound);
+
 	}
 
 	void TitleSceneSound::Update()

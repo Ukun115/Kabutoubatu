@@ -7,6 +7,7 @@
 #include "../Game/InGame/Pause.h"
 #include "Utilities/GameUpdateStop.h"
 #include "ResourceBankManager.h"
+#include "InGame/Online/OnlineUpdateSpeed.h"
 
 
 /// <summary>
@@ -30,7 +31,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームの初期化。
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, TEXT("ふたりで!! かぶとうばつ"));
 
-
 	// 標準入出力コンソールの初期化
 	//コマンドプロンプトを起動
 	if (m_fpsValueOn)
@@ -46,14 +46,15 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	GameObjectManager::CreateInstance();
 	//フィジクスワールドのインスタンスを作成する。
 	PhysicsWorld::CreateInstance();
-	//リソースマネージャのインスタンスを作成
+	//リソースマネージャのインスタンスを作成する。
 	ResourceBankManager::CreateInstance();
-	//プリロード
+	//プリロードを実行
 	PreLoad();
 	//エフェクトエンジンのインスタンスを作成する。
 	EffectEngine::CreateInstance();
 	//サウンドエンジンのインスタンスを作成する。
 	SoundEngine::CreateInstance();
+	//サウンドエンジンの初期化を行う。
 	SoundEngine::GetInstance()->Init();
 
 	//ライト
@@ -68,15 +69,18 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ZPrepass用のレンダリングターゲットを初期化
 	renderingEngine->Init();
 
-	//ポーズ
+	//ポーズ機能
 	nsKabutoubatu::Pause* pause = NewGO<nsKabutoubatu::Pause>(nsStdafx::PRIORITY_0,nsStdafx::PAUSE_NAME);
+
+	//オンラインの変数を管理しているクラス
+	nsKabutoubatu::OnlineUpdateSpeed* m_onlineUpdateSpeed = NewGO<nsKabutoubatu::OnlineUpdateSpeed>(nsStdafx::PRIORITY_0,nsStdafx::ONLINEUPDATESPEED_NAME);
 
 	//ゲーム時間の進行をストップさせるクラス
 	nsKabutoubatu::GameUpdateStop* gameUpdateStop = NewGO<nsKabutoubatu::GameUpdateStop>(nsStdafx::PRIORITY_0,nsStdafx::GAMEUPDATESTOP_NAME);
 	enum enMoveTarget
 	{
-		enUI,
-		enCameraMove
+		enUIMove,			//UI移動のみ
+		enCameraMove	//カメラ移動のみ
 	};
 
 	//ストップウォッチを生成する
@@ -87,7 +91,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//////////////////////////////////////
 	auto& renderContext = g_graphicsEngine->GetRenderContext();
 
-	//タイトルシーン
+	//タイトルシーンを生成
 	NewGO<nsKabutoubatu::TitleScene>(nsStdafx::PRIORITY_0,nsStdafx::TITLESCENE_NAME);
 
 	// ここからゲームループ。
@@ -120,8 +124,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		{
 			switch (gameUpdateStop->GetMoveTarget())
 			{
-			//UIのみを動かす
-			case enUI:
+			//UI移動のみを動かす
+			case enUIMove:
 				//ゲームオブジェクトマネージャーのUI演出更新。
 				GameObjectManager::GetInstance()->ExecuteUiUpdate();
 

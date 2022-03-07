@@ -11,6 +11,7 @@ namespace nsKabutoubatu
 	class Player;		//プレイヤー
 	class PlayerStatus;	//プレイヤーステータス
 	class PlayerCamera;	//プレイヤーカメラ
+	class OnlineUpdateSpeed;
 
 	class DropCoin : public IGameObject
 	{
@@ -32,6 +33,7 @@ namespace nsKabutoubatu
 		SkinModelRender* m_coin = nullptr;	//モデル
 		PlayerCamera* m_playerCamera = nullptr;
 		SoundSource* m_coinSound = nullptr;
+		OnlineUpdateSpeed* m_onlineUpdateSpeed = nullptr;
 
 		int m_playerNum = enPlayerNum;
 		Vector3 m_pos;		//位置

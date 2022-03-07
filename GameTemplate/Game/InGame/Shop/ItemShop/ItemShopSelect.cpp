@@ -52,23 +52,6 @@ namespace nsKabutoubatu
 	{
 		//アイテムショップ選択文字クラスを削除
 		DeleteGO(m_itemShopSelectFont);
-		//サウンド削除
-		if (m_selectSound != nullptr)
-		{
-			DeleteGO(m_selectSound);
-		}
-		if (m_cantDecideSound != nullptr)
-		{
-			DeleteGO(m_cantDecideSound);
-		}
-		if (m_buySound != nullptr)
-		{
-			DeleteGO(m_buySound);
-		}
-		if (m_decideSound != nullptr)
-		{
-			DeleteGO(m_decideSound);
-		}
 		//PushXアイテム説明ボタン画像を削除
 		DeleteGO(m_pushXSprite);
 		//アイテム説明背景画像
@@ -86,18 +69,37 @@ namespace nsKabutoubatu
 			CursorMove(enBuy, enEnter);
 
 			//Aボタンが押されたら、
-			if (m_playerGamePad->IsTrigger(enButtonA)&& !m_ItemSetumeiSprite->IsActive())
+			if (m_playerGamePad)
 			{
-				//購入モード、売却モード、店から出るスタンバイ状態のいずれかに行く。
-				NextState();
-				//初期値に戻しておく
-				m_nowShoppingMode = 0;
+				if (m_playerGamePad->IsTrigger(enButtonA) && !m_ItemSetumeiSprite->IsActive())
+				{
+					//購入モード、売却モード、店から出るスタンバイ状態のいずれかに行く。
+					NextState();
+					//初期値に戻しておく
+					m_nowShoppingMode = 0;
 
-				//決定サウンドの初期化
-				m_decideSound = NewGO<SoundSource>();
-				m_decideSound->Init(L"Assets/sound/Decide.wav");
-				m_decideSound->SetVolume(0.5f);
-				m_decideSound->Play(false);	//ワンショット再生
+					//決定サウンドの初期化
+					m_decideSound = NewGO<SoundSource>();
+					m_decideSound->Init(L"Assets/sound/Decide.wav");
+					m_decideSound->SetVolume(0.5f);
+					m_decideSound->Play(false);	//ワンショット再生
+				}
+			}
+			else
+			{
+				if (g_pad[m_playerNum]->IsTrigger(enButtonA) && !m_ItemSetumeiSprite->IsActive())
+				{
+					//購入モード、売却モード、店から出るスタンバイ状態のいずれかに行く。
+					NextState();
+					//初期値に戻しておく
+					m_nowShoppingMode = 0;
+
+					//決定サウンドの初期化
+					m_decideSound = NewGO<SoundSource>();
+					m_decideSound->Init(L"Assets/sound/Decide.wav");
+					m_decideSound->SetVolume(0.5f);
+					m_decideSound->Play(false);	//ワンショット再生
+				}
 			}
 
 			break;
@@ -108,27 +110,54 @@ namespace nsKabutoubatu
 			//選択カーソル移動
 			CursorMove(enFirstItem, enBackState);
 
-			//Aボタンが押されたら、
-			if (m_playerGamePad->IsTrigger(enButtonA)&& !m_ItemSetumeiSprite->IsActive())
+			if (m_playerGamePad)
 			{
-				//購入
-				BuySelect();
-			}
-
-			//もしXボタンが押されたなら、
-			if (m_playerGamePad->IsTrigger(enButtonX) && m_nowShoppingMode != enBackState)
-			{
-				//表示されているとき、
-				if (m_ItemSetumeiSprite->IsActive())
+				//Aボタンが押されたら、
+				if (m_playerGamePad->IsTrigger(enButtonA) && !m_ItemSetumeiSprite->IsActive())
 				{
-					//非表示にさせる
-					m_ItemSetumeiSprite->Deactivate();
+					//購入
+					BuySelect();
 				}
-				//表示されていないとき、
-				else
+				//もしXボタンが押されたなら、
+				if (m_playerGamePad->IsTrigger(enButtonX) && m_nowShoppingMode != enBackState)
 				{
-					//表示させる
-					m_ItemSetumeiSprite->Activate();
+					//表示されているとき、
+					if (m_ItemSetumeiSprite->IsActive())
+					{
+						//非表示にさせる
+						m_ItemSetumeiSprite->Deactivate();
+					}
+					//表示されていないとき、
+					else
+					{
+						//表示させる
+						m_ItemSetumeiSprite->Activate();
+					}
+				}
+			}
+			else
+			{
+				//Aボタンが押されたら、
+				if (g_pad[m_playerNum]->IsTrigger(enButtonA) && !m_ItemSetumeiSprite->IsActive())
+				{
+					//購入
+					BuySelect();
+				}
+				//もしXボタンが押されたなら、
+				if (g_pad[m_playerNum]->IsTrigger(enButtonX) && m_nowShoppingMode != enBackState)
+				{
+					//表示されているとき、
+					if (m_ItemSetumeiSprite->IsActive())
+					{
+						//非表示にさせる
+						m_ItemSetumeiSprite->Deactivate();
+					}
+					//表示されていないとき、
+					else
+					{
+						//表示させる
+						m_ItemSetumeiSprite->Activate();
+					}
 				}
 			}
 
@@ -139,27 +168,54 @@ namespace nsKabutoubatu
 			//選択カーソル移動
 			CursorMove(enStatusUpItem1, enBack);
 
-			//Aボタンが押されたら
-			if (m_playerGamePad->IsTrigger(enButtonA)&& !m_ItemSetumeiSprite->IsActive())
+			if (m_playerGamePad)
 			{
-				//売却
-				SoldSelect();
-			}
-
-			//もしXボタンが押されたなら、
-			if (m_playerGamePad->IsTrigger(enButtonX)&& m_nowShoppingMode!= enBack)
-			{
-				//表示されているとき、
-				if (m_ItemSetumeiSprite->IsActive())
+				//Aボタンが押されたら
+				if (m_playerGamePad->IsTrigger(enButtonA) && !m_ItemSetumeiSprite->IsActive())
 				{
-					//非表示にさせる
-					m_ItemSetumeiSprite->Deactivate();
+					//売却
+					SoldSelect();
 				}
-				//表示されていないとき、
-				else
+				//もしXボタンが押されたなら、
+				if (m_playerGamePad->IsTrigger(enButtonX) && m_nowShoppingMode != enBack)
 				{
-					//表示させる
-					m_ItemSetumeiSprite->Activate();
+					//表示されているとき、
+					if (m_ItemSetumeiSprite->IsActive())
+					{
+						//非表示にさせる
+						m_ItemSetumeiSprite->Deactivate();
+					}
+					//表示されていないとき、
+					else
+					{
+						//表示させる
+						m_ItemSetumeiSprite->Activate();
+					}
+				}
+			}
+			else
+			{
+				//Aボタンが押されたら
+				if (g_pad[m_playerNum]->IsTrigger(enButtonA) && !m_ItemSetumeiSprite->IsActive())
+				{
+					//売却
+					SoldSelect();
+				}
+				//もしXボタンが押されたなら、
+				if (g_pad[m_playerNum]->IsTrigger(enButtonX) && m_nowShoppingMode != enBack)
+				{
+					//表示されているとき、
+					if (m_ItemSetumeiSprite->IsActive())
+					{
+						//非表示にさせる
+						m_ItemSetumeiSprite->Deactivate();
+					}
+					//表示されていないとき、
+					else
+					{
+						//表示させる
+						m_ItemSetumeiSprite->Activate();
+					}
 				}
 			}
 
@@ -179,42 +235,85 @@ namespace nsKabutoubatu
 	void ItemShopSelect::CursorMove(const int selectMin, const int selectMax)
 	{
 		//下入力
-		if (m_playerGamePad->IsTrigger(enButtonDown) && !m_ItemSetumeiSprite->IsActive()) {
-			//現在セレクトされているのが「出る」だったら、
-			if (m_nowShoppingMode == selectMax) {
-				//選択を一番上に戻す
-				m_nowShoppingMode = selectMin;
-			}
-			else
-			{
-				//一つ下にずらす
-				m_nowShoppingMode += 1;
-			}
+		if (m_playerGamePad)
+		{
+			if (m_playerGamePad->IsTrigger(enButtonDown) && !m_ItemSetumeiSprite->IsActive()) {
+				//現在セレクトされているのが「出る」だったら、
+				if (m_nowShoppingMode == selectMax) {
+					//選択を一番上に戻す
+					m_nowShoppingMode = selectMin;
+				}
+				else
+				{
+					//一つ下にずらす
+					m_nowShoppingMode += 1;
+				}
 
-			//選択サウンドの初期化
-			m_selectSound = NewGO<SoundSource>();
-			m_selectSound->Init(L"Assets/sound/Select.wav");
-			m_selectSound->SetVolume(0.5f);
-			m_selectSound->Play(false);	//ワンショット再生
+				//選択サウンドの初期化
+				m_selectSound = NewGO<SoundSource>();
+				m_selectSound->Init(L"Assets/sound/Select.wav");
+				m_selectSound->SetVolume(0.5f);
+				m_selectSound->Play(false);	//ワンショット再生
+			}
+			//上入力
+			if (m_playerGamePad->IsTrigger(enButtonUp) && !m_ItemSetumeiSprite->IsActive()) {
+				//現在セレクトされているのが「出る」だったら、
+				if (m_nowShoppingMode == selectMin) {
+					//選択を一番下に戻す
+					m_nowShoppingMode = selectMax;
+				}
+				else
+				{
+					//一つ上にずらす
+					m_nowShoppingMode -= 1;
+				}
+
+				//選択サウンドの初期化
+				m_selectSound = NewGO<SoundSource>();
+				m_selectSound->Init(L"Assets/sound/Select.wav");
+				m_selectSound->SetVolume(0.5f);
+				m_selectSound->Play(false);	//ワンショット再生
+			}
 		}
-		//上入力
-		if (m_playerGamePad->IsTrigger(enButtonUp) && !m_ItemSetumeiSprite->IsActive()) {
-			//現在セレクトされているのが「出る」だったら、
-			if (m_nowShoppingMode == selectMin) {
-				//選択を一番下に戻す
-				m_nowShoppingMode = selectMax;
-			}
-			else
-			{
-				//一つ上にずらす
-				m_nowShoppingMode -= 1;
-			}
+		else
+		{
+			if (g_pad[m_playerNum]->IsTrigger(enButtonDown) && !m_ItemSetumeiSprite->IsActive()) {
+				//現在セレクトされているのが「出る」だったら、
+				if (m_nowShoppingMode == selectMax) {
+					//選択を一番上に戻す
+					m_nowShoppingMode = selectMin;
+				}
+				else
+				{
+					//一つ下にずらす
+					m_nowShoppingMode += 1;
+				}
 
-			//選択サウンドの初期化
-			m_selectSound = NewGO<SoundSource>();
-			m_selectSound->Init(L"Assets/sound/Select.wav");
-			m_selectSound->SetVolume(0.5f);
-			m_selectSound->Play(false);	//ワンショット再生
+				//選択サウンドの初期化
+				m_selectSound = NewGO<SoundSource>();
+				m_selectSound->Init(L"Assets/sound/Select.wav");
+				m_selectSound->SetVolume(0.5f);
+				m_selectSound->Play(false);	//ワンショット再生
+			}
+			//上入力
+			if (g_pad[m_playerNum]->IsTrigger(enButtonUp) && !m_ItemSetumeiSprite->IsActive()) {
+				//現在セレクトされているのが「出る」だったら、
+				if (m_nowShoppingMode == selectMin) {
+					//選択を一番下に戻す
+					m_nowShoppingMode = selectMax;
+				}
+				else
+				{
+					//一つ上にずらす
+					m_nowShoppingMode -= 1;
+				}
+
+				//選択サウンドの初期化
+				m_selectSound = NewGO<SoundSource>();
+				m_selectSound->Init(L"Assets/sound/Select.wav");
+				m_selectSound->SetVolume(0.5f);
+				m_selectSound->Play(false);	//ワンショット再生
+			}
 		}
 	}
 

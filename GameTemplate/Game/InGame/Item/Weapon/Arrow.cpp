@@ -3,6 +3,7 @@
 /// </summary>
 #include "stdafx.h"
 #include "Arrow.h"
+#include "../../Online/OnlineUpdateSpeed.h"
 
 namespace nsKabutoubatu
 {
@@ -13,6 +14,8 @@ namespace nsKabutoubatu
 
 	bool Arrow::Start()
 	{
+		m_onlineUpdateSpeed = FindGO<OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
+
 		//正規化
 		m_moveSpeed.Normalize();
 		//地面と平行にしか移動しないためyを0にする。
@@ -27,7 +30,7 @@ namespace nsKabutoubatu
 		m_arrowModel->Init("Arrow");
 		//モデルの位置を更新
 		m_arrowModel->SetPosition(m_pos);
-		m_moveSpeed *= nsArrow::ARROW_SPEED_POWER;
+		m_moveSpeed *= nsArrow::ARROW_SPEED_POWER * m_onlineUpdateSpeed->GetSpeed();
 
 		//矢の向きをセット
 		//回転角度を求める
@@ -49,7 +52,7 @@ namespace nsKabutoubatu
 	void Arrow::Update()
 	{
 		m_deleteTimer++;
-		if (m_deleteTimer > 120)
+		if (m_deleteTimer > 120 / m_onlineUpdateSpeed->GetSpeed())
 		{
 			DeleteGO(this);
 		}

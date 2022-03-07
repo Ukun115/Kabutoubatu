@@ -6,6 +6,7 @@
 #include "../../Player/Player.h"
 #include "../../Player/PlayerStatus.h"
 #include "../DropCoin.h"
+#include "../../Online/OnlineUpdateSpeed.h"
 
 namespace nsKabutoubatu
 {
@@ -13,6 +14,8 @@ namespace nsKabutoubatu
 	{
 		//HPを設定
 		m_hitPoint = 4;
+
+		m_onlineUpdateSpeed = FindGO<OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
 
 		//プレイヤーのインスタンスを検索
 		for (int playerNum = enPlayer1; playerNum < GetPlayerNum(); playerNum++)
@@ -56,6 +59,7 @@ namespace nsKabutoubatu
 			m_hitGroundNormal
 		);
 
+		m_model->SetAnimationSpeed(m_onlineUpdateSpeed->GetSpeed());
 		//キョロキョロアニメーション再生
 		m_model->PlayAnimation(enKyoroKyoro);
 	}
@@ -172,7 +176,7 @@ namespace nsKabutoubatu
 			//敵を倒した数を+1する
 			m_playerStatus[GetLastKillPlayer()]->AddEnemyKillNum();
 			//死亡アニメーション再生
-			m_model->SetAnimationSpeed(1.5f);
+			m_model->SetAnimationSpeed(1.5f * m_onlineUpdateSpeed->GetSpeed());
 			m_model->PlayAnimation(enDeath);
 
 			m_moveSpeed /= 10000.0f;
@@ -228,8 +232,8 @@ namespace nsKabutoubatu
 		//正規化
 		m_moveSpeed.Normalize();
 		//移動速度をかける
-		m_moveSpeed *= 5.0f;
+		m_moveSpeed *= 5.0f * m_onlineUpdateSpeed->GetSpeed();
 
-		m_moveSpeed.y = m_jumpPower;
+		m_moveSpeed.y = m_jumpPower * m_onlineUpdateSpeed->GetSpeed();
 	}
 }

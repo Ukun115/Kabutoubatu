@@ -6,11 +6,14 @@
 #include "../Player/Player.h"
 #include "../Player/PlayerStatus.h"
 #include "../Camera/PlayerCamera.h"
+#include "../Online/OnlineUpdateSpeed.h"
 
 namespace nsKabutoubatu
 {
 	bool DropCoin::Start()
 	{
+		m_onlineUpdateSpeed = FindGO<OnlineUpdateSpeed> (nsStdafx::ONLINEUPDATESPEED_NAME);
+
 		//プレイヤーのインスタンスを検索
 		for (int playerNum = enPlayer1; playerNum < m_playerNum; playerNum++)
 		{
@@ -30,9 +33,6 @@ namespace nsKabutoubatu
 	{
 		//モデルを破棄
 		DeleteGO(m_coin);
-
-		//音削除
-		DeleteGO(m_coinSound);
 	}
 
 	void DropCoin::Update()
@@ -64,8 +64,8 @@ namespace nsKabutoubatu
 	//コインがバウンドする処理メソッド
 	void DropCoin::Bound()
 	{
-		m_pos.y += m_boundPower * g_gameTime->GetFrameDeltaTime();
-		m_boundPower -= 980.0f * g_gameTime->GetFrameDeltaTime();
+		m_pos.y += m_boundPower * g_gameTime->GetFrameDeltaTime() * m_onlineUpdateSpeed->GetSpeed();
+		m_boundPower -= 980.0f * g_gameTime->GetFrameDeltaTime() * m_onlineUpdateSpeed->GetSpeed();
 
 		//地面に落ちた時、
 		if (m_boundStartPosY > m_pos.y)

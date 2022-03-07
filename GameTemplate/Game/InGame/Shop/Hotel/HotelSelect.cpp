@@ -31,23 +31,6 @@ namespace nsKabutoubatu
 	{
 		//ホテル選択文字クラスを削除
 		DeleteGO(m_hotelSelectFont);
-		//サウンド削除
-		if (m_selectSound != nullptr)
-		{
-			DeleteGO(m_selectSound);
-		}
-		if (m_cantDecideSound != nullptr)
-		{
-			DeleteGO(m_cantDecideSound);
-		}
-		if (m_decideSound != nullptr)
-		{
-			DeleteGO(m_decideSound);
-		};
-		if (m_buySound != nullptr)
-		{
-			DeleteGO(m_buySound);
-		};
 	}
 
 	void HotelSelect::Update()
@@ -61,12 +44,25 @@ namespace nsKabutoubatu
 			CursorMove(enStay, enEnter);
 
 			//Aボタンが押されたら、
-			if (m_playerGamePad->IsTrigger(enButtonA))
+			if (m_playerGamePad)
 			{
-				//泊まる状態、店から出るスタンバイ状態のいずれかに行く。
-				NextState();
-				//初期値に戻しておく
-				m_nowHotelMode = 0;
+				if (m_playerGamePad->IsTrigger(enButtonA))
+				{
+					//泊まる状態、店から出るスタンバイ状態のいずれかに行く。
+					NextState();
+					//初期値に戻しておく
+					m_nowHotelMode = 0;
+				}
+			}
+			else
+			{
+				if (g_pad[m_playerNum]->IsTrigger(enButtonA))
+				{
+					//泊まる状態、店から出るスタンバイ状態のいずれかに行く。
+					NextState();
+					//初期値に戻しておく
+					m_nowHotelMode = 0;
+				}
 			}
 
 			break;
@@ -90,42 +86,85 @@ namespace nsKabutoubatu
 	void HotelSelect::CursorMove(const int selectMin, const int selectMax)
 	{
 		//下入力
-		if (m_playerGamePad->IsTrigger(enButtonDown)) {
-			//現在セレクトされているのが「出る」だったら、
-			if (m_nowHotelMode == selectMax) {
-				//選択を一番上に戻す
-				m_nowHotelMode = selectMin;
-			}
-			else
-			{
-				//一つ下にずらす
-				m_nowHotelMode += 1;
-			}
+		if (m_playerGamePad)
+		{
+			if (m_playerGamePad->IsTrigger(enButtonDown)) {
+				//現在セレクトされているのが「出る」だったら、
+				if (m_nowHotelMode == selectMax) {
+					//選択を一番上に戻す
+					m_nowHotelMode = selectMin;
+				}
+				else
+				{
+					//一つ下にずらす
+					m_nowHotelMode += 1;
+				}
 
-			//選択サウンドの初期化
-			m_selectSound = NewGO<SoundSource>();
-			m_selectSound->Init(L"Assets/sound/Select.wav");
-			m_selectSound->SetVolume(0.5f);
-			m_selectSound->Play(false);	//ワンショット再生
+				//選択サウンドの初期化
+				m_selectSound = NewGO<SoundSource>();
+				m_selectSound->Init(L"Assets/sound/Select.wav");
+				m_selectSound->SetVolume(0.5f);
+				m_selectSound->Play(false);	//ワンショット再生
+			}
+			//上入力
+			if (m_playerGamePad->IsTrigger(enButtonUp)) {
+				//現在セレクトされているのが「出る」だったら、
+				if (m_nowHotelMode == selectMin) {
+					//選択を一番下に戻す
+					m_nowHotelMode = selectMax;
+				}
+				else
+				{
+					//一つ上にずらす
+					m_nowHotelMode -= 1;
+				}
+
+				//選択サウンドの初期化
+				m_selectSound = NewGO<SoundSource>();
+				m_selectSound->Init(L"Assets/sound/Select.wav");
+				m_selectSound->SetVolume(0.5f);
+				m_selectSound->Play(false);	//ワンショット再生
+			}
 		}
-		//上入力
-		if (m_playerGamePad->IsTrigger(enButtonUp)) {
-			//現在セレクトされているのが「出る」だったら、
-			if (m_nowHotelMode == selectMin) {
-				//選択を一番下に戻す
-				m_nowHotelMode = selectMax;
-			}
-			else
-			{
-				//一つ上にずらす
-				m_nowHotelMode -= 1;
-			}
+		else
+		{
+			if (g_pad[m_playerNum]->IsTrigger(enButtonDown)) {
+				//現在セレクトされているのが「出る」だったら、
+				if (m_nowHotelMode == selectMax) {
+					//選択を一番上に戻す
+					m_nowHotelMode = selectMin;
+				}
+				else
+				{
+					//一つ下にずらす
+					m_nowHotelMode += 1;
+				}
 
-			//選択サウンドの初期化
-			m_selectSound = NewGO<SoundSource>();
-			m_selectSound->Init(L"Assets/sound/Select.wav");
-			m_selectSound->SetVolume(0.5f);
-			m_selectSound->Play(false);	//ワンショット再生
+				//選択サウンドの初期化
+				m_selectSound = NewGO<SoundSource>();
+				m_selectSound->Init(L"Assets/sound/Select.wav");
+				m_selectSound->SetVolume(0.5f);
+				m_selectSound->Play(false);	//ワンショット再生
+			}
+			//上入力
+			if (g_pad[m_playerNum]->IsTrigger(enButtonUp)) {
+				//現在セレクトされているのが「出る」だったら、
+				if (m_nowHotelMode == selectMin) {
+					//選択を一番下に戻す
+					m_nowHotelMode = selectMax;
+				}
+				else
+				{
+					//一つ上にずらす
+					m_nowHotelMode -= 1;
+				}
+
+				//選択サウンドの初期化
+				m_selectSound = NewGO<SoundSource>();
+				m_selectSound->Init(L"Assets/sound/Select.wav");
+				m_selectSound->SetVolume(0.5f);
+				m_selectSound->Play(false);	//ワンショット再生
+			}
 		}
 	}
 

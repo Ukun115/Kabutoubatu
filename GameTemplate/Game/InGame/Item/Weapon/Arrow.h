@@ -5,10 +5,13 @@
 
 namespace nsKabutoubatu
 {
+	class OnlineUpdateSpeed;
+
 	class Arrow : public IGameObject
 	{
 	private:
 		SkinModelRender* m_arrowModel = nullptr;	//ƒ‚ƒfƒ‹
+		OnlineUpdateSpeed* m_onlineUpdateSpeed = nullptr;
 
 		Vector3 m_pos;			//ˆÊ’u
 		Quaternion m_rot;		//‰ñ“]

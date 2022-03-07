@@ -6,6 +6,7 @@
 #include "../Player/Player.h"
 #include "../Player/PlayerStatus.h"
 #include "ConfusionStar.h"
+#include "../Online/OnlineUpdateSpeed.h"
 
 namespace nsKabutoubatu
 {
@@ -55,6 +56,9 @@ namespace nsKabutoubatu
 
 	void FirstBoss::SubStart()
 	{
+
+		m_onlineUpdateSpeed = FindGO< OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
+
 		//HPを設定
 		m_hitPoint = 40;
 		//攻撃を受ける範囲
@@ -120,6 +124,8 @@ namespace nsKabutoubatu
 		//正面ベクトルを計算
 		m_forward = Vector3::AxisZ;
 		m_rot.Apply(m_forward);
+
+		m_model->SetAnimationSpeed(m_onlineUpdateSpeed->GetSpeed());
 	}
 
 	FirstBoss::~FirstBoss()
@@ -153,7 +159,7 @@ namespace nsKabutoubatu
 					m_sound[enLandingSound]->Play(false);
 				}
 				m_idleTimer++;
-				if (m_idleTimer > 60)
+				if (m_idleTimer > 60/ m_onlineUpdateSpeed->GetSpeed())
 				{
 					//通常状態にする
 					m_nowState = enNormalState;
@@ -186,9 +192,9 @@ namespace nsKabutoubatu
 						m_sound[enChargeSound]->Play(false);
 					}
 					m_moveStopTimer++;
-					if (m_moveStopTimer >= 120)
+					if (m_moveStopTimer >= 120/ m_onlineUpdateSpeed->GetSpeed())
 					{
-						if (m_moveStopTimer == 120)
+						if (m_moveStopTimer == 120/ m_onlineUpdateSpeed->GetSpeed())
 						{
 							m_moveSpeed *= 20.0f;
 
@@ -229,12 +235,12 @@ namespace nsKabutoubatu
 						if (m_confusionStar != nullptr)
 						{
 							m_confusionTimer++;
-							if (m_confusionTimer == 300)
+							if (m_confusionTimer == 300/ m_onlineUpdateSpeed->GetSpeed())
 							{
 								//歩きアニメーションにする
 								m_animState = enWalkAnimation;
 							}
-							if (m_confusionTimer > 500)
+							if (m_confusionTimer > 500/ m_onlineUpdateSpeed->GetSpeed())
 							{
 								//混乱モデルを削除
 								DeleteGO(m_confusionStar);
@@ -266,7 +272,7 @@ namespace nsKabutoubatu
 						m_sound[enAttackHornsUpSound]->Play(false);
 					}
 					m_moveStopTimer++;
-					if (m_moveStopTimer >= 60)
+					if (m_moveStopTimer >= 60/ m_onlineUpdateSpeed->GetSpeed())
 					{
 						//アニメーションを角上げ攻撃に切り替え
 						m_animState = enAttackHornsUpAnimation;
@@ -274,14 +280,14 @@ namespace nsKabutoubatu
 						if (IsAttackRangeIn())
 						{
 							//1ボスの正面に突き飛ばす
-							m_player[m_nearPlayer]->SetMoveSpeed(m_forward * 10.0f);
+							m_player[m_nearPlayer]->SetMoveSpeed(m_forward * 10.0f * m_onlineUpdateSpeed->GetSpeed());
 						}
 
 						//アニメーションが終了したら、
 						if (!m_model->IsPlaying())
 						{
 							m_moveStopTimer++;
-							if (m_moveStopTimer > 120)
+							if (m_moveStopTimer > 120/ m_onlineUpdateSpeed->GetSpeed())
 							{
 								//ランダム移動状態にする
 								m_moveState = enRandomMoveState;
@@ -306,7 +312,7 @@ namespace nsKabutoubatu
 						m_sound[enAttackHornsForwardSound]->Play(false);
 					}
 					m_moveStopTimer++;
-					if (m_moveStopTimer >= 60)
+					if (m_moveStopTimer >= 60/ m_onlineUpdateSpeed->GetSpeed())
 					{
 						//アニメーションを角突き攻撃に切り替え
 						m_animState = enAttackHornsForwardAnimation;
@@ -314,14 +320,14 @@ namespace nsKabutoubatu
 						if (IsAttackRangeIn())
 						{
 							//1ボスの正面に突き飛ばす
-							m_player[m_nearPlayer]->SetMoveSpeed(m_forward * 10.0f);
+							m_player[m_nearPlayer]->SetMoveSpeed(m_forward * 10.0f * m_onlineUpdateSpeed->GetSpeed());
 						}
 
 						//アニメーションが終了したら、
 						if (!m_model->IsPlaying())
 						{
 							m_moveStopTimer2++;
-							if (m_moveStopTimer2 > 120)
+							if (m_moveStopTimer2 > 120/ m_onlineUpdateSpeed->GetSpeed())
 							{
 								//ランダム移動状態にする
 								m_moveState = enRandomMoveState;
@@ -447,7 +453,7 @@ namespace nsKabutoubatu
 			//正規化
 			m_moveSpeed.Normalize();
 			//移動速度をかける
-			m_moveSpeed *= nsFirstBoss::RANDOM_MOVE_POWER;
+			m_moveSpeed *= nsFirstBoss::RANDOM_MOVE_POWER * m_onlineUpdateSpeed->GetSpeed();
 		}
 		//移動タイマーをインクリメント
 		m_randomMoveTimer++;
@@ -537,7 +543,7 @@ namespace nsKabutoubatu
 		}
 		else
 		{
-			switch (rand() % 200)
+			switch (rand() % int(200/ m_onlineUpdateSpeed->GetSpeed()))
 			{
 			case 0:
 				//ダッシュ攻撃状態にする

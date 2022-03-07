@@ -75,9 +75,11 @@ namespace nsStdafx
 	const char* const SILHOUETTE_NAME	= { "silhouette" };
 	const char* const MINIMAP_NAME		= { "minimap" };
 	const char* const SKYCUBE_NAME		= { "skycube" };
+	//ÇªÇÃëº
 	const char* const ARROW_NAME = { "arrow" };
 	const char* const NEEDLE_SLIME_NAME = { "needleslime" };
 	const char* const GAMESCREENUI_NAME = { "gamescreenui" };
+	const char* const ONLINEUPDATESPEED_NAME = { "onlineupdatespeed" };
 
 	/// <summary>
 	///	íËêî

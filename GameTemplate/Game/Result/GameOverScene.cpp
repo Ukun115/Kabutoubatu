@@ -45,12 +45,8 @@ namespace nsKabutoubatu
 	{
 		//背景画像を削除
 		DeleteGO(m_gameOverSprite);
-		//ゲームオーバージングルを削除
-		DeleteGO(m_gameOverGingle);
 		//「Aボタンでタイトル画面に戻る」画像を削除
 		DeleteGO(m_aPushSprite);
-		//決定サウンドを削除
-		DeleteGO(m_decideSound);
 	}
 
 	void GameOverScene::UiUpdate()

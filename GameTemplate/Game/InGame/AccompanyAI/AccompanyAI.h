@@ -12,6 +12,7 @@ namespace nsKabutoubatu
 	class AccompanyAISword;		//同行AIの剣
 	class AccompanyAIShield;	//同行AIの盾
 	class AccompanyAIAnimation;	//同行AIのアニメーション
+	class OnlineUpdateSpeed;
 
 	class AccompanyAI : public IGameObject
 	{
@@ -67,6 +68,7 @@ namespace nsKabutoubatu
 		AccompanyAIAnimation* m_accompanyAIAnimation = nullptr;
 		AccompanyAISword* m_sword = nullptr;
 		AccompanyAIShield* m_shield = nullptr;
+		OnlineUpdateSpeed* m_onlineUpdateSpeed = nullptr;
 
 		CharacterController m_charaCon;		//キャラクタコントローラークラスを作成
 
@@ -117,10 +119,7 @@ namespace nsKabutoubatu
 		void UiUpdate()override final;
 
 		//プレイヤーにかかる重力を設定するメソッド
-		void Gravity()
-		{
-			m_moveSpeed.y -= nsStdafx::GRAVITY;
-		}
+		void Gravity();
 
 		//落下処理メソッド
 		void Fall();

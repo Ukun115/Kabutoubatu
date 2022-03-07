@@ -8,6 +8,7 @@
 #include "AccompanyAISword.h"
 #include "AccompanyAIShield.h"
 #include "AccompanyAIAnimation.h"
+#include "../Online/OnlineUpdateSpeed.h"
 
 namespace nsKabutoubatu
 {
@@ -28,6 +29,8 @@ namespace nsKabutoubatu
 		//インスタンスを検索
 		//プレイヤー
 		m_player = FindGO<Player>(nsStdafx::PLAYER_NAME[enPlayer1]);
+
+		m_onlineUpdateSpeed = FindGO< OnlineUpdateSpeed >(nsStdafx::ONLINEUPDATESPEED_NAME);
 
 		//アニメーション
 		m_accompanyAIAnimation = NewGO<AccompanyAIAnimation>();
@@ -117,7 +120,7 @@ namespace nsKabutoubatu
 					//とりあえず正規化
 					m_moveSpeed.Normalize();
 					//移動力をかける
-					m_moveSpeed *= 3.0f;
+					m_moveSpeed *= 3.0f * m_onlineUpdateSpeed->GetSpeed();
 
 					//タイマーを初期化
 					m_randomTimer = 0;
@@ -166,8 +169,8 @@ namespace nsKabutoubatu
 			m_playerToMeLength = m_playerToMeDirection.Length();
 			m_playerToMeDirection.Normalize();
 			//おともの移動速度にする
-			m_moveSpeed.x = m_playerToMeDirection.x * nsAccompanyAI::MOVE_POWER;
-			m_moveSpeed.z = m_playerToMeDirection.z * nsAccompanyAI::MOVE_POWER;
+			m_moveSpeed.x = m_playerToMeDirection.x * nsAccompanyAI::MOVE_POWER * m_onlineUpdateSpeed->GetSpeed();
+			m_moveSpeed.z = m_playerToMeDirection.z * nsAccompanyAI::MOVE_POWER * m_onlineUpdateSpeed->GetSpeed();
 
 			//プレイヤーとの距離が近くなったら、
 			if (m_playerToMeLength < 200.0f)
@@ -217,7 +220,7 @@ namespace nsKabutoubatu
 			if (m_attackJumpTimer == 30)
 			{
 				//ジャンプさせる
-				m_moveSpeed.y += 7.0f;
+				m_moveSpeed.y += 7.0f * m_onlineUpdateSpeed->GetSpeed();
 				//ジャンプアタックタイマーを初期化する
 				m_attackJumpTimer = 0;
 			}
@@ -289,6 +292,8 @@ namespace nsKabutoubatu
 	//位置・回転・キャラコン・アニメーション状態
 	void AccompanyAI::DataUpdate()
 	{
+		m_otomoModel->SetAnimationSpeed(m_onlineUpdateSpeed->GetSpeed());
+
 		//ヒットポイントの補正
 		m_hitPoint = min(10, m_hitPoint);	//ヒットポイントが最大体力以上にならないようにする
 		m_hitPoint = max(0, m_hitPoint);		//ヒットポイントが0以下にならないようにする
@@ -351,7 +356,7 @@ namespace nsKabutoubatu
 	{
 		m_state = enShieldDashAttack;
 		m_moveSpeed = moveSpeed;
-		m_moveSpeed *= 2.0f;
+		m_moveSpeed *= 2.0f * m_onlineUpdateSpeed->GetSpeed();
 	};
 
 	//おともの位置を移動させる
@@ -363,4 +368,9 @@ namespace nsKabutoubatu
 		//キャラコンを再初期化
 		m_charaCon.Init(25.0f, 30.0f,m_pos);
 	};
+
+	void AccompanyAI::Gravity()
+	{
+		m_moveSpeed.y -= nsStdafx::GRAVITY * m_onlineUpdateSpeed->GetSpeed();
+	}
 }

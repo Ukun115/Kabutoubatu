@@ -5,6 +5,7 @@
 #include "RecoveryItem.h"
 #include "../Player/Player.h"
 #include "../Player/PlayerStatus.h"
+#include "../Online/OnlineUpdateSpeed.h"
 
 namespace nsKabutoubatu
 {
@@ -16,6 +17,8 @@ namespace nsKabutoubatu
 
 	bool RecoveryItem::Start()
 	{
+		m_onlineUpdateSpeed = FindGO< OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
+
 		if (m_isSoloPlay)
 		{
 			m_totalPlayerNum = enPlayer2;
@@ -95,7 +98,7 @@ namespace nsKabutoubatu
 					//キャラコンの位置を更新
 					m_charaCon.SetPosition(m_pos);
 					//移動方向に速度をつける。
-					m_moveSpeed *= nsRecoveryItem::MOVE_POWER;
+					m_moveSpeed *= nsRecoveryItem::MOVE_POWER * m_onlineUpdateSpeed->GetSpeed();
 					//斜め上に投げるようにYを設定
 					m_moveSpeed.y = 5.0f;
 
@@ -165,7 +168,7 @@ namespace nsKabutoubatu
 				//これをしないとプレイヤーが動けなくなり、
 				//プレイヤーのストレスになるため。
 				m_fallTimer++;
-				if (m_fallTimer > 100)
+				if (m_fallTimer > 100/m_onlineUpdateSpeed->GetSpeed())
 				{
 					//プレイヤーの状態を回復初期化状態にする
 					//このメソッドでモデルを削除する

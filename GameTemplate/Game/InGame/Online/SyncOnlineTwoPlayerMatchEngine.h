@@ -1,4 +1,4 @@
-﻿/// <summary>
+/// <summary>
 /// オンライン通信エンジンクラス
 /// </summary>
 #pragma once
@@ -273,7 +273,9 @@ namespace nsKabutoubatu {
 			IN_GAME_BUFFERING_PAD_DATA,			// パッドデータのバッファリング中
 			IN_GAME,							// ゲームプレイ中。
 			DISCONNECTING,						// サーバーから切断中。
-			DISCONNECTED						// サーバーから切断済み。
+			DISCONNECTED,						// サーバーから切断済み。
+			END,								// 終わり
+
 		};
 
 		//イベント

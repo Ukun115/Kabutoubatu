@@ -22,7 +22,7 @@ namespace nsKabutoubatu
 		/// </summary>
 
 		//‘I‘ğó‘Ô
-		enum enSelectState
+		enum enStartOrEndState
 		{
 			enSelectStart,	//‚Í‚¶‚ß‚é
 			enSelectEnd		//‚¨‚í‚é

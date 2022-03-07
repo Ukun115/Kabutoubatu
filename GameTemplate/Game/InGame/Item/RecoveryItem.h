@@ -10,6 +10,7 @@ namespace nsKabutoubatu
 	/// </summary>
 	class Player;		//プレイヤー
 	class PlayerStatus;	//プレイヤーのステータス
+	class OnlineUpdateSpeed;
 
 	class RecoveryItem : public IGameObject
 	{
@@ -38,6 +39,7 @@ namespace nsKabutoubatu
 		SkinModelRender* m_model = nullptr;		//モデル
 		Player* m_player[enPlayerNum] = { nullptr };		//プレイヤー検索するためのインスタンス
 		PlayerStatus* m_playerStatus[enPlayerNum] = {nullptr};
+		OnlineUpdateSpeed* m_onlineUpdateSpeed = nullptr;
 
 		CharacterController m_charaCon;		//キャラクタコントローラークラスを作成
 

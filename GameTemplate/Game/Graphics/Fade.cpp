@@ -3,6 +3,7 @@
 /// </summary>
 #include "stdafx.h"
 #include "Fade.h"
+#include "../InGame/Online/OnlineUpdateSpeed.h"
 
 namespace nsKabutoubatu
 {
@@ -38,6 +39,8 @@ namespace nsKabutoubatu
 		m_fadeSprite->Init(nsFade::FADE_COLOR[m_fadeColorState], nsFade::FADE_IMAGE_SIZE, nsFade::FADE_IMAGE_SIZE);
 		//アルファ値を設定
 		m_fadeSprite->SetMulColor(0.0f, 0.0f, 0.0f, m_alphaValue);
+
+		m_onlineUpdateSpeed = FindGO<OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
 	}
 
 	Fade::~Fade()
@@ -53,7 +56,7 @@ namespace nsKabutoubatu
 		{
 		//フェードイン中
 		case StateIn:
-			m_alphaValue -= nsFade::FADE_SPEED;
+			m_alphaValue -= nsFade::FADE_SPEED* m_onlineUpdateSpeed->GetSpeed();
 			//完全にフェードインしたら、
 			if (m_alphaValue <= 0.0f) {
 				//フェードを削除する
@@ -62,7 +65,7 @@ namespace nsKabutoubatu
 			break;
 		//フェードアウト中
 		case StateOut:
-			m_alphaValue += nsFade::FADE_SPEED;
+			m_alphaValue += nsFade::FADE_SPEED* m_onlineUpdateSpeed->GetSpeed();
 			//完全に真っ白になったら待機させる
 			if (m_alphaValue >= nsFade::ALL_WHITE) {
 				//待機中にする
@@ -81,7 +84,7 @@ namespace nsKabutoubatu
 		{
 			//フェードイン中
 		case StateIn:
-			m_alphaValue -= nsFade::FADE_SPEED;
+			m_alphaValue -= nsFade::FADE_SPEED * m_onlineUpdateSpeed->GetSpeed();
 			//完全にフェードインしたら、
 			if (m_alphaValue <= 0.0f) {
 				//フェードを削除する
@@ -90,7 +93,7 @@ namespace nsKabutoubatu
 			break;
 			//フェードアウト中
 		case StateOut:
-			m_alphaValue += nsFade::FADE_SPEED;
+			m_alphaValue += nsFade::FADE_SPEED * m_onlineUpdateSpeed->GetSpeed();
 			//完全に真っ白になったら待機させる
 			if (m_alphaValue >= nsFade::ALL_WHITE) {
 				//待機中にする

@@ -14,6 +14,7 @@ namespace nsKabutoubatu
 	class DropCoin;		//コイン
 	class PlayerCamera;	//プレイヤーカメラ
 	class Weapon;		//武器
+	class OnlineUpdateSpeed;
 
 	class EnemyBase : public IGameObject
 	{
@@ -81,6 +82,7 @@ namespace nsKabutoubatu
 		PlayerStatus* m_playerStatus[enPlayerNum] = { nullptr };
 		SkinModelRender* m_model = nullptr;			//敵モデル
 		DropCoin* m_dropCoin = nullptr;				//コインクラス
+		OnlineUpdateSpeed* m_onlineUpdateSpeed = nullptr;
 
 		CharacterController m_charaCon;				//キャラクタコントローラークラス
 
@@ -107,10 +109,7 @@ namespace nsKabutoubatu
 	public:
 
 		//弱敵にかかる重力を設定するメソッド
-		void Gravity()
-		{
-			m_moveSpeed.y -= nsStdafx::GRAVITY;
-		}
+		void Gravity();
 
 		/// <summary>
 		/// 敵個別の呼ばれて最初に実行される関数

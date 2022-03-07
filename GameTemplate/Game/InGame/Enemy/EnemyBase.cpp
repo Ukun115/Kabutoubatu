@@ -9,11 +9,14 @@
 #include "../Camera/PlayerCamera.h"
 #include "../Item/Weapon/Arrow.h"
 #include "../Item/Weapon/Weapon.h"
+#include "../Online/OnlineUpdateSpeed.h"
 
 namespace nsKabutoubatu
 {
 	bool EnemyBase::Start()
 	{
+		m_onlineUpdateSpeed = FindGO< OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
+
 		//インスタンスを検索
 		for (int playerNum = enPlayer1; playerNum < m_playerNum; playerNum++)
 		{
@@ -90,8 +93,8 @@ namespace nsKabutoubatu
 		{
 			m_damageTimer++;
 		}
-		//タイマーが20になったら、
-		if (m_damageTimer > 10)
+		//タイマーが10になったら、
+		if (m_damageTimer > 10/ m_onlineUpdateSpeed->GetSpeed())
 		{
 			//ダメージを受けた時の赤色をなくす
 			m_model->SetDameageRed(false);
@@ -152,7 +155,7 @@ namespace nsKabutoubatu
 			//剣を振った瞬間に攻撃が当たらないようにディレイをかける
 			//攻撃判定タイマーを進める
 			m_attackJudgeTimer[playerNum]++;
-			if (m_attackJudgeTimer[playerNum] == m_weapon[playerNum]->GetAttackJudgeTimer())
+			if (m_attackJudgeTimer[playerNum] == m_weapon[playerNum]->GetAttackJudgeTimer()/ m_onlineUpdateSpeed->GetSpeed())
 			{
 				//プレイヤーとの距離の長さを取得
 				m_playerToEnemyVector = m_pos - m_player[playerNum]->GetPosition();
@@ -213,7 +216,7 @@ namespace nsKabutoubatu
 				//正規化
 				m_dir[playerNum].Normalize();
 				//吹っ飛ばしパワーにする
-				m_dir[playerNum] *= 10.0f;
+				m_dir[playerNum] *= 10.0f* m_onlineUpdateSpeed->GetSpeed();
 
 				//プレイヤーに移動速度(&移動方向)を渡す
 				m_player[playerNum]->SetMoveSpeed(m_dir[playerNum]);
@@ -225,5 +228,10 @@ namespace nsKabutoubatu
 				m_player[playerNum]->InitDamageTimer();
 			}
 		}
+	}
+
+	void EnemyBase::Gravity()
+	{
+		m_moveSpeed.y -= nsStdafx::GRAVITY * m_onlineUpdateSpeed->GetSpeed();
 	}
 }

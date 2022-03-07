@@ -1,4 +1,4 @@
-﻿/// <summary>
+/// <summary>
 /// オンライン通信エンジンクラス
 /// </summary>
 #include "stdafx.h"
@@ -193,7 +193,7 @@ namespace nsKabutoubatu
 		m_timer = 0.0f;
 		std::random_device rnd;
 		//待ちの最大秒数を設定する
-		m_waitLimitTime = 10.0f + rnd() % 30;
+		m_waitLimitTime = 30;
 		//状態を「ルームにジョイン中」に設定する
 		m_state = State::JOINING;
 	}
@@ -218,9 +218,8 @@ namespace nsKabutoubatu
 			SendInitDataOtherPlayer();
 			//タイマーを初期化する
 			m_timer = 0.0f;
-			std::random_device rnd;
 			//待ちの最大秒数を設定する
-			m_waitLimitTime = 10.0f + rnd() % 30;
+			m_waitLimitTime =30;
 			// 他プレイヤーの初期化情報受け取り待ちへ遷移する。
 			m_state = State::WAIT_RECV_INIT_DATA_OTHER_PLAYER;
 		}
@@ -288,10 +287,9 @@ namespace nsKabutoubatu
 		while(true) {
 			// 他プレイヤーが部屋から抜けたとき、
 			if (m_otherPlayerState == enOtherPlayerState_LeftRoom) {
-				//エラー処理を実行
-				m_errorFunc();
 				ONLINE_LOG("プレイヤーが部屋から抜けた");
 				m_loadBalancingClient->disconnect();
+				m_state = State::DISCONNECTED;
 				break;
 			}
 			auto it = m_padData[otherPlNo].find(m_playFrameNo);
@@ -303,9 +301,19 @@ namespace nsKabutoubatu
 				// 再生フレームのパッド情報を受け取っている。
 				m_pad[plNo].Update(m_padData[plNo][m_playFrameNo].xInputState);
 				m_pad[otherPlNo].Update(it->second.xInputState);
-				// 再生済みのパッド情報を削除。
-				m_padData[plNo].erase(m_playFrameNo);
-				m_padData[otherPlNo].erase(m_playFrameNo);
+				if (m_padData[plNo].size() > 100) {
+					// サイズが100を超えたので、一番古いフレームのデータを削除する。
+					int delFrameNo = INT32_MAX;
+					for (auto it = m_padData[plNo].begin(); it != m_padData[plNo].end(); it++)
+					{
+						if (delFrameNo < it->first) {
+							delFrameNo = it->first;
+						}
+					}
+					// 一番古いデータを削除。
+					m_padData[plNo].erase(delFrameNo);
+					m_padData[otherPlNo].erase(delFrameNo);
+				}
 
 				break;
 			}
@@ -319,13 +327,11 @@ namespace nsKabutoubatu
 				Sleep(100);
 				m_loadBalancingClient->service();
 				//ループカウント変数のカウンターが100になったら、
-				if (loopCount == 100) {
+				 if (loopCount == 100) {
 					OutputDebugStringA("ループカウント変数のカウンターが100になったら");
 					// 接続エラー。
-					//エラー処理を実行
-					m_errorFunc();
 					m_loadBalancingClient->disconnect();
-
+					m_state = State::DISCONNECTED;
 					break;
 				}
 			}
@@ -374,7 +380,9 @@ namespace nsKabutoubatu
 			break;
 		//サーバーから切断済み状態の時、
 		case State::DISCONNECTED:
-			m_state = State::INITIALIZED;
+			m_errorFunc();
+			m_errorFunc = nullptr;
+			m_state = State::END;
 			break;
 		//それ以外の時、
 		default:
@@ -463,9 +471,14 @@ namespace nsKabutoubatu
 
 	void SyncOnlineTwoPlayerMatchEngine::disconnectReturn(void)
 	{
-		// 切断済みにする。
-		ONLINE_LOG("disconnectReturn\n");
-		m_state = State::DISCONNECTED;
+		if (m_state != State::END 
+			&& m_state != State::IN_GAME
+		) {
+			// 終了状態の際に再度切断済みに行かないようにする。
+			// 切断済みにする。
+			ONLINE_LOG("disconnectReturn\n");
+			m_state = State::DISCONNECTED;
+		}
 	}
 
 	//sendDirect()関数(P2P通信)で送られたメッセージを受信した場合に、呼び出されるコールバック関数

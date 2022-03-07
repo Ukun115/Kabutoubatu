@@ -7,6 +7,7 @@
 #include "../../Player/PlayerStatus.h"
 #include "../DropCoin.h"
 #include "Needle.h"
+#include "../../Online/OnlineUpdateSpeed.h"
 
 
 namespace nsKabutoubatu
@@ -14,7 +15,7 @@ namespace nsKabutoubatu
 	namespace nsNeedleSlime
 	{
 		//ランダム移動の移動力
-		const float RANDOM_MOVE_POWER = 0.5f;
+		const float RANDOM_MOVE_POWER = 1.0f;
 		//攻撃範囲
 		const float ATTACK_RANGE = 500.0f;
 	}
@@ -23,6 +24,8 @@ namespace nsKabutoubatu
 	{
 		//HPを設定
 		m_hitPoint = 4;
+
+		m_onlineUpdateSpeed = FindGO<OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
 
 		//プレイヤーのインスタンスを検索
 		for (int playerNum = enPlayer1; playerNum < GetPlayerNum(); playerNum++)
@@ -68,17 +71,14 @@ namespace nsKabutoubatu
 			m_isHitGround,
 			m_hitGroundNormal
 		);
+
+		m_model->SetAnimationSpeed(m_onlineUpdateSpeed->GetSpeed());
 	}
 
 	NeedleSlime::~NeedleSlime()
 	{
 		//モデルを削除
 		DeleteGO(m_model);
-
-		if (m_needle != nullptr)
-		{
-			DeleteGO(m_needle);
-		}
 	}
 
 	void NeedleSlime::SubUpdate()
@@ -94,7 +94,7 @@ namespace nsKabutoubatu
 				m_moveSpeed = m_playerToEnemyDistanceDirecion[m_nearPlayer];
 				m_moveSpeed /= 10000.0f;
 				m_idleTimer++;
-				if (m_idleTimer > 160)
+				if (m_idleTimer > 160/ m_onlineUpdateSpeed->GetSpeed())
 				{
 					//歩き状態にする
 					m_nowState = enWalk;
@@ -178,7 +178,7 @@ namespace nsKabutoubatu
 			//敵を倒した数を+1する
 			m_playerStatus[GetLastKillPlayer()]->AddEnemyKillNum();
 			//死亡状態に遷移
-			m_model->SetAnimationSpeed(4.0f);
+			m_model->SetAnimationSpeed(4.0f * m_onlineUpdateSpeed->GetSpeed());
 			m_nowState = enDeath;
 		}
 
@@ -299,7 +299,7 @@ namespace nsKabutoubatu
 		if (m_plaToEneDistanceLength[m_nearPlayer] > nsNeedleSlime::ATTACK_RANGE)
 		{
 			//ランダムに移動速度を決定
-			if (m_randomMoveTimer % 240 == 0)
+			if (m_randomMoveTimer % 240/ m_onlineUpdateSpeed->GetSpeed() == 0)
 			{
 				//120フレームで移動方向を変更
 				m_moveSpeed.x = (rand() % 100) / 100.0f;
@@ -309,7 +309,7 @@ namespace nsKabutoubatu
 				//正規化
 				m_moveSpeed.Normalize();
 				//移動速度をかける
-				m_moveSpeed *= nsNeedleSlime::RANDOM_MOVE_POWER;
+				m_moveSpeed *= nsNeedleSlime::RANDOM_MOVE_POWER * m_onlineUpdateSpeed->GetSpeed();
 			}
 			//移動タイマーをインクリメント
 			m_randomMoveTimer++;

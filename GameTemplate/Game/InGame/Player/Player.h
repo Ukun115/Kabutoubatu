@@ -17,6 +17,7 @@ namespace nsKabutoubatu
 	class RecoveryItem;		//回復アイテム
 	class Arrow;			//矢
 	class MiniMap;			//ミニマップ
+	class OnlineUpdateSpeed;
 
 
 	class Player : public IGameObject
@@ -85,6 +86,7 @@ namespace nsKabutoubatu
 		PlayerStatus* m_playerStatus[enPlayerNum] = { nullptr };
 		GamePad* m_gamePad;
 		MiniMap* m_miniMap = nullptr;
+		OnlineUpdateSpeed* m_onlineUpdateSpeed = nullptr;
 
 		Effect m_fireBallEffect;	//ゴースト状態の時の火の玉エフェクト
 

@@ -5,6 +5,7 @@
 #include "Needle.h"
 #include "../../Player/Player.h"
 #include "../../Player/PlayerStatus.h"
+#include "../../Online/OnlineUpdateSpeed.h"
 
 namespace nsKabutoubatu
 {
@@ -18,6 +19,8 @@ namespace nsKabutoubatu
 
 	void Needle::SubStart()
 	{
+		m_onlineUpdateSpeed = FindGO<OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
+
 		//接触判定をなくす
 		SetCanHitBody(false);
 
@@ -48,6 +51,7 @@ namespace nsKabutoubatu
 		//モデルの位置を更新
 		m_model->SetPosition(m_pos);
 		m_moveSpeed *= nsNeedle::NEEDLE_SPEED;
+		m_moveSpeed *= m_onlineUpdateSpeed->GetSpeed();
 		m_moveSpeed.y = 0.0f;
 
 		//とげの向きをセット
@@ -69,11 +73,11 @@ namespace nsKabutoubatu
 	{
 		m_timer++;
 
-		if (m_timer < 20)
+		if (m_timer < 20/ m_onlineUpdateSpeed->GetSpeed())
 		{
 			return;
 		}
-		if (m_timer == 20)
+		if (m_timer == 20/m_onlineUpdateSpeed->GetSpeed())
 		{
 			m_needleSlimeSound[enAttackSound] = NewGO<SoundSource>();
 			m_needleSlimeSound[enAttackSound]->Init(L"Assets/sound/Enemy_NeedleSlime_Attack.wav");
@@ -81,7 +85,7 @@ namespace nsKabutoubatu
 			m_needleSlimeSound[enAttackSound]->Play(false);
 		}
 
-		if (m_timer > 60)
+		if (m_timer > 60/ m_onlineUpdateSpeed->GetSpeed())
 		{
 			//とげ削除
 			DeleteGO(this);

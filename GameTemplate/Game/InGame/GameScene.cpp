@@ -164,9 +164,6 @@ namespace nsKabutoubatu
 
 		//ステージを削除
 		DeleteGO(m_stage);
-
-		//ゲームBGMを削除
-		DeleteGO(m_gameSceneSound);
 	}
 
 	void GameScene::Update()

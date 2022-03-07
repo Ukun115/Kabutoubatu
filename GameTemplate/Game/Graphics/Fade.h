@@ -5,6 +5,8 @@
 
 namespace nsKabutoubatu
 {
+	class OnlineUpdateSpeed;
+
 	class Fade : public IGameObject
 	{
 	private:
@@ -28,6 +30,8 @@ namespace nsKabutoubatu
 
 		//フェード画像
 		SpriteRenderSub* m_fadeSprite = nullptr;
+
+		OnlineUpdateSpeed* m_onlineUpdateSpeed = nullptr;
 
 		int m_fadeColorState = enWhite;
 		//画像のα値

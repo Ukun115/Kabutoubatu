@@ -333,6 +333,7 @@
     <ClCompile Include="InGame\LoadScene.cpp" />
     <ClCompile Include="InGame\Online\Online.cpp" />
     <ClCompile Include="InGame\Online\OnlineErrorScene.cpp" />
+    <ClCompile Include="InGame\Online\OnlineUpdateSpeed.cpp" />
     <ClCompile Include="InGame\Online\SyncOnlineTwoPlayerMatchEngine.cpp" />
     <ClCompile Include="InGame\Pause.cpp" />
     <ClCompile Include="InGame\Player\Player.cpp" />
@@ -481,6 +482,7 @@
     <ClInclude Include="InGame\LoadScene.h" />
     <ClInclude Include="InGame\Online\Online.h" />
     <ClInclude Include="InGame\Online\OnlineErrorScene.h" />
+    <ClInclude Include="InGame\Online\OnlineUpdateSpeed.h" />
     <ClInclude Include="InGame\Online\SyncOnlineTwoPlayerMatchEngine.h" />
     <ClInclude Include="InGame\Pause.h" />
     <ClInclude Include="InGame\Player\Player.h" />

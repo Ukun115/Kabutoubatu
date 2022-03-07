@@ -17,6 +17,7 @@ namespace nsKabutoubatu
 	class ItemShopScene;	//アイテムショップシーン
 	class FirstBossStage;	//最初のボス
 	class Fade;				//フェード
+	class OnlineUpdateSpeed;
 
 	class StageBuilding : public IGameObject
 	{
@@ -68,7 +69,7 @@ namespace nsKabutoubatu
 		ItemShopScene* m_itemShopScene = nullptr;
 		//最初のボスステージ
 		FirstBossStage* m_firstBossStage = nullptr;
-
+		OnlineUpdateSpeed* m_onlineUpdateSpeed = nullptr;
 		GamePad* m_playerGamePad[enPlayerNum] = { nullptr };
 
 		PhysicsStaticObject m_physicsStaticObject[2];		//静的物理オブジェクトクラス

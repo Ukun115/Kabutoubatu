@@ -5,6 +5,7 @@
 #include "Online.h"
 #include "SyncOnlineTwoPlayerMatchEngine.h"
 #include "OnlineErrorScene.h"
+#include "OnlineUpdateSpeed.h"
 
 namespace nsKabutoubatu
 {
@@ -36,6 +37,8 @@ namespace nsKabutoubatu
 			);
 
 			OutputDebugStringA("オンライン初期化\n");
+
+			m_onlineUpdateSpeed = FindGO<OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
 		}
 	}
 
@@ -53,6 +56,8 @@ namespace nsKabutoubatu
 		m_step = enStep_InGame;
 
 		OutputDebugStringA("全てのプレイヤーがゲームをスタート\n");
+
+		m_onlineUpdateSpeed->SetIsOnline(true);
 	}
 
 	//通信エラーが起きた。
@@ -65,6 +70,8 @@ namespace nsKabutoubatu
 		//通信エラーシーンに遷移
 		m_onlineErrorScene = NewGO<OnlineErrorScene>();
 		m_onlineErrorScene->SetPlayerGamePad(m_onlineTwoPlayerMatchEngine->GetGamePad(m_playerNo));
+
+		m_onlineUpdateSpeed->SetIsOnline(false);
 	}
 
 	void Online::DeleteData()
@@ -81,6 +88,8 @@ namespace nsKabutoubatu
 			m_step = enStep_CharacterSelect;
 
 			OutputDebugStringA("オンライン削除\n");
+
+			m_onlineUpdateSpeed->SetIsOnline(false);
 		}
 	}
 
@@ -92,6 +101,8 @@ namespace nsKabutoubatu
 		m_step = enStep_WaitAllPlayerStartGame;
 
 		OutputDebugStringA("ゲーム開始可能\n");
+
+		m_onlineUpdateSpeed->SetIsOnline(true);
 	}
 
 	GamePad& Online::GetPlayerGamePad(int no)

@@ -12,18 +12,20 @@
 #include "../AccompanyAI/AccompanyAI.h"
 #include "../../Graphics/Fade.h"
 #include "../Camera/PlayerCamera.h"
+#include "../Online/OnlineUpdateSpeed.h"
 
 namespace nsKabutoubatu
 {
 	bool StageBuilding::Start()
 	{
+		m_onlineUpdateSpeed = FindGO<OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
+
 		for (int playerNum = enPlayer1; playerNum < m_playerNum; playerNum++)
 		{
 			//プレイヤーのインスタンスを検索
 			m_player[playerNum] = FindGO<Player>(nsStdafx::PLAYER_NAME[playerNum]);
 			m_playerRotation[playerNum] = FindGO<PlayerRotation>(nsStdafx::PLAYER_ROTATION_NAME[playerNum]);
 			m_playerAnimation[playerNum] = FindGO<PlayerAnimation>(nsStdafx::PLAYER_ANIMATION_NAME[playerNum]);
-
 
 			m_hukidasiSprite[playerNum] = NewGO<SpriteRender>();
 			m_hukidasiSprite[playerNum]->Init("Hukidasi_PushA",100.0f,75.0f);
@@ -69,11 +71,6 @@ namespace nsKabutoubatu
 			DeleteGO(m_hukidasiSprite[playerNum]);
 		}
 
-		//音削除
-		DeleteGO(m_buildingSound);
-		DeleteGO(m_doorOpenSound);
-		DeleteGO(m_doorCloseSound);
-
 		if (m_hotelScene != nullptr)
 		{
 			DeleteGO(m_hotelScene);
@@ -99,7 +96,7 @@ namespace nsKabutoubatu
 		//建物に入ったとき、
 		else
 		{
-			if (m_sceneChangeDelayTimer == 10)
+			if (m_sceneChangeDelayTimer == 10/ m_onlineUpdateSpeed->GetSpeed())
 			{
 				//建物に入る音の初期化
 				m_buildingSound = NewGO<SoundSource>();
@@ -111,7 +108,7 @@ namespace nsKabutoubatu
 			//遅延タイマーを加算
 			m_sceneChangeDelayTimer++;
 			//40フレーム経ったら、
-			if (m_sceneChangeDelayTimer == 40&& m_fade->GetNowState() == 2)
+			if (m_sceneChangeDelayTimer == 40/ m_onlineUpdateSpeed->GetSpeed() && m_fade->GetNowState() == 2)
 			{
 				//シーン遷移
 				SceneTransition();
@@ -211,34 +208,69 @@ namespace nsKabutoubatu
 				//吹き出しを表示させる
 				HukidasiActivate(playerNum);
 
-				//Aボタンが押されたら、
-				if (m_playerGamePad[playerNum]->IsTrigger(enButtonA))
+				if (m_playerGamePad[playerNum])
 				{
-					//ドアの状態の入れ替え
-					switch (m_doorState)
+					//Aボタンが押されたら、
+					if (m_playerGamePad[playerNum]->IsTrigger(enButtonA))
 					{
-					case enClose:
-						m_doorState = enOpen;
+						//ドアの状態の入れ替え
+						switch (m_doorState)
+						{
+						case enClose:
+							m_doorState = enOpen;
 
-						//ドアを開ける音
-						m_doorOpenSound = NewGO<SoundSource>();
-						m_doorOpenSound->Init(L"Assets/sound/Door_Open.wav");
-						m_doorOpenSound->SetVolume(0.2f);
-						m_doorOpenSound->Play(false);
+							//ドアを開ける音
+							m_doorOpenSound = NewGO<SoundSource>();
+							m_doorOpenSound->Init(L"Assets/sound/Door_Open.wav");
+							m_doorOpenSound->SetVolume(0.2f);
+							m_doorOpenSound->Play(false);
 
-						break;
-					case enOpen:
-						m_doorState = enClose;
+							break;
+						case enOpen:
+							m_doorState = enClose;
 
-						//ドアを閉じる音
-						m_doorCloseSound = NewGO<SoundSource>();
-						m_doorCloseSound->Init(L"Assets/sound/Door_Close.wav");
-						m_doorCloseSound->SetVolume(0.2f);
-						m_doorCloseSound->Play(false);
+							//ドアを閉じる音
+							m_doorCloseSound = NewGO<SoundSource>();
+							m_doorCloseSound->Init(L"Assets/sound/Door_Close.wav");
+							m_doorCloseSound->SetVolume(0.2f);
+							m_doorCloseSound->Play(false);
 
-						break;
+							break;
+						}
+						m_doorSlideTimer = 0;
 					}
-					m_doorSlideTimer = 0;
+				}
+				else
+				{
+					//Aボタンが押されたら、
+					if (g_pad[playerNum]->IsTrigger(enButtonA))
+					{
+						//ドアの状態の入れ替え
+						switch (m_doorState)
+						{
+						case enClose:
+							m_doorState = enOpen;
+
+							//ドアを開ける音
+							m_doorOpenSound = NewGO<SoundSource>();
+							m_doorOpenSound->Init(L"Assets/sound/Door_Open.wav");
+							m_doorOpenSound->SetVolume(0.2f);
+							m_doorOpenSound->Play(false);
+
+							break;
+						case enOpen:
+							m_doorState = enClose;
+
+							//ドアを閉じる音
+							m_doorCloseSound = NewGO<SoundSource>();
+							m_doorCloseSound->Init(L"Assets/sound/Door_Close.wav");
+							m_doorCloseSound->SetVolume(0.2f);
+							m_doorCloseSound->Play(false);
+
+							break;
+						}
+						m_doorSlideTimer = 0;
+					}
 				}
 			}
 			else
@@ -257,7 +289,7 @@ namespace nsKabutoubatu
 				{
 				case enHotel:
 				case enItemShop:
-					m_rotationAngle += 0.05f;
+					m_rotationAngle += 0.05f* m_onlineUpdateSpeed->GetSpeed();
 					m_rotationAngle = min(m_rotationAngle, 2.0f);
 					//回転を更新
 					m_rot.SetRotation(Vector3::AxisY, m_rotationAngle);
@@ -266,9 +298,9 @@ namespace nsKabutoubatu
 					break;
 
 				case enFirstBossHouse:
-					if (m_doorSlideTimer < 60)
+					if (m_doorSlideTimer < 60/ m_onlineUpdateSpeed->GetSpeed())
 					{
-						m_doorPos.x -= 3.0f;
+						m_doorPos.x -= 3.0f* m_onlineUpdateSpeed->GetSpeed();
 						m_door->SetPosition(m_doorPos);
 					}
 					m_doorSlideTimer++;
@@ -283,7 +315,7 @@ namespace nsKabutoubatu
 				{
 				case enHotel:
 				case enItemShop:
-					m_rotationAngle -= 0.05f;
+					m_rotationAngle -= 0.05f* m_onlineUpdateSpeed->GetSpeed();
 					m_rotationAngle = max(m_rotationAngle, 0.0f);
 					//回転を更新
 					m_rot.SetRotation(Vector3::AxisY, m_rotationAngle);
@@ -292,9 +324,9 @@ namespace nsKabutoubatu
 					break;
 
 				case enFirstBossHouse:
-					if (m_doorSlideTimer < 60 && m_doorPos.x != m_pos.x)
+					if (m_doorSlideTimer < 60/ m_onlineUpdateSpeed->GetSpeed() && m_doorPos.x != m_pos.x)
 					{
-						m_doorPos.x += 3.0f;
+						m_doorPos.x += 3.0f* m_onlineUpdateSpeed->GetSpeed();
 						m_door->SetPosition(m_doorPos);
 					}
 					m_doorSlideTimer++;
@@ -340,7 +372,14 @@ namespace nsKabutoubatu
 			m_hotelScene->SetPlayerNumber(m_playerNum);
 			//建物の場所をシーンに渡しておく
 			m_hotelScene->SetHotelPosition(m_pos);
-			m_hotelScene->SetPlayerGamePad(*m_playerGamePad[m_playerNum],m_playerNum);
+			if (m_playerGamePad[m_playerNum])
+			{
+				m_hotelScene->SetPlayerGamePad(*m_playerGamePad[m_playerNum], m_playerNum);
+			}
+			else
+			{
+				m_hotelScene->SetPlayerGamePad(*g_pad[m_playerNum], m_playerNum);
+			}
 			break;
 		//アイテムショップ
 		case enItemShop:

@@ -50,11 +50,7 @@ namespace nsKabutoubatu
 
 	PlayerSound::~PlayerSound()
 	{
-		//音を削除
-		for (int playerSoundNum = enJumpSound; playerSoundNum < enPlayerSoundNum; playerSoundNum++)
-		{
-			DeleteGO(m_playerSound[playerSoundNum]);
-		}
+
 	}
 
 	//ジャンプ音再生メソッド

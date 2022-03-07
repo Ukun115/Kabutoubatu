@@ -19,8 +19,6 @@ namespace nsKabutoubatu
 
 	bool OnlineErrorScene::Start()
 	{
-		//ゲームシーンのインスタンスを検索
-		m_gameScene = FindGO<GameScene>(nsStdafx::GAMESCENE_NAME);
 		m_pause = FindGO<Pause>(nsStdafx::PAUSE_NAME);
 
 		//ポーズ機能を利用する
@@ -34,9 +32,6 @@ namespace nsKabutoubatu
 		//エラーメッセージ画像
 		m_errorMessageBox = NewGO<SpriteRenderSub>(nsStdafx::PRIORITY_12);
 		m_errorMessageBox->Init("ErrorMessageBox", 1280, 720);
-
-		//パッドナンバーを取得
-		m_padNo = m_gameScene->GetPlayerNo();
 
 		return true;
 	}
@@ -72,6 +67,8 @@ namespace nsKabutoubatu
 			m_online = FindGO<Online>(nsStdafx::ONLINE_NAME);
 			DeleteGO(m_online);
 
+			//ゲームシーンのインスタンスを検索
+			m_gameScene = FindGO<GameScene>(nsStdafx::GAMESCENE_NAME);
 			//ゲームシーンを削除し、タイトルシーンを生成
 			m_gameScene->DeleteGameSceneClass();
 			NewGO<TitleScene>(nsStdafx::PRIORITY_0, nsStdafx::TITLESCENE_NAME);

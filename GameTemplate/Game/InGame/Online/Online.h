@@ -10,6 +10,7 @@ namespace nsKabutoubatu
 	/// </summary>
 	class SyncOnlineTwoPlayerMatchEngine;	//オンライン通信エンジン
 	class OnlineErrorScene;					//オンライン時のエラーシーン
+	class OnlineUpdateSpeed;
 
 	class Online : public IGameObject
 	{
@@ -31,6 +32,8 @@ namespace nsKabutoubatu
 		SyncOnlineTwoPlayerMatchEngine* m_onlineTwoPlayerMatchEngine = nullptr;
 		//オンライン通信エラーシーン
 		OnlineErrorScene* m_onlineErrorScene = nullptr;
+
+		OnlineUpdateSpeed* m_onlineUpdateSpeed = nullptr;
 
 		enStep m_step = enStep_CharacterSelect;
 

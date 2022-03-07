@@ -234,14 +234,10 @@ namespace nsKabutoubatu
 
 	GameClearScene::~GameClearScene()
 	{
-		//ゲームクリアサウンドを削除
-		DeleteGO(m_gameClearSound);
 		//「討伐完了！！」画像を削除
 		DeleteGO(m_toubatuKannryou);
 		//ゲームクリア画像を削除
 		DeleteGO(m_gameClearSprite);
-		//決定サウンドを削除
-		DeleteGO(m_decideSound);
 		//フォント
 		for (int playerNum = 0; playerNum < m_playerNum; playerNum++)
 		{

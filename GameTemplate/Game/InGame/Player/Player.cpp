@@ -11,6 +11,7 @@
 #include "PlayerCharaCon.h"
 #include "PlayerStatus.h"
 #include "../Item/Weapon/Arrow.h"
+#include "../Online/OnlineUpdateSpeed.h"
 
 namespace nsKabutoubatu
 {
@@ -31,6 +32,8 @@ namespace nsKabutoubatu
 		//インスタンスを検索
 		//ミニマップ
 		m_miniMap = FindGO<MiniMap>(nsStdafx::MINIMAP_NAME);
+
+		m_onlineUpdateSpeed = FindGO< OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
 
 		//プレイヤーの回転クラス
 		m_playerRotation = NewGO< PlayerRotation >(nsStdafx::PRIORITY_0,nsStdafx::PLAYER_ROTATION_NAME[m_playerNum]);
@@ -83,6 +86,7 @@ namespace nsKabutoubatu
 
 			break;
 		}
+		m_model->SetAnimationSpeed(m_onlineUpdateSpeed->GetSpeed());
 		DataUpdate();
 
 		return true;
@@ -272,13 +276,13 @@ namespace nsKabutoubatu
 				//ダウンアニメーションにする
 				m_playerAnimation->ChangeAnimation(enPlayerAnimation::enAnimationClip_down);
 				//アニメーションが遅かったため３倍する
-				m_model->SetAnimationSpeed(3.0f);
+				m_model->SetAnimationSpeed(3.0f * m_onlineUpdateSpeed->GetSpeed());
 			}
 			else
 			{
 				//ゴースト状態での移動
 				GhostMove();
-				m_model->SetAnimationSpeed(1.0f);
+				m_model->SetAnimationSpeed(1.0f * m_onlineUpdateSpeed->GetSpeed());
 
 				//歩きアニメーションにする
 				m_playerAnimation->ChangeAnimation(enPlayerAnimation::enAnimationClip_walk);
@@ -289,7 +293,7 @@ namespace nsKabutoubatu
 					m_fireBallEffect.Play();
 				}
 				m_fireBallEffectTimer++;
-				if (m_fireBallEffectTimer > 200)
+				if (m_fireBallEffectTimer > 200 / m_onlineUpdateSpeed->GetSpeed())
 				{
 					m_fireBallEffectTimer = 0;
 				}
@@ -343,12 +347,12 @@ namespace nsKabutoubatu
 	void Player::Friction(const float frictionPower)
 	{
 		//摩擦力を設定する
-		m_friction = m_moveSpeed;
+		m_friction = m_moveSpeed ;
 		m_friction *= -frictionPower;
 
 		//摩擦力を加算する
-		m_moveSpeed.x += m_friction.x * g_gameTime->GetFrameDeltaTime();
-		m_moveSpeed.z += m_friction.z * g_gameTime->GetFrameDeltaTime();
+		m_moveSpeed.x += (m_friction.x * g_gameTime->GetFrameDeltaTime());
+		m_moveSpeed.z += (m_friction.z * g_gameTime->GetFrameDeltaTime());
 	}
 
 	//移動メソッド
@@ -358,14 +362,14 @@ namespace nsKabutoubatu
 		if (m_playerStatus[m_playerNum]->GetHaveWeapon() == enLargeSword)
 		{
 			//左スティックの入力量を加算する
-			m_moveSpeed.x -= m_gamePad->GetLStickXF() * m_playerStatus[m_playerNum]->GetMovePower()/2 * g_gameTime->GetFrameDeltaTime();
-			m_moveSpeed.z -= m_gamePad->GetLStickYF() * m_playerStatus[m_playerNum]->GetMovePower() /2 * g_gameTime->GetFrameDeltaTime();
+			m_moveSpeed.x -= (m_gamePad->GetLStickXF() * m_playerStatus[m_playerNum]->GetMovePower()/2 * g_gameTime->GetFrameDeltaTime() );
+			m_moveSpeed.z -= (m_gamePad->GetLStickYF() * m_playerStatus[m_playerNum]->GetMovePower() /2 * g_gameTime->GetFrameDeltaTime() );
 		}
 		else
 		{
 			//左スティックの入力量を加算する
-			m_moveSpeed.x -= m_gamePad->GetLStickXF() * m_playerStatus[m_playerNum]->GetMovePower() * g_gameTime->GetFrameDeltaTime();
-			m_moveSpeed.z -= m_gamePad->GetLStickYF() * m_playerStatus[m_playerNum]->GetMovePower() * g_gameTime->GetFrameDeltaTime();
+			m_moveSpeed.x -= (m_gamePad->GetLStickXF() * m_playerStatus[m_playerNum]->GetMovePower() * g_gameTime->GetFrameDeltaTime() );
+			m_moveSpeed.z -= (m_gamePad->GetLStickYF() * m_playerStatus[m_playerNum]->GetMovePower() * g_gameTime->GetFrameDeltaTime());
 		}
 	}
 
@@ -373,10 +377,10 @@ namespace nsKabutoubatu
 	void Player::GhostMove()
 	{
 		//左スティックの入力量を横移動に加算する
-		m_pos.x -= m_gamePad->GetLStickXF() * nsPlayer::GHOST_MOVE_POWER * g_gameTime->GetFrameDeltaTime();
-		m_pos.z -= m_gamePad->GetLStickYF() * nsPlayer::GHOST_MOVE_POWER * g_gameTime->GetFrameDeltaTime();
+		m_pos.x -= (m_gamePad->GetLStickXF() * nsPlayer::GHOST_MOVE_POWER * g_gameTime->GetFrameDeltaTime());
+		m_pos.z -= (m_gamePad->GetLStickYF() * nsPlayer::GHOST_MOVE_POWER * g_gameTime->GetFrameDeltaTime());
 		//右スティックの入力量を上下移動
-		m_pos.y += m_gamePad->GetRStickYF() * nsPlayer::GHOST_MOVE_POWER * g_gameTime->GetFrameDeltaTime();
+		m_pos.y += (m_gamePad->GetRStickYF() * nsPlayer::GHOST_MOVE_POWER * g_gameTime->GetFrameDeltaTime() );
 
 		//プレイヤーを回転させたいので通常移動の処理も置いておく。
 		//(これは移動力が加わることはない)
@@ -401,12 +405,12 @@ namespace nsKabutoubatu
 			//アニメーションをジャンプに切り替え
 			m_playerAnimation->ChangeAnimation(enPlayerAnimation::enAnimationClip_jump);
 
-			m_moveSpeed.y = m_playerStatus[m_playerNum]->GetJumpPower();
+			m_moveSpeed.y = m_playerStatus[m_playerNum]->GetJumpPower() ;
 
 			//大剣をもっているときはジャンプ力低下
 			if (m_playerStatus[m_playerNum]->GetHaveWeapon() == enLargeSword)
 			{
-				m_moveSpeed.y /= 2.0f;
+				m_moveSpeed.y = (m_moveSpeed.y / 2.0f );
 			}
 		}
 	}
@@ -418,8 +422,8 @@ namespace nsKabutoubatu
 		{
 			m_playerAnimation->ChangeAnimation(enPlayerAnimation::enAnimationClip_rollingAvoidance);
 			//回避の移動速度を乗算
-			m_moveSpeed.x *= 3.0f;
-			m_moveSpeed.z *= 3.0f;
+			m_moveSpeed.x *= 2.0f ;
+			m_moveSpeed.z *= 2.0f ;
 
 			//回避効果音を鳴らす
 			m_playerSound->PlayAvoidanceSound();
@@ -445,12 +449,12 @@ namespace nsKabutoubatu
 		//回避アニメーション中
 		if (m_playerAnimation->GetAnimationState() == enPlayerAnimation::enAnimationClip_rollingAvoidance)
 		{
-			m_model->SetAnimationSpeed(1.5f);
+			m_model->SetAnimationSpeed(1.5f * m_onlineUpdateSpeed->GetSpeed());
 		}
 		//回避アニメーション以外
 		else
 		{
-			m_model->SetAnimationSpeed(1.0f);
+			m_model->SetAnimationSpeed(1.0f * m_onlineUpdateSpeed->GetSpeed());
 		}
 
 	}
@@ -471,7 +475,9 @@ namespace nsKabutoubatu
 		if (m_nowState != enGhost)
 		{
 			//キャラクターコントローラーを使った移動処理に変更。
-			m_pos = m_playerCharaCon->RigidBodyExecute(m_moveSpeed,m_isHitGround,m_hitGroundNormal);
+			Vector3 speed = m_moveSpeed * m_onlineUpdateSpeed->GetSpeed();
+			m_pos = m_playerCharaCon->RigidBodyExecute(speed,m_isHitGround,m_hitGroundNormal);
+			m_moveSpeed = speed / m_onlineUpdateSpeed->GetSpeed();
 		}
 		//位置を更新
 		m_model->SetPosition(m_pos);
@@ -711,10 +717,10 @@ namespace nsKabutoubatu
 		switch (gravityPower)
 		{
 		case enNormalGravity:
-			m_moveSpeed.y -= nsStdafx::GRAVITY;
+			m_moveSpeed.y -= (nsStdafx::GRAVITY );
 			break;
 		case enHalfGravity:
-			m_moveSpeed.y -= nsStdafx::GRAVITY / 5;
+			m_moveSpeed.y -= (nsStdafx::GRAVITY / 5 );
 			break;
 		}
 	}
@@ -731,7 +737,7 @@ namespace nsKabutoubatu
 			m_model->SetDameageRed(true);
 		}
 		//タイマーが10になったら、
-		if (m_damageTimer > 10)
+		if (m_damageTimer > 10 / m_onlineUpdateSpeed->GetSpeed())
 		{
 			//ダメージを受けた時の赤色をなくす
 			m_model->SetDameageRed(false);

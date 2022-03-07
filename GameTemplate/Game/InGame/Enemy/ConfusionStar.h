@@ -9,6 +9,7 @@ namespace nsKabutoubatu
 	/// 前方宣言
 	/// </summary>
 	class PlayerCamera;		//プレイヤーカメラ
+	class OnlineUpdateSpeed;
 
 	class ConfusionStar : public IGameObject
 	{
@@ -16,6 +17,7 @@ namespace nsKabutoubatu
 		SkinModelRender* m_model = nullptr;
 		PlayerCamera* m_playerCamera = nullptr;
 		SoundSource* m_sound = nullptr;
+		OnlineUpdateSpeed* m_onlineUpdateSpeed = nullptr;
 
 		Vector3 m_pos;		//位置
 		float m_rotationAngle = 0.0f;	//回転角度

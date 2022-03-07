@@ -98,9 +98,6 @@ namespace nsKabutoubatu
 			DeleteGO(m_coinSprite[playerNum]);
 		}
 
-		//ƒVƒ‡ƒbƒvBGM‚ğíœ
-		DeleteGO(m_shopBGM);
-
 		DeleteGO(m_hukidasi);
 
 		DeleteGO(m_fade[1]);

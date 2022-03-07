@@ -6,6 +6,7 @@
 #include "../../Player/Player.h"
 #include "../../Player/PlayerStatus.h"
 #include "../DropCoin.h"
+#include "../../Online/OnlineUpdateSpeed.h"
 
 namespace nsKabutoubatu
 {
@@ -34,6 +35,8 @@ namespace nsKabutoubatu
 		//HPを設定
 		m_hitPoint = 4;
 
+		m_onlineUpdateSpeed = FindGO<OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
+
 		//プレイヤーのインスタンスを検索
 		for (int playerNum = enPlayer1; playerNum < GetPlayerNum(); playerNum++)
 		{
@@ -59,6 +62,8 @@ namespace nsKabutoubatu
 
 		m_randomDelayTimer = (rand() % 50);
 		m_randomDelayTimer += 80;
+
+		m_model->SetAnimationSpeed(m_onlineUpdateSpeed->GetSpeed());
 	}
 
 	Mole::~Mole()
@@ -81,14 +86,14 @@ namespace nsKabutoubatu
 			RandomMove();
 
 			//歩きアニメーション再生
-			m_model->SetAnimationSpeed(1.0f);
+			m_model->SetAnimationSpeed(1.0f * m_onlineUpdateSpeed->GetSpeed());
 			m_model->PlayAnimation(enWalkAnimation);
 
 			break;
 			//突進攻撃状態
 		case enAttack:
 			//攻撃(突進)するまでの遅延
-			if (m_attackDelayTimer < nsMole::ATTACK_DELAY_TIME)
+			if (m_attackDelayTimer < nsMole::ATTACK_DELAY_TIME/ m_onlineUpdateSpeed->GetSpeed())
 			{
 				//突進攻撃状態になったとき、1回だけ実行される。
 				if (m_attackDelayTimer == 0)
@@ -106,7 +111,7 @@ namespace nsKabutoubatu
 				ExclamationMarkActive();
 
 				//突進アニメーション再生
-				m_model->SetAnimationSpeed(1.0f);
+				m_model->SetAnimationSpeed(1.0f * m_onlineUpdateSpeed->GetSpeed());
 				m_model->PlayAnimation(enTackleAnimation);
 			}
 			//攻撃遅延タイマーが終了
@@ -141,7 +146,7 @@ namespace nsKabutoubatu
 			}
 			m_blowAwayAfterWaitTimer++;
 			//吹っ飛ばし後の停止時間がオーバーしたら
-			if (m_blowAwayAfterWaitTimer > 70)
+			if (m_blowAwayAfterWaitTimer > 70/ m_onlineUpdateSpeed->GetSpeed())
 			{
 				//吹っ飛ばし後の停止時間を初期化
 				m_blowAwayAfterWaitTimer = 0;
@@ -150,7 +155,7 @@ namespace nsKabutoubatu
 			}
 
 			//Winアニメーション再生
-			m_model->SetAnimationSpeed(1.0f);
+			m_model->SetAnimationSpeed(1.0f * m_onlineUpdateSpeed->GetSpeed());
 			m_model->PlayAnimation(enWinAnimation);
 
 			break;
@@ -212,7 +217,7 @@ namespace nsKabutoubatu
 			m_playerStatus[GetLastKillPlayer()]->AddEnemyKillNum();
 
 			//死亡アニメーション再生
-			m_model->SetAnimationSpeed(2.0f);
+			m_model->SetAnimationSpeed(2.0f * m_onlineUpdateSpeed->GetSpeed());
 			m_model->PlayAnimation(enDeathAnimation);
 
 			//「発見！」のUI(エクスクラメーションマーク)を表示されていたら非表示にする
@@ -255,10 +260,11 @@ namespace nsKabutoubatu
 				//正規化
 				m_moveSpeed.Normalize();
 				//移動速度をかける
-				m_moveSpeed *= nsMole::RANDOM_MOVE_POWER;
+				m_moveSpeed *= nsMole::RANDOM_MOVE_POWER * m_onlineUpdateSpeed->GetSpeed();
 
 				m_randomDelayTimer = (rand() % 50);
 				m_randomDelayTimer += 80;
+				m_randomDelayTimer /= m_onlineUpdateSpeed->GetSpeed();
 
 				m_randomMoveTimer = 0;
 			}
@@ -318,7 +324,7 @@ namespace nsKabutoubatu
 		//上方向に行かないように補正
 		m_playerToEnemyDistanceDirecion[m_nearPlayer].y = min(0, m_playerToEnemyDistanceDirecion[m_nearPlayer].y);
 		//移動速度にする
-		m_moveSpeed = m_playerToEnemyDistanceDirecion[m_nearPlayer] * nsMole::MOVE_POWER;
+		m_moveSpeed = m_playerToEnemyDistanceDirecion[m_nearPlayer] * nsMole::MOVE_POWER * m_onlineUpdateSpeed->GetSpeed();
 
 		//TODO:突進攻撃サウンドを再生
 		if ((m_cameraTargetPos -m_pos).Length() < nsStdafx::SOUND_CAN_HEARD_RANGE)
@@ -355,7 +361,7 @@ namespace nsKabutoubatu
 		}
 
 		//攻撃時間が終わったら、
-		if (m_attackTimer > nsMole::ATTACK_TIME)
+		if (m_attackTimer > nsMole::ATTACK_TIME/ m_onlineUpdateSpeed->GetSpeed())
 		{
 			//距離検索状態にする
 			m_nowState = enPlayerSearchAndRandomMove;
@@ -408,7 +414,7 @@ namespace nsKabutoubatu
 		//進んでいる方向(吹っ飛ばす方向)を正規化
 		m_moveSpeed.Normalize();
 		//吹っ飛ばす力に変える
-		m_moveSpeed *= nsMole::BLOWAWAY_POWER;
+		m_moveSpeed *= nsMole::BLOWAWAY_POWER * m_onlineUpdateSpeed->GetSpeed();
 		m_moveSpeed.y = 7.5f;
 		//プレイヤーに移動速度(&移動方向)を渡す
 		m_player[m_blowAwayPlayer]->SetMoveSpeed(m_moveSpeed);
