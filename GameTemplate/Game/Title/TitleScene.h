@@ -21,6 +21,15 @@ namespace nsKabutoubatu
 		/// —ñ‹“Œ^
 		/// </summary>
 
+		//ó‘Ô
+		enum enSelectState
+		{
+			enStartOrEnd,
+			enGameModeSelect,
+			enOnlineRoomCreateOrJoin,
+			enOnlineMatchWaiting
+		};
+
 		//‘I‘ğó‘Ô
 		enum enStartOrEndState
 		{

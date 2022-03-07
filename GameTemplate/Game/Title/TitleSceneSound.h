@@ -13,7 +13,7 @@ namespace nsKabutoubatu
 	class TitleSceneSound : public IGameObject
 	{
 	private:
-		SoundSource* m_titleSceneSound = nullptr;
+		SoundSource* m_gingleSound = nullptr;
 		SoundSource* m_selectSound = nullptr;
 		SoundSource* m_decideSound = nullptr;
 
