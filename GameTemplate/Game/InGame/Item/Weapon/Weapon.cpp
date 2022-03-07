@@ -129,6 +129,7 @@ namespace nsKabutoubatu
 		if (m_model != nullptr)
 		{
 			DeleteGO(m_model);
+			m_model = nullptr;
 		}
 
 		m_weaponNum = weaponNum;

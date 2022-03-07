@@ -375,6 +375,7 @@ namespace nsKabutoubatu
 				{
 					//混乱モデルを削除
 					DeleteGO(m_confusionStar);
+					m_confusionStar = nullptr;
 				}
 				//死亡アニメーションが終了したら、
 				if (!m_model->IsPlaying())

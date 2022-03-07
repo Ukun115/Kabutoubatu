@@ -628,9 +628,10 @@ namespace nsKabutoubatu
 	{
 		m_recoveryState = enRecoveryStay;
 		m_haveRecoveryItem = false;
-		if (m_recoveryItem)
+		if (m_recoveryItem != nullptr)
 		{
 			DeleteGO(m_recoveryItem);
+			m_recoveryItem = nullptr;
 		}
 	}
 
