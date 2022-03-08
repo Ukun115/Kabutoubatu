@@ -23,6 +23,7 @@ public:
 	}
 public:
 
+	//二重デリートを検知するための関数
 	virtual void OnDestroy()
 	{
 

@@ -218,7 +218,7 @@ namespace nsKabutoubatu
 				//正規化
 				m_dir[playerNum].Normalize();
 				//吹っ飛ばしパワーにする
-				m_dir[playerNum] *= 10.0f* m_onlineUpdateSpeed->GetSpeed();
+				m_dir[playerNum] *= 10.0f;
 
 				//プレイヤーに移動速度(&移動方向)を渡す
 				m_player[playerNum]->SetMoveSpeed(m_dir[playerNum]);

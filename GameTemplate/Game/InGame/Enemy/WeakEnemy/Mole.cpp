@@ -414,7 +414,7 @@ namespace nsKabutoubatu
 		//進んでいる方向(吹っ飛ばす方向)を正規化
 		m_moveSpeed.Normalize();
 		//吹っ飛ばす力に変える
-		m_moveSpeed *= nsMole::BLOWAWAY_POWER * m_onlineUpdateSpeed->GetSpeed();
+		m_moveSpeed *= nsMole::BLOWAWAY_POWER;
 		m_moveSpeed.y = 7.5f;
 		//プレイヤーに移動速度(&移動方向)を渡す
 		m_player[m_blowAwayPlayer]->SetMoveSpeed(m_moveSpeed);

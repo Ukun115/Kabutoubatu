@@ -227,6 +227,11 @@ namespace nsKabutoubatu
 			m_playerNo = m_online->GetPlayerNo();
 			//通信相手のゲームパッドナンバーを設定する
 			m_otherPlayerNo = m_online->GetOtherPlayerNo();
+
+			//ゲームパッドの番号を設定
+			m_online->GetPlayerGamePad(m_playerNo).Init(m_playerNo);
+			m_online->GetPlayerGamePad(m_otherPlayerNo).Init(m_otherPlayerNo);
+
 			//自身のゲームパッドナンバーをゲームシーンクラスに渡す
 			m_gameScene->SetPlayerNo(m_playerNo);
 			//自身のゲームパッドをゲームシーンクラスに渡す

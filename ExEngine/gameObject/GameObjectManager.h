@@ -105,7 +105,9 @@ public:
 	void DeleteGameObject( IGameObject* gameObject )
 	{
 		if (gameObject != nullptr) {
+			//二重デリートをしてしまうとOnDestroy関数でエラーが出る。
 			gameObject->OnDestroy();
+			//ゲームオブジェクトを死亡させる。
 			gameObject->Dead();
 		}
 	}
