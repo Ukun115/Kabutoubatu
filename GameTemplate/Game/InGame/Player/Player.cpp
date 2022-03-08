@@ -631,6 +631,7 @@ namespace nsKabutoubatu
 		if (m_recoveryItem != nullptr)
 		{
 			DeleteGO(m_recoveryItem);
+			//ヌルポインタを入れておく。
 			m_recoveryItem = nullptr;
 		}
 	}

@@ -24,6 +24,7 @@ namespace nsKabutoubatu
         const int BLUR_POWER = 5;
 
         const char* SPRITE2D_FX_FILEPATH = "Assets/shader/2D.fx";
+        const char* DOF_FX_FILEPATH = "Assets/shader/DoF.fx";
     }
 
     //DoFの初期化メソッド
@@ -114,7 +115,7 @@ namespace nsKabutoubatu
         m_combineBokeImageSpriteInitData.m_width = nsDoF::SPRITE_WIDTH;
         m_combineBokeImageSpriteInitData.m_height = nsDoF::SPRITE_HEIGHT;
         //合成用のシェーダーを指定する。
-        m_combineBokeImageSpriteInitData.m_fxFilePath = "Assets/shader/DoF.fx";
+        m_combineBokeImageSpriteInitData.m_fxFilePath = nsDoF::DOF_FX_FILEPATH;
         m_combineBokeImageSpriteInitData.m_colorBufferFormat[nsDoF::FIRST_ARRAY] = DXGI_FORMAT_R32G32B32A32_FLOAT;
         // 距離を利用してボケ画像をアルファブレンディングするので、半透明合成モードにする。
         m_combineBokeImageSpriteInitData.m_alphaBlendMode = AlphaBlendMode_Trans;

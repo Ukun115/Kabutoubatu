@@ -28,6 +28,11 @@ namespace nsKabutoubatu
 
 	bool Stage::Start()
 	{
+		return true;
+	}
+
+	void Stage::Init()
+	{
 		for (int playerNum = 0; playerNum < m_playerNum; playerNum++)
 		{
 			m_player[playerNum] = FindGO<Player>(nsStdafx::PLAYER_NAME[playerNum]);
@@ -64,9 +69,10 @@ namespace nsKabutoubatu
 		{
 			m_shopBuiding[shopNum] = NewGO<StageBuilding>();
 			m_shopBuiding[shopNum]->SetPlayerNumber(m_playerNum);
-			if (m_playerGamePad[m_playerNum])
+			if (m_playerGamePad[m_onlinePlayerPadNo] != nullptr)
 			{
-				m_shopBuiding[shopNum]->SetPlayerGamePad(*m_playerGamePad[m_playerNum], m_playerNum);
+				m_shopBuiding[shopNum]->SetPlayerGamePad(*m_playerGamePad[m_onlinePlayerPadNo], m_onlinePlayerPadNo);
+				m_shopBuiding[shopNum]->SetPlayerGamePad(*m_playerGamePad[!m_onlinePlayerPadNo], !m_onlinePlayerPadNo);
 			}
 			//アイテムショップか宿屋か最初のボスの家かを設定
 			m_shopBuiding[shopNum]->SetShopType(shopNum);
@@ -91,7 +97,7 @@ namespace nsKabutoubatu
 			m_mole[weakEnemyNum]->SetPlayerNum(m_playerNum);
 			m_slime[weakEnemyNum] = NewGO<Slime>();
 			m_slime[weakEnemyNum]->SetPlayerNum(m_playerNum);
-			m_needleSlime[weakEnemyNum] = NewGO<NeedleSlime>(nsStdafx::PRIORITY_0,nsStdafx::NEEDLE_SLIME_NAME);
+			m_needleSlime[weakEnemyNum] = NewGO<NeedleSlime>(nsStdafx::PRIORITY_0, nsStdafx::NEEDLE_SLIME_NAME);
 			m_needleSlime[weakEnemyNum]->SetPlayerNum(m_playerNum);
 		}
 		//もぐらを初期リスポーン位置にセット
@@ -110,8 +116,6 @@ namespace nsKabutoubatu
 		m_needleSlime[1]->SetInitPosition(nsStage::WEAK_ENEMY_FIRST_RESPOWN_POS[9]);
 		m_needleSlime[2]->SetInitPosition(nsStage::WEAK_ENEMY_FIRST_RESPOWN_POS[10]);
 		m_needleSlime[3]->SetInitPosition(nsStage::WEAK_ENEMY_FIRST_RESPOWN_POS[11]);
-
-		return true;
 	}
 
 	Stage::~Stage()
@@ -155,6 +159,7 @@ namespace nsKabutoubatu
 			//もぐらが死んだとき、
 			if (m_mole[weakEnemyNum]->IsDead() || m_mole[weakEnemyNum]->GetFall())
 			{
+				//ヌルポインタを入れておく。
 				m_mole[weakEnemyNum] = nullptr;
 				//新しいもぐらを生成させる。
 				m_mole[weakEnemyNum] = NewGO<Mole>();
@@ -180,6 +185,7 @@ namespace nsKabutoubatu
 			//スライムが死んだとき、
 			if (m_slime[weakEnemyNum]->IsDead() || m_slime[weakEnemyNum]->GetFall())
 			{
+				//ヌルポインタを入れておく。
 				m_slime[weakEnemyNum] = nullptr;
 				//新しいスライムを生成させる。
 				m_slime[weakEnemyNum] = NewGO<Slime>();
@@ -205,6 +211,7 @@ namespace nsKabutoubatu
 			//とげスライムが死んだとき、
 			if (m_needleSlime[weakEnemyNum]->IsDead()|| m_needleSlime[weakEnemyNum]->GetFall())
 			{
+				//ヌルポインタを入れておく。
 				m_needleSlime[weakEnemyNum] = nullptr;
 				//新しいとげスライムを生成させる。
 				m_needleSlime[weakEnemyNum] = NewGO<NeedleSlime>();

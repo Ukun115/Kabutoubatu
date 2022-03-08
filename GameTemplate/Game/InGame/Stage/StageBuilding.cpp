@@ -114,6 +114,7 @@ namespace nsKabutoubatu
 				SceneTransition();
 
 				DeleteGO(m_fade);
+				//ヌルポインタを入れておく。
 				m_fade = nullptr;
 			}
 		}
@@ -199,9 +200,8 @@ namespace nsKabutoubatu
 			//プレイヤーからドアにのびるベクトルを取得
 			m_newPlayerMoveDirection = m_doorPos - m_player[playerNum]->GetPosition();
 			//ドアとの距離が近かったら、
-			if (m_newPlayerMoveDirection.Length() < m_canDoorTatchLength&&m_player[playerNum]->GetNowState() != 2)
+			if (m_newPlayerMoveDirection.Length() < m_canDoorTatchLength&&m_player[playerNum]->GetNowState() != enGhost)
 			{
-
 				m_doorTatchFlg[playerNum] = true;
 				//フラグを立ててAボタンを押されたときにドア開閉にプラスして攻撃しないようにしている。
 				m_player[playerNum]->SetNowDoorTatch(true);
@@ -209,10 +209,10 @@ namespace nsKabutoubatu
 				//吹き出しを表示させる
 				HukidasiActivate(playerNum);
 
-				if (m_playerGamePad[playerNum])
+				if (m_gamePad[playerNum] != nullptr)
 				{
 					//Aボタンが押されたら、
-					if (m_playerGamePad[playerNum]->IsTrigger(enButtonA))
+					if (m_gamePad[playerNum]->IsTrigger(enButtonA))
 					{
 						//ドアの状態の入れ替え
 						switch (m_doorState)
@@ -348,7 +348,7 @@ namespace nsKabutoubatu
 			if (m_newPlayerMoveDirection.Length() < m_buildingEnterLength && m_playerAnimation[playerNum]->GetAnimationState() != 3)
 			{
 				//建物に入る状態にする
-				m_player[playerNum]->SetNowState(3);
+				m_player[playerNum]->SetNowState(enDontMove);
 				//プレイヤーの移動方向を建物の奥方向にして移動させる
 				m_player[playerNum]->SetMoveSpeed({ 0.0f,0.0f,-1.0f });
 
@@ -373,9 +373,9 @@ namespace nsKabutoubatu
 			m_hotelScene->SetPlayerNumber(m_playerNum);
 			//建物の場所をシーンに渡しておく
 			m_hotelScene->SetHotelPosition(m_pos);
-			if (m_playerGamePad[m_playerNum])
+			if (m_gamePad[m_playerNum])
 			{
-				m_hotelScene->SetPlayerGamePad(*m_playerGamePad[m_playerNum], m_playerNum);
+				m_hotelScene->SetPlayerGamePad(*m_gamePad[m_playerNum], m_playerNum);
 			}
 			else
 			{
@@ -422,16 +422,16 @@ namespace nsKabutoubatu
 			if (m_shopType != enFirstBossHouse)
 			{
 				//操作不可状態にする
-				m_player[playerNum]->SetNowState(3);
+				m_player[playerNum]->SetNowState(enDontMove);
 			}
 			//ボス戦に行く且つゴースト状態じゃないとき、
-			else if (m_player[playerNum]->GetNowState() != 2)
+			else if (m_player[playerNum]->GetNowState() != enGhost)
 			{
 				//通常状態にする
 				m_player[playerNum]->SetNowState(0);
 			}
 			//アイドルアニメーションにする
-			m_playerAnimation[playerNum]->SetAnimation(0);
+			m_playerAnimation[playerNum]->SetAnimation(enNormal);
 			//回復アイテムを持っていたらしまう。
 			m_player[playerNum]->RecoveryItemDelete();
 		}
@@ -440,7 +440,7 @@ namespace nsKabutoubatu
 		if (m_playerNum == 1)
 		{
 			m_accompaniAI = FindGO<AccompanyAI>(nsStdafx::ACCOMPANYAI_NAME);
-			m_accompaniAI->SetNowState(0);
+			m_accompaniAI->SetNowState(enNormal);
 			m_accompaniAI->SetPosition({ -130.0f, 10000.0f * m_gyaku, 250.0f });
 		}
 

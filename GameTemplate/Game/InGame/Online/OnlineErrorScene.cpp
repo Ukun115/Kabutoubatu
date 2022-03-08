@@ -15,6 +15,9 @@ namespace nsKabutoubatu
 	{
 		//オンライン時じゃないときの通常fps値
 		const int NORMAL_FPS_VALUE = 60;
+		const int IMAGE_WIDTH = 1280;
+		const int IMAGE_HEIGHT = 720;
+		const int PAD_NO = 0;
 	}
 
 	bool OnlineErrorScene::Start()
@@ -28,10 +31,10 @@ namespace nsKabutoubatu
 
 		//背景を暗くするための画像
 		m_grayBack = NewGO<SpriteRenderSub>(nsStdafx::PRIORITY_11);
-		m_grayBack->Init("OnlineErrorGrayBack", 1280, 720);
+		m_grayBack->Init("OnlineErrorGrayBack", nsOnlineErrorScene::IMAGE_WIDTH, nsOnlineErrorScene::IMAGE_HEIGHT);
 		//エラーメッセージ画像
 		m_errorMessageBox = NewGO<SpriteRenderSub>(nsStdafx::PRIORITY_12);
-		m_errorMessageBox->Init("ErrorMessageBox", 1280, 720);
+		m_errorMessageBox->Init("ErrorMessageBox", nsOnlineErrorScene::IMAGE_WIDTH, nsOnlineErrorScene::IMAGE_HEIGHT);
 
 		return true;
 	}
@@ -46,7 +49,7 @@ namespace nsKabutoubatu
 
 	void OnlineErrorScene::PauseUpdate()
 	{
-		////TODO:↓機能していないので機能させる
+		////TODO:↓機能していない
 		//if (m_errorMessageBoxXscale < 1.0f)
 		//{
 		//	m_errorMessageBoxXscale += 0.01f;
@@ -61,11 +64,12 @@ namespace nsKabutoubatu
 	void OnlineErrorScene::BackTitle()
 	{
 		//Aボタンを押したら、
-		if (g_pad[0]->IsTrigger(enButtonA))
+		if (g_pad[nsOnlineErrorScene::PAD_NO]->IsTrigger(enButtonA))
 		{
 			//オンラインのインスタンスを削除する
 			m_online = FindGO<Online>(nsStdafx::ONLINE_NAME);
 			DeleteGO(m_online);
+			//ヌルポインタを入れておく。
 			m_online = nullptr;
 
 			//ゲームシーンのインスタンスを検索

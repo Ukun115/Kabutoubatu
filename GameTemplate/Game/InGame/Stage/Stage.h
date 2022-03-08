@@ -32,6 +32,8 @@ namespace nsKabutoubatu
 		Vector3 m_weakEnemyRandomRespownPos;
 		int m_playerNum = 0;
 
+		int m_onlinePlayerPadNo = -1;
+
 		/// <summary>
 		/// ŒÄ‚Î‚ê‚ÄÅ‰‚ÉÀs‚³‚ê‚éŠÖ”
 		/// </summary>
@@ -55,7 +57,11 @@ namespace nsKabutoubatu
 		Vector3 WeakEnemyRandomRespownPos(const int x1, const int z1, const int x2, const int z2);
 
 	public:
+		void Init();
+
 		void SetPlayerNumber(const int playerNum) { m_playerNum = playerNum; };
+
+		void SetOnlinePlayerPadNo(const int playerPadNo) { m_onlinePlayerPadNo = playerPadNo; };
 
 		void SetPlayerGamePad(GamePad& gamePad, const int playerNo) { m_playerGamePad[playerNo] = &gamePad; };
 	};

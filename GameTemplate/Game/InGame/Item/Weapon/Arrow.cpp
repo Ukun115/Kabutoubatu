@@ -10,15 +10,17 @@ namespace nsKabutoubatu
 	namespace nsArrow
 	{
 		const float ARROW_SPEED_POWER = 15.0f;
+		const char* ARROW_MODEL_FILE_NAME = "Arrow";
 	}
 
 	bool Arrow::Start()
 	{
+		//オンライン時の更新速度管理クラスのインスタンスを検索
 		m_onlineUpdateSpeed = FindGO<OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
 
-		//正規化
+		//移動速度を正規化
 		m_moveSpeed.Normalize();
-		//地面と平行にしか移動しないためyを0にする。
+		//地面と平行にしか移動しないようにするためy方向を0にする。
 		m_moveSpeed.y = 0.0f;
 
 		//モデルを初期化
@@ -27,7 +29,7 @@ namespace nsKabutoubatu
 		m_arrowModel->SetOutline(false);		//輪郭線をつけない
 		m_arrowModel->SetSilhouette(true);		//シルエットをつける
 		m_arrowModel->SetPlayerMode(m_playerNum);	//プレイヤー１か２かを渡す
-		m_arrowModel->Init("Arrow");
+		m_arrowModel->Init(nsArrow::ARROW_MODEL_FILE_NAME);
 		//モデルの位置を更新
 		m_arrowModel->SetPosition(m_pos);
 		m_moveSpeed *= nsArrow::ARROW_SPEED_POWER * m_onlineUpdateSpeed->GetSpeed();

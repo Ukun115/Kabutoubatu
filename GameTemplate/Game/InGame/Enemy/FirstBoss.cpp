@@ -244,6 +244,7 @@ namespace nsKabutoubatu
 							{
 								//混乱モデルを削除
 								DeleteGO(m_confusionStar);
+								//ヌルポインタを入れておく。
 								m_confusionStar = nullptr;
 								//混乱状態を解除(ランダム移動になる)
 								m_moveState = enRandomMoveState;
@@ -375,6 +376,7 @@ namespace nsKabutoubatu
 				{
 					//混乱モデルを削除
 					DeleteGO(m_confusionStar);
+					//ヌルポインタを入れておく。
 					m_confusionStar = nullptr;
 				}
 				//死亡アニメーションが終了したら、

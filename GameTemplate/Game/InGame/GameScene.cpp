@@ -94,6 +94,7 @@ namespace nsKabutoubatu
 			//プレイヤーのパッド情報をステージに送る
 			m_stage->SetPlayerGamePad(*m_playerGamePad, m_playerNo);
 			m_stage->SetPlayerGamePad(*m_otherPlayerGamePad, m_otherPlayerNo);
+			m_stage->SetOnlinePlayerPadNo(m_playerNo);
 		}
 		//オンラインプレイじゃないとき、
 		else
@@ -125,6 +126,9 @@ namespace nsKabutoubatu
 				}
 			}
 		}
+
+		//ステージを初期化
+		m_stage->Init();
 
 		return true;
 	}
@@ -171,6 +175,7 @@ namespace nsKabutoubatu
 		if (m_fade != nullptr && m_fade->GetNowState() == 2)
 		{
 			DeleteGO(m_fade);
+			//ヌルポインタを入れておく。
 			m_fade = nullptr;
 		}
 

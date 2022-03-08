@@ -129,6 +129,7 @@ namespace nsKabutoubatu
 		if (m_model != nullptr)
 		{
 			DeleteGO(m_model);
+			//ヌルポインタを入れておく。
 			m_model = nullptr;
 		}
 

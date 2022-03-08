@@ -8,6 +8,18 @@
 
 namespace nsKabutoubatu
 {
+	namespace nsPlayerCamera
+	{
+		float FAR_RANGE = 1000000;	//遠平面までの距離
+		float VIEW_ANGLE = 38.0f;	//画角
+
+		Vector3 CAMERA_POS_SHOP = { 0.0f,10150.0f,600.0f };
+		Vector3 CAMERA_TARGET_SHOP = { 0.0f, 10100.0f, 0.0f };
+		Vector3 CAMERA_POS_BOSS_STAGE = { 0.0f,-9500.0f,1200.0f };
+		Vector3 CAMERA_TARGET_BOSS_STAGE = { 0.0f, -10000.0f, 0.0f };
+
+	}
+
 	bool PlayerCamera::Start()
 	{
 		//プレイヤーのインスタンスを検索
@@ -16,8 +28,8 @@ namespace nsKabutoubatu
 		m_cameraMoveDirectionChange = NewGO<CameraMoveDirectionChange>();
 		m_cameraMoveDirectionChange->SetTargetPlayer(m_targetPlayer);
 		//遠平面までの距離を設定
-		g_camera3D->SetFar(1000000);
-		g_camera3D->SetViewAngle(Math::DegToRad(38.0f));
+		g_camera3D->SetFar(nsPlayerCamera::FAR_RANGE);
+		g_camera3D->SetViewAngle(Math::DegToRad(nsPlayerCamera::VIEW_ANGLE));
 		return true;
 	}
 
@@ -69,16 +81,16 @@ namespace nsKabutoubatu
 		//ショップカメラ
 		case enShop:
 			//視点
-			m_cameraPos = { 0.0f,10150.0f,600.0f };
+			m_cameraPos = nsPlayerCamera::CAMERA_POS_SHOP;
 			//注視点
-			m_cameraTarget = { 0.0f, 10100.0f, 0.0f };
+			m_cameraTarget = nsPlayerCamera::CAMERA_TARGET_SHOP;
 			break;
 		//ボスステージカメラ
 		case enBossStage:
 			//視点
-			m_cameraPos = { 0.0f,-9500.0f,1200.0f };
+			m_cameraPos = nsPlayerCamera::CAMERA_POS_BOSS_STAGE;
 			//注視点
-			m_cameraTarget = { 0.0f, -10000.0f, 0.0f };
+			m_cameraTarget = nsPlayerCamera::CAMERA_TARGET_BOSS_STAGE;
 			break;
 		}
 

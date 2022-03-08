@@ -381,6 +381,7 @@ namespace nsKabutoubatu
 		//サーバーから切断済み状態の時、
 		case State::DISCONNECTED:
 			m_errorFunc();
+			//ヌルポインタを入れておく。
 			m_errorFunc = nullptr;
 			m_state = State::END;
 			break;

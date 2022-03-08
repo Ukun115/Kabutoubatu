@@ -35,6 +35,15 @@ namespace nsKabutoubatu
 			enPlayerNum		//プレイヤーの総数
 		};
 
+		//プレイヤーの状態
+		enum enPlayerNowState
+		{
+			enNormal,			//通常
+			enSufferAnAttack,	//攻撃を受けた状態
+			enGhost,			//ゴースト状態
+			enDontMove			//何もしない状態
+		};
+
 		//ドアの状態
 		enum enDoorState
 		{
@@ -70,7 +79,7 @@ namespace nsKabutoubatu
 		//最初のボスステージ
 		FirstBossStage* m_firstBossStage = nullptr;
 		OnlineUpdateSpeed* m_onlineUpdateSpeed = nullptr;
-		GamePad* m_playerGamePad[enPlayerNum] = { nullptr };
+		GamePad* m_gamePad[enPlayerNum] = { nullptr };
 
 		PhysicsStaticObject m_physicsStaticObject[2];		//静的物理オブジェクトクラス
 
@@ -145,6 +154,6 @@ namespace nsKabutoubatu
 		/// <returns>ドアに触れているかどうか</returns>
 		bool GetDoorTatchFlg(const int playerNum){ return m_doorTatchFlg[playerNum]; };
 
-		void SetPlayerGamePad(GamePad& gamePad,const int playerNo) { m_playerGamePad[playerNo] = &gamePad; };
+		void SetPlayerGamePad(GamePad& gamePad,const int playerNo) { m_gamePad[playerNo] = &gamePad; };
 	};
 }

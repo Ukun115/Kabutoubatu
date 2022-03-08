@@ -9,9 +9,15 @@
 
 namespace nsKabutoubatu
 {
+	namespace nsOnline
+	{
+		//プレイヤー番号の初期化値
+		int PLAYER_NO_INIT_VALUE = -1;
+	}
+
 	void Online::Update()
 	{
-		//オンライン処理
+		//ロビーの更新処理
 		if (m_onlineTwoPlayerMatchEngine)
 		{
 			m_onlineTwoPlayerMatchEngine->Update();
@@ -29,13 +35,14 @@ namespace nsKabutoubatu
 			(
 				L"c9354541-9e42-4465-b556-6c707bb22d85",	//appID
 				L"1.0",										//appVer.
-				&m_playerNo,
+				&m_playerNo,								//プレイヤー番号
 				sizeof(int),
 				[&](void* pData, int size) { OnAllPlayerJoined(pData, size); },
 				[&]() { OnAllPlayerStartGame(); },
 				[&]() { OnError(); }
 			);
 
+			//デバックログ
 			OutputDebugStringA("オンライン初期化\n");
 
 			m_onlineUpdateSpeed = FindGO<OnlineUpdateSpeed>(nsStdafx::ONLINEUPDATESPEED_NAME);
@@ -47,14 +54,17 @@ namespace nsKabutoubatu
 	{
 		m_isJoined = true;
 
+		//デバックログ
 		OutputDebugStringA("全てのプレイヤーがルームに参加\n");
 	}
 
 	//すべてのプレイヤーがゲームスタートした時に呼ばれる処理。
 	void Online::OnAllPlayerStartGame()
 	{
+		//ステップをインゲームにする
 		m_step = enStep_InGame;
 
+		//デバックログ
 		OutputDebugStringA("全てのプレイヤーがゲームをスタート\n");
 
 		m_onlineUpdateSpeed->SetIsOnline(true);
@@ -63,8 +73,10 @@ namespace nsKabutoubatu
 	//通信エラーが起きた。
 	void Online::OnError()
 	{
+		//デバックログ
 		OutputDebugStringA("通信エラーが起きました。\n");
 
+		//ステップをエラーにする
 		m_step = enStep_Error;
 
 		//通信エラーシーンに遷移
@@ -77,16 +89,17 @@ namespace nsKabutoubatu
 	void Online::DeleteData()
 	{
 		//オンラインマッチングしてしまわないように削除しておく
-		if (m_playerNo != -1)
+		if (m_playerNo != nsOnline::PLAYER_NO_INIT_VALUE)
 		{
-			m_playerNo = -1;
+			m_playerNo = nsOnline::PLAYER_NO_INIT_VALUE;
 			//削除
 			delete m_onlineTwoPlayerMatchEngine;
-			//nullポインタにしておく。
+			//ヌルポインタを入れておく。
 			m_onlineTwoPlayerMatchEngine = nullptr;
 			//ステップをキャラクターセレクトに戻す
 			m_step = enStep_CharacterSelect;
 
+			//デバックログ
 			OutputDebugStringA("オンライン削除\n");
 
 			m_onlineUpdateSpeed->SetIsOnline(false);
@@ -100,11 +113,13 @@ namespace nsKabutoubatu
 		// ほかのプレイヤーがゲーム開始可能になるまで待つ。
 		m_step = enStep_WaitAllPlayerStartGame;
 
+		//デバックログ
 		OutputDebugStringA("ゲーム開始可能\n");
 
 		m_onlineUpdateSpeed->SetIsOnline(true);
 	}
 
+	//プレイヤーのゲームパッドを取得する関数
 	GamePad& Online::GetPlayerGamePad(const int no)
 	{
 		return m_onlineTwoPlayerMatchEngine->GetGamePad(no);

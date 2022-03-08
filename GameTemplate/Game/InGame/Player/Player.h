@@ -96,7 +96,7 @@ namespace nsKabutoubatu
 		Vector3 m_pos;
 		Vector3 m_moveSpeed;
 		Vector3 m_friction;		//–€C
-		int m_nowState = 0;
+		int m_nowState = enNormal;
 		Vector3 m_hitGroundNormal;
 		int m_recoveryState = enRecoveryStay;
 		//³–ÊƒxƒNƒgƒ‹

@@ -52,6 +52,7 @@ namespace nsKabutoubatu
 		if (m_fade != nullptr && m_fade->GetNowState() == 2)
 		{
 			DeleteGO(m_fade);
+			//ヌルポインタを入れておく。
 			m_fade = nullptr;
 		}
 

@@ -139,6 +139,7 @@ namespace nsKabutoubatu
 						m_lastAttackPlayer = playerNum;
 						//矢を消す
 						DeleteGO(m_arrow);
+						//ヌルポインタを入れておく。
 						m_arrow = nullptr;
 
 						return true;

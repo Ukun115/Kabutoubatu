@@ -14,8 +14,8 @@ namespace nsKabutoubatu
 		const int BLUR_POWER = 10;
 		const int FIRST_ARRAY = 0;
 
-		const char* SPRITE2D_FX_FILEPATH = "Assets/shader/2D.fx";
-		const char* BLOOM_FX_FILEPATH = "Assets/shader/bloom.fx";
+		const char* SPRITE2D_FX_FILE_PATH = "Assets/shader/2D.fx";
+		const char* BLOOM_FX_FILE_PATH = "Assets/shader/bloom.fx";
 	}
 
 	//ブルーム初期化メソッド
@@ -47,7 +47,7 @@ namespace nsKabutoubatu
 		m_spriteInitData.m_height = nsBloom::SPRITE_HEIGHT;
 
 		// モノクロ用のシェーダーを指定する
-		m_spriteInitData.m_fxFilePath = nsBloom::SPRITE2D_FX_FILEPATH;
+		m_spriteInitData.m_fxFilePath = nsBloom::SPRITE2D_FX_FILE_PATH;
 
 		m_copyToFrameBufferSprite.Init(m_spriteInitData);
 	}
@@ -95,7 +95,7 @@ namespace nsKabutoubatu
 	void Bloom::LuminanceSpriteInit(RenderTarget& mrt)
 	{
 		// 輝度抽出用のシェーダーのファイルパスを指定する
-		m_luminanceSpriteInitData.m_fxFilePath = nsBloom::BLOOM_FX_FILEPATH;
+		m_luminanceSpriteInitData.m_fxFilePath = nsBloom::BLOOM_FX_FILE_PATH;
 
 		// 頂点シェーダーのエントリーポイントを指定する
 		m_luminanceSpriteInitData.m_vsEntryPointFunc = "VSMain";
@@ -149,7 +149,7 @@ namespace nsKabutoubatu
 		m_bokeSpriteInitData.m_width = nsBloom::SPRITE_WIDTH;
 		m_bokeSpriteInitData.m_height = nsBloom::SPRITE_HEIGHT;
 		//ボケ画像を合成する必要があるので、2D用のシェーダーではなく、専用シェーダーを指定。
-		m_bokeSpriteInitData.m_fxFilePath = nsBloom::BLOOM_FX_FILEPATH;
+		m_bokeSpriteInitData.m_fxFilePath = nsBloom::BLOOM_FX_FILE_PATH;
 		m_bokeSpriteInitData.m_psEntryPoinFunc = "PSBloomFinal";
 
 		//ただし、加算合成で描画するので、アルファブレンディングモードを加算にする。
