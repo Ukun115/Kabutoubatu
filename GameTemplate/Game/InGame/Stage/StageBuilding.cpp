@@ -387,6 +387,13 @@ namespace nsKabutoubatu
 			m_itemShopScene->SetPlayerNumber(m_playerNum);
 			//建物の場所をシーンに渡しておく
 			m_itemShopScene->SetItemShopPosition(m_pos);
+			for (int playerNum = enPlayer1; playerNum < m_playerNum; playerNum++)
+			{
+				if (m_gamePad[playerNum] != nullptr)
+				{
+					m_itemShopScene->SetPlayerGamePad(*m_gamePad[playerNum], playerNum);
+				}
+			}
 			break;
 		//最初のボスと戦うシーン
 		case enFirstBossHouse:

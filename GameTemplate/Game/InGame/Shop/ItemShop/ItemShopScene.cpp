@@ -96,7 +96,10 @@ namespace nsKabutoubatu
 			//プレイヤーの番号をセット
 			m_ItemShopSelect[playerNum]->SetPlayerNum(playerNum);
 
-			m_ItemShopSelect[playerNum]->SetPlayerGamePad(*m_playerGamePad[playerNum]);
+			if (m_playerGamePad[playerNum] != nullptr)
+			{
+				m_ItemShopSelect[playerNum]->SetPlayerGamePad(*m_playerGamePad[playerNum]);
+			}
 		}
 
 		return true;
