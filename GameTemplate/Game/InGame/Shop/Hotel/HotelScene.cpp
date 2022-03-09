@@ -71,7 +71,10 @@ namespace nsKabutoubatu
 			//プレイヤーの番号をセット
 			m_hotelSelect[playerNum]->SetPlayerNum(playerNum);
 
-			m_hotelSelect[playerNum]->SetPlayerGamePad(*m_playerGamePad[playerNum]);
+			if (m_playerGamePad[playerNum] != nullptr)
+			{
+				m_hotelSelect[playerNum]->SetPlayerGamePad(*m_playerGamePad[playerNum]);
+			}
 
 			m_coinSprite[playerNum] = NewGO<SpriteRender>();
 			m_coinSprite[playerNum]->Init("Coin", 50, 50);

@@ -69,7 +69,7 @@ namespace nsKabutoubatu
 			CursorMove(enBuy, enEnter);
 
 			//Aボタンが押されたら、
-			if (m_playerGamePad)
+			if (m_playerGamePad != nullptr)
 			{
 				if (m_playerGamePad->IsTrigger(enButtonA) && !m_ItemSetumeiSprite->IsActive())
 				{
@@ -110,7 +110,7 @@ namespace nsKabutoubatu
 			//選択カーソル移動
 			CursorMove(enFirstItem, enBackState);
 
-			if (m_playerGamePad)
+			if (m_playerGamePad != nullptr)
 			{
 				//Aボタンが押されたら、
 				if (m_playerGamePad->IsTrigger(enButtonA) && !m_ItemSetumeiSprite->IsActive())
@@ -168,7 +168,7 @@ namespace nsKabutoubatu
 			//選択カーソル移動
 			CursorMove(enStatusUpItem1, enBack);
 
-			if (m_playerGamePad)
+			if (m_playerGamePad != nullptr)
 			{
 				//Aボタンが押されたら
 				if (m_playerGamePad->IsTrigger(enButtonA) && !m_ItemSetumeiSprite->IsActive())
@@ -235,7 +235,7 @@ namespace nsKabutoubatu
 	void ItemShopSelect::CursorMove(const int selectMin, const int selectMax)
 	{
 		//下入力
-		if (m_playerGamePad)
+		if (m_playerGamePad != nullptr)
 		{
 			if (m_playerGamePad->IsTrigger(enButtonDown) && !m_ItemSetumeiSprite->IsActive()) {
 				//現在セレクトされているのが「出る」だったら、

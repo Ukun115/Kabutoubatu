@@ -44,7 +44,7 @@ namespace nsKabutoubatu
 			CursorMove(enStay, enEnter);
 
 			//Aボタンが押されたら、
-			if (m_playerGamePad)
+			if (m_playerGamePad != nullptr)
 			{
 				if (m_playerGamePad->IsTrigger(enButtonA))
 				{
@@ -86,7 +86,7 @@ namespace nsKabutoubatu
 	void HotelSelect::CursorMove(const int selectMin, const int selectMax)
 	{
 		//下入力
-		if (m_playerGamePad)
+		if (m_playerGamePad != nullptr)
 		{
 			if (m_playerGamePad->IsTrigger(enButtonDown)) {
 				//現在セレクトされているのが「出る」だったら、
