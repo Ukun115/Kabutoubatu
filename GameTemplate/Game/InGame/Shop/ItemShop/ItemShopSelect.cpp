@@ -23,6 +23,10 @@ namespace nsKabutoubatu
 		m_itemShopSelectFont = NewGO<ItemShopSelectFont>();
 		//プレイヤー番号をセット
 		m_itemShopSelectFont->SetPlayerNum(m_playerNum);
+		if (m_playerGamePad != nullptr)
+		{
+			m_itemShopSelectFont->SetPlayerGamePad(*m_playerGamePad);
+		}
 
 		//PushXアイテム説明ボタン画像を初期化
 		m_pushXSprite = NewGO<SpriteRender>();

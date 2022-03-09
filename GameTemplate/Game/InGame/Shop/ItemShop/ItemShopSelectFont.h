@@ -68,6 +68,8 @@ namespace nsKabutoubatu
 		//説明するアイテム名
 		FontRender* m_setumeiItemName= nullptr;
 
+		GamePad* m_playerGamePad = nullptr;
+
 		//フォントの文字
 		wchar_t m_text[256];
 		//プレイヤー番号
@@ -107,5 +109,7 @@ namespace nsKabutoubatu
 
 		//プレイヤー番号セットメソッド
 		void SetPlayerNum(const int playerNum) { m_playerNum = playerNum; };
+
+		void SetPlayerGamePad(GamePad& gamePad) { m_playerGamePad = &gamePad; };
 	};
 }

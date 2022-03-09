@@ -316,9 +316,19 @@ namespace nsKabutoubatu
 			}
 
 			//もしXボタンが押されたなら、
-			if (g_pad[m_playerNum]->IsTrigger(enButtonX) && m_nowShoppingMode != 3)
+			if (m_playerGamePad != nullptr)
 			{
-				m_isFontActive = !m_isFontActive;
+				if (m_playerGamePad->IsTrigger(enButtonX) && m_nowShoppingMode != 3)
+				{
+					m_isFontActive = !m_isFontActive;
+				}
+			}
+			else
+			{
+				if (g_pad[m_playerNum]->IsTrigger(enButtonX) && m_nowShoppingMode != 3)
+				{
+					m_isFontActive = !m_isFontActive;
+				}
 			}
 
 			break;
@@ -362,9 +372,19 @@ namespace nsKabutoubatu
 			}
 
 			//もしXボタンが押されたなら、
-			if (g_pad[m_playerNum]->IsTrigger(enButtonX) && m_nowShoppingMode != 5)
+			if (m_playerGamePad != nullptr)
 			{
-				m_isFontActive = !m_isFontActive;
+				if (m_playerGamePad->IsTrigger(enButtonX) && m_nowShoppingMode != 5)
+				{
+					m_isFontActive = !m_isFontActive;
+				}
+			}
+			else
+			{
+				if (g_pad[m_playerNum]->IsTrigger(enButtonX) && m_nowShoppingMode != 5)
+				{
+					m_isFontActive = !m_isFontActive;
+				}
 			}
 
 			break;
