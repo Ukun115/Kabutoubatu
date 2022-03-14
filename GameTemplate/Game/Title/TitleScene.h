@@ -69,7 +69,7 @@ namespace nsKabutoubatu
 		Online* m_online = nullptr;
 
 		int m_cursorSelect = 0;
-		int m_selectState = 0;
+		int m_selectState = enStartOrEnd;
 		char m_gamePadNo[256];
 		int m_playerNo = 0;
 		int m_otherPlayerNo = 0;
@@ -98,6 +98,11 @@ namespace nsKabutoubatu
 
 		//ƒJ[ƒ\ƒ‹‚ÌˆÚ“®ˆ—
 		void CursorMove(const int lastSelect);
+
+		void StartOrEndStatePushA();
+		void GameModeSelectStatePushA();
+		void OnlineRoomCreateOrJoinStatePushA();
+		void OnlineMatchWaitingStatePushA();
 
 	public:
 		/// <summary>

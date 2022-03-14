@@ -61,35 +61,13 @@ namespace nsKabutoubatu
 		{
 			//プレイヤーを生成
 			m_player[m_playerNo] = NewGO<Player>(nsStdafx::PRIORITY_0, nsStdafx::PLAYER_NAME[m_playerNo]);
-			//1Pか2Pかの番号をセット
-			m_player[m_playerNo]->SetPlayerNum(m_playerNo);
-			//操作するパッドの番号をセット
-			m_player[m_playerNo]->SetGamePad(*m_playerGamePad);
-			//武器をセット
 			m_weapon[m_playerNo] = NewGO<Weapon>(nsStdafx::PRIORITY_0, nsStdafx::WEAPON_NAME[m_playerNo]);
-			m_weapon[m_playerNo]->SetPlayerNum(m_playerNo);
-			//初期装備武器を設定
-			m_weapon[m_playerNo]->SetWeaponNum(enWoodStick);
-			//現在のお金文字を初期化
-			NowMoneyFontInit(m_playerNo);
-			//回復アイテム文字を初期化
-			RecoveryItemFontInit(m_playerNo);
+			PlayerInit(m_player[m_playerNo], m_playerNo, m_playerGamePad, m_weapon[m_playerNo]);
 
 			//プレイヤーを生成
 			m_player[m_otherPlayerNo] = NewGO<Player>(nsStdafx::PRIORITY_0, nsStdafx::PLAYER_NAME[m_otherPlayerNo]);
-			//1Pか2Pかの番号をセット
-			m_player[m_otherPlayerNo]->SetPlayerNum(m_otherPlayerNo);
-			//操作するパッドの番号をセット
-			m_player[m_otherPlayerNo]->SetGamePad(*m_otherPlayerGamePad);
-			//武器をセット
 			m_weapon[m_otherPlayerNo] = NewGO<Weapon>(nsStdafx::PRIORITY_0, nsStdafx::WEAPON_NAME[m_otherPlayerNo]);
-			m_weapon[m_otherPlayerNo]->SetPlayerNum(m_otherPlayerNo);
-			//初期装備武器を設定
-			m_weapon[m_otherPlayerNo]->SetWeaponNum(enWoodStick);
-			//現在のお金文字を初期化
-			NowMoneyFontInit(m_otherPlayerNo);
-			//回復アイテム文字を初期化
-			RecoveryItemFontInit(m_otherPlayerNo);
+			PlayerInit(m_player[m_otherPlayerNo], m_otherPlayerNo, m_otherPlayerGamePad, m_weapon[m_otherPlayerNo]);
 
 			//プレイヤーのパッド情報をステージに送る
 			m_stage->SetPlayerGamePad(*m_playerGamePad, m_playerNo);
@@ -104,19 +82,8 @@ namespace nsKabutoubatu
 			{
 				//プレイヤーを生成
 				m_player[playerNum] = NewGO<Player>(nsStdafx::PRIORITY_0, nsStdafx::PLAYER_NAME[playerNum]);
-				//1Pか2Pかの番号をセット
-				m_player[playerNum]->SetPlayerNum(playerNum);
-				//操作するパッドの番号をセット
-				m_player[playerNum]->SetGamePad(*g_pad[playerNum]);
-				//武器をセット
 				m_weapon[playerNum] = NewGO<Weapon>( nsStdafx::PRIORITY_0,nsStdafx::WEAPON_NAME[playerNum]);
-				m_weapon[playerNum]->SetPlayerNum(playerNum);
-				//初期装備武器を設定
-				m_weapon[playerNum]->SetWeaponNum(enSword);
-				//現在のお金文字を初期化
-				NowMoneyFontInit(playerNum);
-				//回復アイテム文字を初期化
-				RecoveryItemFontInit(playerNum);
+				PlayerInit(m_player[playerNum], playerNum, g_pad[playerNum], m_weapon[playerNum]);
 				if (m_playerNum == 1)
 				{
 					//ソロモードということをプレイヤークラスに渡す
@@ -294,5 +261,21 @@ namespace nsKabutoubatu
 		//プレイヤーの所持している回復アイテム数をセットし、更新。
 		swprintf_s(m_nowMoneyText, L"%d", m_playerStatus[playerNum]->GetCoinNum());
 		m_nowMoney[playerNum]->SetText(m_nowMoneyText);
+	}
+
+	void GameScene::PlayerInit(Player* player,int playerNo,GamePad*gamePad,Weapon*weapon)
+	{
+		//1Pか2Pかの番号をセット
+		player->SetPlayerNum(playerNo);
+		//操作するパッドの番号をセット
+		player->SetGamePad(*gamePad);
+		//武器をセット
+		weapon->SetPlayerNum(playerNo);
+		//初期装備武器を設定
+		weapon->SetWeaponNum(enWoodStick);
+		//現在のお金文字を初期化
+		NowMoneyFontInit(playerNo);
+		//回復アイテム文字を初期化
+		RecoveryItemFontInit(playerNo);
 	}
 }

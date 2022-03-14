@@ -106,6 +106,8 @@ namespace nsKabutoubatu
 		//お金の所持数文字の数更新7
 		void NowMoneyNumUpdate(const int playerNum);
 
+		void PlayerInit(Player* player, int playerNo, GamePad* gamePad, Weapon* weapon);
+
 	public:
 		//プレイヤー番号をセットするメソッド
 		void SetPlayerNo(const int playerNo) { m_playerNo = playerNo; };

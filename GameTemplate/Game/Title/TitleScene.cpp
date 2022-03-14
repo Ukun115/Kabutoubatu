@@ -21,6 +21,9 @@ namespace nsKabutoubatu
 		const int CAN_SCENECHANGE_FRAME_INTERVAL = 5;
 		//オンライン時じゃないときの通常fps値
 		const int NORMAL_FPS_VALUE = 60;
+
+		const char* DEBUG_STRING_MY_GAMEPAD_NO = "自分のゲームパッド番号は%dです。\n";
+		const char* DEBUG_STRING_PARTNER_GAMEPAD_NO = "相手のゲームパッド番号は%dです。\n";
 	}
 
 	bool TitleScene::Start()
@@ -49,32 +52,9 @@ namespace nsKabutoubatu
 		{
 			//開始or終了選択
 		case enStartOrEnd:
-			//Aボタンが押されたとき、
-			if (g_pad[enPlayer1]->IsTrigger(enButtonA))
-			{
-				//決定音再生
-				m_titleSceneSound->PlayDecideSound();
 
-				//カーソルが指しているものの処理を行う
-				switch (m_cursorSelect)
-				{
-					//はじめる
-				case enSelectStart:
-					//モード選択に移行
-					m_selectState = enGameModeSelect;
-					//カーソルを初期位置に戻す
-					m_cursorSelect = nsTitleScene::CURSOR_INIT_POS;
-					break;
-					//おわる
-				case enSelectEnd:
-					//exeを閉じてゲーム終了
-					exit(EXIT_SUCCESS);
-					//メモ//
-					//exit(EXIT_FAILURE);は異常終了		EXIT_FAILURE = 1
-					//exit(EXIT_SUCCESS);は正常終了		EXIT_SUCCESS = 0
-					break;
-				}
-			}
+			//Aボタンが押されたときのステートチェンジ処理
+			StartOrEndStatePushA();
 
 			//カーソルの移動処理
 			CursorMove(enSelectEnd);
@@ -83,48 +63,9 @@ namespace nsKabutoubatu
 
 			//ゲームモード選択
 		case enGameModeSelect:
-			//Aボタンが押されたとき、
-			if (g_pad[enPlayer1]->IsTrigger(enButtonA))
-			{
-				//決定音再生
-				m_titleSceneSound->PlayDecideSound();
 
-				//カーソルが指しているものの処理を行う
-				switch (m_cursorSelect)
-				{
-					//オンラインモード
-				case enSelectOnline:
-					//オンラインのルーム作成orルーム参加へ移行
-					m_selectState = enOnlineRoomCreateOrJoin;
-					//カーソルを初期位置に戻す
-					m_cursorSelect = nsTitleScene::CURSOR_INIT_POS;
-
-					break;
-
-					//ローカルマルチモード
-				case enSelectLocalMult:
-					//ゲームシーンに遷移する処理
-					ChangeGameScene(enSelectLocalMult);
-
-					break;
-
-					//ソロモード
-				case enSelectSolo:
-					//ゲームシーンに遷移する処理
-					ChangeGameScene(enSelectSolo);
-
-					break;
-
-					//もどる
-				case enSelectBack:
-					//はじめるおわる選択にもどる
-					m_selectState = enStartOrEnd;
-					//カーソルを初期位置に戻す
-					m_cursorSelect = nsTitleScene::CURSOR_INIT_POS;
-
-					break;
-				}
-			}
+			//Aボタンが押されたときのステートチェンジ処理
+			GameModeSelectStatePushA();
 
 			//カーソルの移動処理
 			CursorMove(enSelectBack);
@@ -133,47 +74,13 @@ namespace nsKabutoubatu
 
 			//オンラインのルーム作成orルーム参加
 		case enOnlineRoomCreateOrJoin:
+
+
 			//オンラインのデータを削除
 			m_online->DeleteData();
 
-			//Aボタンが押されたとき、
-			if (g_pad[enPlayer1]->IsTrigger(enButtonA))
-			{
-				//決定音再生
-				m_titleSceneSound->PlayDecideSound();
-
-				//カーソルが指しているものの処理を行う
-				switch (m_cursorSelect)
-				{
-					//ルーム作成
-				case enRoomCreate:
-					m_online->SetPlayerNo(enPlayer1);	//1Pとして登録
-					//オンラインマッチ待機中に移行
-					m_selectState = enOnlineMatchWaiting;
-					//カーソルを初期位置に戻す
-					m_cursorSelect = nsTitleScene::CURSOR_INIT_POS;
-					m_isRoomCreate = true;
-					break;
-
-					//ルーム参加
-				case enRoomJoin:
-					m_online->SetPlayerNo(enPlayer2);	//2Pとして登録
-					//オンラインマッチ待機中に移行
-					m_selectState = enOnlineMatchWaiting;
-					//カーソルを初期位置に戻す
-					m_cursorSelect = nsTitleScene::CURSOR_INIT_POS;
-					m_isRoomCreate = false;
-					break;
-
-					//戻る
-				case enSelectBackGameMode:
-					//ゲームモード選択にもどる
-					m_selectState = enGameModeSelect;
-					//カーソルを初期位置に戻す
-					m_cursorSelect = nsTitleScene::CURSOR_INIT_POS;
-					break;
-				}
-			}
+			//Aボタンが押されたときのステートチェンジ処理
+			OnlineRoomCreateOrJoinStatePushA();
 
 			//カーソルの移動処理
 			CursorMove(enSelectBackGameMode);
@@ -182,19 +89,12 @@ namespace nsKabutoubatu
 
 			//オンラインマッチ待機中
 		case enOnlineMatchWaiting:
-			//オンライン処理
+
+			//オンライン初期化処理
 			m_online->OnlineInit();
 
-			//Aボタンが押されたとき、
-			if (g_pad[enPlayer1]->IsTrigger(enButtonA))
-			{
-				//決定音再生
-				m_titleSceneSound->PlayDecideSound();
-				//オンラインのルーム作成orルーム参加に戻る
-				m_selectState = enOnlineRoomCreateOrJoin;
-				//カーソルを初期位置に戻す
-				m_cursorSelect = nsTitleScene::CURSOR_INIT_POS;
-			}
+			//Aボタンが押されたときのステートチェンジ処理
+			OnlineMatchWaitingStatePushA();
 
 			//カーソルの移動処理
 			CursorMove(0);
@@ -242,10 +142,10 @@ namespace nsKabutoubatu
 			m_gameScene->SetOtherPlayerGamePad(m_online->GetPlayerGamePad(m_otherPlayerNo));
 
 			//自身のゲームパッド番号を出力にデバック表示
-			sprintf(m_gamePadNo, "自分のゲームパッド番号は%dです。\n", m_playerNo);
+			sprintf(m_gamePadNo, nsTitleScene::DEBUG_STRING_MY_GAMEPAD_NO, m_playerNo);
 			OutputDebugStringA(m_gamePadNo);
 			//通信相手のゲームパッド番号を出力にデバック表示
-			sprintf(m_gamePadNo, "相手のゲームパッド番号は%dです。\n", m_otherPlayerNo);
+			sprintf(m_gamePadNo, nsTitleScene::DEBUG_STRING_PARTNER_GAMEPAD_NO, m_otherPlayerNo);
 			OutputDebugStringA(m_gamePadNo);
 
 			m_gameScene->SetOnlinePlay(true);
@@ -315,6 +215,138 @@ namespace nsKabutoubatu
 
 			//選択音再生
 			m_titleSceneSound->PlaySelectSound();
+		}
+	}
+
+	void TitleScene::StartOrEndStatePushA()
+	{
+		//Aボタンが押されたとき、
+		if (g_pad[enPlayer1]->IsTrigger(enButtonA))
+		{
+			//決定音再生
+			m_titleSceneSound->PlayDecideSound();
+
+			//カーソルが指しているものの処理を行う
+			switch (m_cursorSelect)
+			{
+				//はじめる
+			case enSelectStart:
+				//モード選択に移行
+				m_selectState = enGameModeSelect;
+				//カーソルを初期位置に戻す
+				m_cursorSelect = nsTitleScene::CURSOR_INIT_POS;
+				break;
+				//おわる
+			case enSelectEnd:
+				//exeを閉じてゲーム終了
+				exit(EXIT_SUCCESS);
+				//メモ//
+				//exit(EXIT_FAILURE);は異常終了		EXIT_FAILURE = 1
+				//exit(EXIT_SUCCESS);は正常終了		EXIT_SUCCESS = 0
+				break;
+			}
+		}
+	}
+
+	void TitleScene::GameModeSelectStatePushA()
+	{
+		//Aボタンが押されたとき、
+		if (g_pad[enPlayer1]->IsTrigger(enButtonA))
+		{
+			//決定音再生
+			m_titleSceneSound->PlayDecideSound();
+
+			//カーソルが指しているものの処理を行う
+			switch (m_cursorSelect)
+			{
+				//オンラインモード
+			case enSelectOnline:
+				//オンラインのルーム作成orルーム参加へ移行
+				m_selectState = enOnlineRoomCreateOrJoin;
+				//カーソルを初期位置に戻す
+				m_cursorSelect = nsTitleScene::CURSOR_INIT_POS;
+
+				break;
+
+				//ローカルマルチモード
+			case enSelectLocalMult:
+				//ゲームシーンに遷移する処理
+				ChangeGameScene(enSelectLocalMult);
+
+				break;
+
+				//ソロモード
+			case enSelectSolo:
+				//ゲームシーンに遷移する処理
+				ChangeGameScene(enSelectSolo);
+
+				break;
+
+				//もどる
+			case enSelectBack:
+				//はじめるおわる選択にもどる
+				m_selectState = enStartOrEnd;
+				//カーソルを初期位置に戻す
+				m_cursorSelect = nsTitleScene::CURSOR_INIT_POS;
+
+				break;
+			}
+		}
+	}
+
+	void TitleScene::OnlineRoomCreateOrJoinStatePushA()
+	{
+		//Aボタンが押されたとき、
+		if (g_pad[enPlayer1]->IsTrigger(enButtonA))
+		{
+			//決定音再生
+			m_titleSceneSound->PlayDecideSound();
+
+			//カーソルが指しているものの処理を行う
+			switch (m_cursorSelect)
+			{
+				//ルーム作成
+			case enRoomCreate:
+				m_online->SetPlayerNo(enPlayer1);	//1Pとして登録
+				//オンラインマッチ待機中に移行
+				m_selectState = enOnlineMatchWaiting;
+				//カーソルを初期位置に戻す
+				m_cursorSelect = nsTitleScene::CURSOR_INIT_POS;
+				m_isRoomCreate = true;
+				break;
+
+				//ルーム参加
+			case enRoomJoin:
+				m_online->SetPlayerNo(enPlayer2);	//2Pとして登録
+				//オンラインマッチ待機中に移行
+				m_selectState = enOnlineMatchWaiting;
+				//カーソルを初期位置に戻す
+				m_cursorSelect = nsTitleScene::CURSOR_INIT_POS;
+				m_isRoomCreate = false;
+				break;
+
+				//戻る
+			case enSelectBackGameMode:
+				//ゲームモード選択にもどる
+				m_selectState = enGameModeSelect;
+				//カーソルを初期位置に戻す
+				m_cursorSelect = nsTitleScene::CURSOR_INIT_POS;
+				break;
+			}
+		}
+	}
+
+	void TitleScene::OnlineMatchWaitingStatePushA()
+	{
+		//Aボタンが押されたとき、
+		if (g_pad[enPlayer1]->IsTrigger(enButtonA))
+		{
+			//決定音再生
+			m_titleSceneSound->PlayDecideSound();
+			//オンラインのルーム作成orルーム参加に戻る
+			m_selectState = enOnlineRoomCreateOrJoin;
+			//カーソルを初期位置に戻す
+			m_cursorSelect = nsTitleScene::CURSOR_INIT_POS;
 		}
 	}
 };

@@ -29,10 +29,10 @@ namespace nsKabutoubatu
 		//ポーズ機能は使えないようにする
 		m_pause->SetCanPause(false);
 
-		//背景を暗くするための画像
+		//背景を暗くするための画像を生成＆初期化
 		m_grayBack = NewGO<SpriteRenderSub>(nsStdafx::PRIORITY_11);
 		m_grayBack->Init("OnlineErrorGrayBack", nsOnlineErrorScene::IMAGE_WIDTH, nsOnlineErrorScene::IMAGE_HEIGHT);
-		//エラーメッセージ画像
+		//エラーメッセージ画像を生成＆初期化
 		m_errorMessageBox = NewGO<SpriteRenderSub>(nsStdafx::PRIORITY_12);
 		m_errorMessageBox->Init("ErrorMessageBox", nsOnlineErrorScene::IMAGE_WIDTH, nsOnlineErrorScene::IMAGE_HEIGHT);
 

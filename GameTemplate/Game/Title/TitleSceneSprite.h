@@ -26,6 +26,24 @@ namespace nsKabutoubatu
 			enPointNum		//点の総数
 		};
 
+		//状態
+		enum enSelectState
+		{
+			enStartOrEnd,
+			enGameModeSelect,
+			enOnlineRoomCreateOrJoin,
+			enOnlineMatchWaiting
+		};
+
+		enum enPointMoveCoolTime
+		{
+			enFirstCool = 1,
+			enSecondCool = 30,
+			enThirdCool = 60,
+			enFourthCool = 90,
+			enFifthCool = 120
+		};
+
 		TitleScene* m_titleScene = nullptr;
 		SpriteRender* m_backSprite = nullptr;
 		//カーソル画像
@@ -55,5 +73,7 @@ namespace nsKabutoubatu
 		/// 毎フレーム実行される更新処理関数
 		/// </summary>
 		void Update()override final;
+
+		void PointMove(SpriteRender* writings, SpriteRender* pointSprite[]);
 	};
 }

@@ -10,6 +10,8 @@ namespace nsKabutoubatu
 	namespace nsTitleSceneSound
 	{
 		const float GINGLE_SOUND_VOLUME = 0.5f;
+		const float SELECT_SOUND_VOLUME = 0.3f;
+		const float DECIDE_SOUND_VOLUME = 0.3f;
 	}
 
 	bool TitleSceneSound::Start()
@@ -39,7 +41,7 @@ namespace nsKabutoubatu
 		//選択サウンドの初期化
 		m_selectSound = NewGO<SoundSource>();
 		m_selectSound->Init(L"Assets/sound/Select.wav");
-		m_selectSound->SetVolume(0.3f);
+		m_selectSound->SetVolume(nsTitleSceneSound::SELECT_SOUND_VOLUME);
 		//ワンショット再生
 		m_selectSound->Play(false);
 	}
@@ -49,7 +51,7 @@ namespace nsKabutoubatu
 		//決定サウンドの初期化
 		m_decideSound = NewGO<SoundSource>();
 		m_decideSound->Init(L"Assets/sound/Decide.wav");
-		m_decideSound->SetVolume(0.3f);
+		m_decideSound->SetVolume(nsTitleSceneSound::DECIDE_SOUND_VOLUME);
 		//ワンショット再生
 		m_decideSound->Play(false);
 	}
